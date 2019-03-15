@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
 import UniqueId from 'react-html-id';  
-import { BrowserRouter as Router, Link, NavLink, Redirect, Prompt } from 'react-router-dom';
+import { BrowserRouter as Router, Link, NavLink } from 'react-router-dom';
 import Route from 'react-router-dom/Route';
+
+import { connect } from 'react-redux';
 
 class App extends Component {
 
@@ -11,12 +13,6 @@ class App extends Component {
 
     UniqueId.enableUniqueIds(this);
 
-    this.state = {
-      routes: [
-        { id: this.nextUniqueId() },
-        { id: this.nextUniqueId() },
-      ]
-    }
   }
 
   render() {
@@ -32,13 +28,22 @@ class App extends Component {
               <NavLink to="/editor/settings/" activeClassName="active">Ustawienia</NavLink>
             </nav>
             <div>
-              <Route path="/routes/"
+              <Route path="/editor/routes/"
                   render={
                     () => {
-                      return( <div>Trasy</div> );
+                      return( 
+                        <div>
+                          <div>Trasy {this.props.routes.length}</div> 
+                          <button onClick={this.props.onAddTracks}>Dodaj trase</button>
+
+                          {/* <input type="file" onChange={ (e) => this.handleChange(e.target.files) } /> */}
+                        </div>
+                      );
                     }
-                  }
+                  } 
               />
+
+              
 
             <Route path="/routes/:routename" exact strict render={ 
               ( {match} ) => {
@@ -60,4 +65,17 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    routes: state.routes
+  }
+}
+
+const mapDispacToProps = (dispach) => {
+  return {
+    onAddTracks: () => dispach( { type: 'ADD_NEW_TRACKS' }),
+    removeTrack: () => dispach( { type: 'REMOVE_TRACK' })
+  }
+}
+
+export default connect(mapStateToProps, mapDispacToProps)( App );
