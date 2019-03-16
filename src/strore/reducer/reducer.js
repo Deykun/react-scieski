@@ -1,20 +1,24 @@
+import { v4 } from 'node-uuid';
+
+
 const initialState = {
-    routes: [],
+    tracks: [],
 };
 
 const reducer = ( state = initialState, action ) => {
     const newState = {...state};
-
+ 
     switch (action.type) {
         case 'ADD_NEW_TRACKS':
             console.info('Adding... tracks.');
-            newState.routes = [ ...newState.routes, { id: this.nextUniqueId() } ];
-            // newState.routes = [ ...newState.routes, { id: 'dsdssd' } ];
-            console.log(newState.routes);
+            newState.tracks = [ ...newState.tracks, { id: v4() } ];
+            console.log(newState.tracks);
             break;
 
         case 'REMOVE_TRACK':
-            console.info('Adding... track.');
+            console.info('Removing... track.');
+            newState.tracks = newState.tracks.filter( track => track.id !== action.id );
+            
             break;
     }
 

@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 
-import UniqueId from 'react-html-id';  
 import { BrowserRouter as Router, Link, NavLink } from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 
 import { connect } from 'react-redux';
 
+import AddTrack from './components/editor/tracks/AddTrack';
+import TrackList from './components/editor/tracks/TrackList';
+
 class App extends Component {
 
   constructor() {
     super();
-
-    UniqueId.enableUniqueIds(this);
-
   }
 
   render() {
+
+    console.log(window.location.pathname);
     return (
       
       <Router>
@@ -24,35 +25,24 @@ class App extends Component {
 
           <aside id="scieski-editor">
             <nav>
-              <NavLink to="/editor/routes/" exact activeClassName="active">Trasy</NavLink>
+              <NavLink to="/editor/tracks/" exact activeClassName="active">Trasy</NavLink>
               <NavLink to="/editor/settings/" activeClassName="active">Ustawienia</NavLink>
             </nav>
             <div>
-              <Route path="/editor/routes/"
-                  render={
-                    () => {
-                      return( 
-                        <div>
-                          <div>Trasy {this.props.routes.length}</div> 
-                          <button onClick={this.props.onAddTracks}>Dodaj trase</button>
+              <section id="scieski-tracks" className={ window.location.pathname.includes('/editor/tracks/') ? 'active' : '' }>
+                <div>
+                  <div>Trasy {this.props.tracks.length}</div> 
+                  <button onClick={this.props.onAddTracks}>Dodaj trase</button>
 
-                          {/* <input type="file" onChange={ (e) => this.handleChange(e.target.files) } /> */}
-                        </div>
-                      );
-                    }
-                  } 
-              />
+                  {/* <input type="file" onChange={ (e) => this.handleChange(e.target.files) } /> */}
+                  <AddTrack></AddTrack>
+                  <TrackList tracks={this.props.tracks} onRemove={this.props.onRemoveTrack}></TrackList>
+
+                </div>
+              </section>
 
               
-
-            <Route path="/routes/:routename" exact strict render={ 
-              ( {match} ) => {
-
-                const indexOfRoute = this.state.tracks.findIndex( (route) => { return match.params.routename.toLowerCase() === route.routename.toLowerCase() ? true : false } ); 
-                return indexOfRoute >= 0 ? <div user={this.state.users[indexOfRoute]}>Trasa.</div> : <div>Brak trasy.</div>;
-              }
-            } 
-            /> 
+ 
               <section id="routes">                
               </section>
             </div>
@@ -67,14 +57,14 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    routes: state.routes
+    tracks: state.tracks
   }
 }
 
 const mapDispacToProps = (dispach) => {
   return {
     onAddTracks: () => dispach( { type: 'ADD_NEW_TRACKS' }),
-    removeTrack: () => dispach( { type: 'REMOVE_TRACK' })
+    onRemoveTrack: (id) => dispach( { type: 'REMOVE_TRACK', id: id })
   }
 }
 
