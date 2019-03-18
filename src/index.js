@@ -4,11 +4,19 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducer from './strore/reducer/reducer';
 
-const store = createStore(reducer);
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux'; 
+
+import reducerTracks from './store/reducer/reducerTracks'; 
+import reducerMap from './store/reducer/reducerMap'; 
+
+const rootReducer = combineReducers({
+    rTracks: reducerTracks,
+    rMap: reducerMap
+});
+
+const store = createStore(rootReducer);
 
 
 ReactDOM.render(

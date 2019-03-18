@@ -15,8 +15,6 @@ class App extends Component {
   }
 
   render() {
-
-    console.log(window.location.pathname);
     return (
       
       <Router>
@@ -29,7 +27,7 @@ class App extends Component {
               <NavLink to="/editor/settings/" activeClassName="active">Ustawienia</NavLink>
             </nav>
             <div>
-              <section id="scieski-tracks" className={ window.location.pathname.includes('/editor/tracks/') ? 'active' : '' }>
+              <section id="scieski-tracks">
                 <div>
                   <div>Trasy {this.props.tracks.length}</div> 
                   <button onClick={this.props.onAddTracks}>Dodaj trase</button>
@@ -55,16 +53,16 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (store) => {
   return {
-    tracks: state.tracks
+    tracks: store.rTracks.tracks
   }
 }
 
 const mapDispacToProps = (dispach) => {
   return {
-    onAddTracks: () => dispach( { type: 'ADD_NEW_TRACKS' }),
-    onRemoveTrack: (id) => dispach( { type: 'REMOVE_TRACK', id: id })
+    onAddTracks: () => dispach( { type: 'ADD_NEW_TRACKS' }), 
+    onRemoveTrack: (id) => dispach( { type: 'REMOVE_TRACK', id }) 
   }
 }
 

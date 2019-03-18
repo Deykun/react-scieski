@@ -10,15 +10,11 @@ const reducer = ( state = initialState, action ) => {
  
     switch (action.type) {
         case 'ADD_NEW_TRACKS':
-            console.info('Adding... tracks.');
             newState.tracks = [ ...newState.tracks, { id: v4() } ];
-            console.log(newState.tracks);
             break;
 
         case 'REMOVE_TRACK':
-            console.info('Removing... track.');
-            newState.tracks = newState.tracks.filter( track => track.id !== action.id );
-            
+            newState.tracks = newState.tracks.filter( track => track.id !== action.id ); 
             break;
     }
 

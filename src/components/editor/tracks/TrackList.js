@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TrackList =  (props) => {
+const TrackList = (props) => {
     return (
         <ul className="track-list">
             {props.tracks.map( (track) => {
