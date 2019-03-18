@@ -4,19 +4,19 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'; 
+import thunk from 'redux-thunk';
 
-import reducerTracks from './store/reducer/reducerTracks'; 
-import reducerMap from './store/reducer/reducerMap'; 
+import reducerTracks from './store/reducers/reducerTracks'; 
+import reducerMap from './store/reducers/reducerMap'; 
 
 const rootReducer = combineReducers({
     rTracks: reducerTracks,
     rMap: reducerMap
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 
 ReactDOM.render(

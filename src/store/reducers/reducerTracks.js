@@ -9,7 +9,7 @@ const reducer = ( state = initialState, action ) => {
     const newState = {...state};
  
     switch (action.type) {
-        case 'ADD_NEW_TRACKS':
+        case 'ADD_NEW_TRACK':
             newState.tracks = [ ...newState.tracks, { id: v4() } ];
             break;
 
