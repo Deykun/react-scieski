@@ -36,11 +36,9 @@ class App extends Component {
                       return (
                       <section id="scieski-tracks">
                         <div>
-                          <div>Trasy {this.props.tracks.length}</div> 
-                          <button onClick={this.props.onAddTrack}>Dodaj trase</button>
-                          <button onClick={this.props.onAddFiles}>Dodaj plik</button>
-                          <AddTrack></AddTrack>
-                          <TrackList tracks={this.props.tracks} onRemove={this.props.onRemoveTrack}></TrackList>
+                          <div>Trasy {this.props.tracks.length}</div>
+                          <AddTrack onAddFiles={this.props.onAddFiles}></AddTrack>
+                          <TrackList tracks={this.props.tracks} onRemoveTrack={this.props.onRemoveTrack}></TrackList>
         
                         </div>
                       </section>
@@ -71,10 +69,8 @@ const mapStateToProps = (store) => {
 
 const mapDispacToProps = (dispach) => {
   return {
-    onAddTrack: () => dispach( { type: 'ADD_NEW_TRACK' }), 
-    onAddFiles: () => dispach( actionCreator.addTracksFromFiles(1) ),
+    onAddFiles: (files) => dispach( actionCreator.addTracksFromFiles(files) ),
     onRemoveTrack: (id) => dispach( { type: 'REMOVE_TRACK', id }),
-
   }
 }
 

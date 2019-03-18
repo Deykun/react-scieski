@@ -1,6 +1,3 @@
-import { v4 } from 'node-uuid';
-
-
 const initialState = {
     tracks: [],
 };
@@ -10,7 +7,9 @@ const reducer = ( state = initialState, action ) => {
  
     switch (action.type) {
         case 'ADD_NEW_TRACK':
-            newState.tracks = [ ...newState.tracks, { id: v4() } ];
+            newState.tracks = [ ...newState.tracks, action.track ];
+
+            console.log(newState)
             break;
 
         case 'REMOVE_TRACK':

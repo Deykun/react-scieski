@@ -6,8 +6,8 @@ const TrackList = (props) => {
             {props.tracks.map( (track) => {
             return (
                 <li key={track.id}>
-                    <h2>{track.id}</h2>
-                    <button onClick={props.onRemove.bind(this, track.id)} >Usuń</button>
+                    <h2>{track.title}</h2>
+                    <button onClick={props.onRemoveTrack.bind(this, track.id)} >Usuń</button>
                 </li>
             )
             })}
