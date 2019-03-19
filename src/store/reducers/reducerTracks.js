@@ -8,8 +8,6 @@ const reducer = ( state = initialState, action ) => {
     switch (action.type) {
         case 'ADD_NEW_TRACK':
             newState.tracks = [ ...newState.tracks, action.track ];
-
-            console.log(newState)
             break;
 
         case 'REMOVE_TRACK':
