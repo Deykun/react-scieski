@@ -1,0 +1,3 @@
+export const ADD_NEW_TRACK = 'ADD_NEW_TRACK'
+export const UPDATE_TRACK = 'UPDATE_TRACK'
+export const FILE_IMPORT_ERROR = 'FILE_IMPORT_ERROR'

@@ -9,7 +9,8 @@ import * as actionCreator from './store/actions/actions';
 import { addTracksFromFiles } from './store/actions/actions';
 
 
-import AddTrack from './components/editor/tracks/AddTrack';
+import TrackDetail from './components/editor/tracks/TrackDetail';
+import AddTrack from './components/editor/tracks/AddTrack'; 
 import TrackList from './components/editor/tracks/TrackList';
 
 class App extends Component {
@@ -37,6 +38,15 @@ class App extends Component {
                       <section id="scieski-tracks">
                         <div>
                           <div>Trasy {this.props.tracks.length}</div>
+
+                          <Route path="/editor/tracks/:trackid" exact strict render={ 
+                            ( {match} ) => {
+                              const indexOfTrack = this.props.tracks.findIndex( (track) => { return match.params.trackid === track.id } ); 
+                              return indexOfTrack >= 0 ? <TrackDetail track={this.props.tracks[indexOfTrack]} /> : '';
+                            }
+                          } 
+                          /> 
+
                           <AddTrack onAddFiles={this.props.onAddFiles}></AddTrack>
                           <TrackList tracks={this.props.tracks} onRemoveTrack={this.props.onRemoveTrack}></TrackList>
         
