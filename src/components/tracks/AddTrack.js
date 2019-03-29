@@ -13,9 +13,9 @@ const TrackList = (props) => {
   return (
       <section {...getRootProps()} className="track-add" >
         <input {...getInputProps()} />
-        <p>Przeciągni i upuść trasy w formacie .tcx lub .gpx lub wybierz pliki klikając <strong>tutaj</strong>.</p>
+        <p>Przeciągni i upuść trasy w formacie .tcx lub .gpx lub wybierz pliki klikając <strong>tutaj</strong>.</p> 
       </section>
-  );
-}
+  ); 
+} 
 
 export default TrackList;

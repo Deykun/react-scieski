@@ -14,6 +14,7 @@ const Track = (props) => {
     return (
         <li>        
             <h2><Link to={`/editor/tracks/${track.id}`}>{track.title}</Link></h2>
+            <p>{track.status === 'loading' ? <strong>ŁADOWANIE</strong> : ''}</p>
             <p>{track.distance ? <strong>{track.distance.toFixed(2)} km</strong> : `brak danych`}</p>
             <button onClick={props.onRemoveTrack.bind(this, track.id)}>Usuń</button>
         </li>

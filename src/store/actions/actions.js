@@ -8,19 +8,12 @@ import { v4 } from 'node-uuid';
 
 export const addTracksFromFiles = (files) => {
     return (dispatch) => {
-        dispatch( addTracksFromFilesAsync(files) );
-    }
-}
-
-
-export const addTracksFromFilesAsync = (files) => {
-    return (dispatch) => {
-
         if ( !Array.isArray( files ) ) { files = [files]; }
 
-        files.map( (file) => {
-            setTimeout( () => createTrackFromFile(file, dispatch) , 0 ); // setTimeout prevents frezzing of the app
-        });
+
+        files.forEach( file => {
+            setTimeout( () => createTrackFromFile(file, dispatch) , 0 ); // setTimeout prevents frezzing of the app; 
+        })
 
         return;
     }
@@ -38,7 +31,8 @@ const createTrackFromFile = (file, dispatch) => {
         let newTrack = {
             id: v4(),
             title: fileTitle,
-            format: fileFormat
+            format: fileFormat,
+            status: 'loading'
         };
         
         dispatch ( { type: ADD_NEW_TRACK, track: newTrack } );
@@ -55,10 +49,9 @@ const createTrackFromFile = (file, dispatch) => {
             const fileContent = reader.result;
 
             const trackData = dataFromFile( fileContent, fileFormat );
-
-            let trackToSave = { ...newTrack, ...trackData};
+            trackData.status = 'success';
             
-            dispatch( { type: UPDATE_TRACK, id: newTrack.id, track: trackToSave } );
+            dispatch( { type: UPDATE_TRACK, id: newTrack.id, track: trackData } );
         }
         return;
     } else {
@@ -73,11 +66,14 @@ const dataFromFile = (fileContent, fileFormat) => {
     const xmlParser = new DOMParser();
     const xmlFileContent = xmlParser.parseFromString( fileContent , 'text/xml');
 
+    let activity = 'other';
+    let distanceFromFile = 0
+
     switch ( fileFormat ) {
         case 'gpx':
-            var rawPoints = [...xmlFileContent.querySelectorAll('trkpt')]; // [...] to change NodeList to Array
+            let rawPointsGPX = [...xmlFileContent.querySelectorAll('trkpt')]; // [...] to change NodeList to Array
             
-            rawPoints.map( rawPoint => {
+            rawPointsGPX.forEach( rawPoint => {
                 let latitude = rawPoint.getAttribute('lat') !== null ? rawPoint.getAttribute('lat') : null;
                 let longitude = rawPoint.getAttribute('lon') !== null ? rawPoint.getAttribute('lon') : null;
                 let time = rawPoint.querySelector('time') !== null ? rawPoint.querySelector('time').textContent : null;
@@ -87,17 +83,20 @@ const dataFromFile = (fileContent, fileFormat) => {
                     let newPoint = createPoint( latitude, longitude, time, altitude );
                     points.push( newPoint );
                 }
-            }); 
+            })
 
-            var activity = xmlFileContent.querySelector('type') !== null ? xmlFileContent.querySelector('type').textContent.toLowerCase() : '';
-            var distanceFromFile = 0;
+            if ( xmlFileContent.querySelector('type') !== null ) {
+                activity = xmlFileContent.querySelector('type').textContent.toLowerCase();
+            }
+
+            distanceFromFile = 0;
 
             break;
  
         case 'tcx':
-            var rawPoints = [...xmlFileContent.querySelectorAll('Trackpoint')]; // [...] to change NodeList to Array
+            let rawPointsTCX = [...xmlFileContent.querySelectorAll('Trackpoint')]; // [...] to change NodeList to Array
 
-            rawPoints.map( rawPoint => {
+            rawPointsTCX.forEach( rawPoint => {
                 let latitude = rawPoint.querySelector('LatitudeDegrees') !== null ? rawPoint.querySelector('LatitudeDegrees').textContent : null;
                 let longitude = rawPoint.querySelector('LongitudeDegrees') !== null ? rawPoint.querySelector('LongitudeDegrees').textContent : null;
                 let time = rawPoint.querySelector('Time') !== null ? rawPoint.querySelector('Time').textContent : null;
@@ -109,10 +108,16 @@ const dataFromFile = (fileContent, fileFormat) => {
                 }
             });
 
-            var activity = xmlFileContent.querySelector('Activity') !== null ? xmlFileContent.querySelector('Activity').getAttribute('Sport').toLowerCase() : '';
-            var distanceFromFile = xmlFileContent.querySelector('DistanceMeters') !== null ? Number( xmlFileContent.querySelector('DistanceMeters').textContent / 1000 ) : 0;
+            if ( xmlFileContent.querySelector('Activity') !== null ) {
+                activity = xmlFileContent.querySelector('Activity').getAttribute('Sport').toLowerCase();
+            }
+
+            if ( xmlFileContent.querySelector('DistanceMeters') !== null ) {
+                distanceFromFile = Number( xmlFileContent.querySelector('DistanceMeters').textContent / 1000 );
+            }
 
             break;
+        default:
     }
     
     const calculatedDistance = calculateDistance(points);
@@ -125,6 +130,7 @@ const dataFromFile = (fileContent, fileFormat) => {
         },
         activity: activity,
         distance: calculatedDistance,
+        distanceFromFile: distanceFromFile,
         points: points
     }
 
@@ -145,7 +151,7 @@ const calculateDistance = (points) => {
     const earthRadius = 6371; // mean in km
 
     for (var i = 1, imax = points.length ; i < imax ; i++) {
-        if (points[i].lat == 0 && points[i].lng == 0) {
+        if (points[i].lat === 0 && points[i].lng === 0) {
             points[i].lat = points[i-1].lat;
             points[i].lng = points[i-1].lng;
             continue;
