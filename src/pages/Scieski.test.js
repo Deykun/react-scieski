@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Scieski from './Scieski';
 
-it('renders without crashing', () => {
+it('Renders app without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+  ReactDOM.render(<Scieski />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

@@ -4,8 +4,6 @@ import {useDropzone} from 'react-dropzone';
 const TrackList = (props) => {
   const onDrop = useCallback(acceptedFiles => {
     props.onAddFiles([...acceptedFiles]);
-
-    
   }, [])
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
