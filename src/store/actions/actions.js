@@ -5,6 +5,7 @@ import {
 } from '../constants/actions';
 
 import { v4 } from 'node-uuid';
+import { type } from 'os';
 
 export const addTracksFromFiles = (files) => {
     return (dispatch) => {
@@ -61,7 +62,8 @@ const createTrackFromFile = (file, dispatch) => {
 
 const dataFromFile = (fileContent, fileFormat) => {
     
-    const points = [];
+    var points = [];
+    const fragments = [];
 
     const xmlParser = new DOMParser();
     const xmlFileContent = xmlParser.parseFromString( fileContent , 'text/xml');
@@ -71,19 +73,29 @@ const dataFromFile = (fileContent, fileFormat) => {
 
     switch ( fileFormat ) {
         case 'gpx':
-            let rawPointsGPX = [...xmlFileContent.querySelectorAll('trkpt')]; // [...] to change NodeList to Array
-            
-            rawPointsGPX.forEach( rawPoint => {
-                let latitude = rawPoint.getAttribute('lat') !== null ? rawPoint.getAttribute('lat') : null;
-                let longitude = rawPoint.getAttribute('lon') !== null ? rawPoint.getAttribute('lon') : null;
-                let time = rawPoint.querySelector('time') !== null ? rawPoint.querySelector('time').textContent : null;
-                let altitude = rawPoint.querySelector('ele') !== null ? rawPoint.querySelector('ele').textContent : 0;
 
-                if ( latitude !== null && longitude !== null) {
-                    let newPoint = createPoint( latitude, longitude, time, altitude );
-                    points.push( newPoint );
+            let rawFragmentsGPS = [...xmlFileContent.querySelectorAll('trkseg')]; // [...] to change NodeList to Array
+
+            rawFragmentsGPS.forEach( rawFragment => {
+                let rawPointsGPX = [...rawFragment.querySelectorAll('trkpt')]; // [...] to change NodeList to Array
+            
+                rawPointsGPX.forEach( rawPoint => {
+                    let latitude = rawPoint.getAttribute('lat') !== null ? rawPoint.getAttribute('lat') : null;
+                    let longitude = rawPoint.getAttribute('lon') !== null ? rawPoint.getAttribute('lon') : null;
+                    let time = rawPoint.querySelector('time') !== null ? rawPoint.querySelector('time').textContent : null;
+                    let altitude = rawPoint.querySelector('ele') !== null ? rawPoint.querySelector('ele').textContent : 0;
+
+                    if ( latitude !== null && longitude !== null) {
+                        let newPoint = createPoint( latitude, longitude, time, altitude );
+                        points.push( newPoint );
+                    }
+                })
+
+                if ( points.length > 0 ) {
+                    fragments.push( points );
+                    points = [];
                 }
-            })
+            })            
 
             if ( xmlFileContent.querySelector('type') !== null ) {
                 activity = xmlFileContent.querySelector('type').textContent.toLowerCase();
@@ -102,11 +114,21 @@ const dataFromFile = (fileContent, fileFormat) => {
                 let time = rawPoint.querySelector('Time') !== null ? rawPoint.querySelector('Time').textContent : null;
                 let altitude = rawPoint.querySelector('AltitudeMeters') !== null ? rawPoint.querySelector('AltitudeMeters').textContent : 0;
 
+                /* In tcx pause is marked with lack of Altitude before and after */
+                if ( rawPoint.querySelector('AltitudeMeters') === null && points.length !== 0 && fragments.length > 0 ) {
+                    fragments.push( points );
+                    points = [];
+                }
+
                 if ( latitude !== null && longitude !== null) {
                     let newPoint = createPoint( latitude, longitude, time, altitude );
                     points.push( newPoint );
                 }
             });
+
+            if ( points.length > 0 ) {
+                fragments.push( points );
+            }
 
             if ( xmlFileContent.querySelector('Activity') !== null ) {
                 activity = xmlFileContent.querySelector('Activity').getAttribute('Sport').toLowerCase();
@@ -122,18 +144,23 @@ const dataFromFile = (fileContent, fileFormat) => {
     
     const calculatedDistance = calculateDistance(points);
 
+    let firstPoint = fragments[0][0];
+    let lastPoint = fragments[ fragments.length - 1 ][ fragments[ fragments.length - 1 ].length - 1 ];
+
+    if ( typeof lastPoint === 'undefined') {
+        console.log(fileContent);
+        console.log(fragments);
+    }
     const trackData = {
         date: {
-            start: points[0].time,
-            middle: points[ Math.floor(points.length / 2) ].time,
-            end: points[ points.length - 1 ].time,
+            start: firstPoint.time,
+            end: lastPoint.time,
         },
         activity: activity,
         distance: calculatedDistance,
         distanceFromFile: distanceFromFile,
-        points: points
+        fragments: fragments
     }
-
     return trackData;
 }
 
