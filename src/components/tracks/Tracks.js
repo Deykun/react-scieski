@@ -11,11 +11,21 @@ import TrackDetail from './TrackDetail';
 import AddTrack from './AddTrack'; 
 import TrackList from './TrackList';
 
+import styled from 'styled-components';
+
+const TrackTab = styled.section`
+  .number {
+    display: inline-block;
+    color: white;
+    background-color: ${ props => props.theme.color.brand };
+  }
+`
+
 class Tracks extends Component {
   render() {
     return(
-      <section id="scieski-tracks">
-        <div>Trasy {this.props.tracks.length}</div>
+      <TrackTab>
+        <h3>Trasy <span className='number'>{this.props.tracks.length}</span></h3>
 
         <Route path="/editor/tracks/:trackid" exact strict render={ 
           ( {match} ) => {
@@ -26,7 +36,7 @@ class Tracks extends Component {
         />
         <AddTrack onAddFiles={this.props.onAddFiles}></AddTrack>
         <TrackList tracks={this.props.tracks} onRemoveTrack={this.props.onRemoveTrack}></TrackList>
-      </section>
+      </TrackTab>
     ) 
   }
 }
