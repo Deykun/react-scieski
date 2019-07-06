@@ -13,6 +13,8 @@ import Logo from '../logo.svg';
 import Notifications from '../components/notifications/Notifications'; 
 import Tracks from '../components/tracks/Tracks'; 
 
+import Icon from '../styles/ui/Icon';
+
 const AppWrapper = styled.div`
 `
 
@@ -41,8 +43,15 @@ const TabNavLink = styled(NavLink).attrs({
   activeClassName: activeClassName,
 })`
   text-shadow: none;
-  &.${activeClassName} {
+  &:hover, &.${activeClassName} {
     color: ${ props => props.theme.color.active || 'red' };
+    ${ textGradient };
+  }
+`
+const TabNavLinkExternal = styled.a`
+  text-shadow: none;
+  color: ${ props => props.theme.color.active || 'red' };
+  &:hover {
     ${ textGradient };
   }
 `
@@ -61,9 +70,23 @@ class App extends Component {
                 return (
                   <MainEditor open={ match.url.startsWith('/editor/') }>
                     <nav>
-                      <NavLink to="/">Close</NavLink>
-                      <TabNavLink to="/editor/tracks/">Trasy</TabNavLink>
-                      <TabNavLink to="/editor/settings/">Ustawienia</TabNavLink>
+                      <NavLink to="/">
+                        <Icon name="cross" />
+                        Close
+                      </NavLink>
+                      <TabNavLink to="/editor/tracks/">
+                        <Icon name="flag"/>
+                        Trasy
+                      </TabNavLink>
+                      <TabNavLink to="/editor/settings/">
+                        <Icon name="cog"/>
+                        Ustawienia
+                      </TabNavLink>
+                      <TabNavLinkExternal href="https://github.com/Deykun/react-scieski" target="_blank" rel="noopener noreferrer">
+                        <Icon name="flow-branch" />
+                        GitHub
+                      </TabNavLinkExternal>
+                    
                     </nav>
                     <div>
                       <Route path="/editor/tracks" component={Tracks} /> 

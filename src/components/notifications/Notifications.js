@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Icon from '../../styles/ui/Icon';
 
 // import { connect } from 'react-redux';
 // import * as actionCreator from './../../store/actions/actions';
@@ -64,6 +64,7 @@ class Notifications extends Component {
         {notificationsList.map( notification => {
           return(
             <Notification tabIndex='0'>
+              <Icon name="cross" />
               <h3>{notification.title}</h3>
               {notification.content}
               <button>Test</button>
