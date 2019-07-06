@@ -26,7 +26,7 @@ class Tracks extends Component {
     return(
       <TrackTab>
         <h3>Trasy <span className='number'>{this.props.tracks.length}</span></h3>
-
+        <AddTrack onAddFiles={this.props.onAddFiles}></AddTrack>
         <Route path="/editor/tracks/:trackid" exact strict render={ 
           ( {match} ) => {
             const indexOfTrack = this.props.tracks.findIndex( (track) => { return match.params.trackid === track.id } ); 
@@ -34,7 +34,6 @@ class Tracks extends Component {
           }
         } 
         />
-        <AddTrack onAddFiles={this.props.onAddFiles}></AddTrack>
         <TrackList tracks={this.props.tracks} onRemoveTrack={this.props.onRemoveTrack}></TrackList>
       </TrackTab>
     ) 

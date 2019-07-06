@@ -2,19 +2,24 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 const theme = {
+  import: {
+    fontFromGoogle: true
+  },
   color: {
     brand: '#d4db96',
     text: '#333333',
     inactive: '#c0c0c0',
-    active: '#d4db96'
+    active: '#a4b324',
+    active75: '#737e10',
+    border: '#f8f8f8'
   },
   background: {
-    editor: 'white' 
+    app: '#e5e5e5',
+    component: 'white' 
   }
 }
 
 const Theme = (props) => {
-    const track = props.track;
     return (
       <ThemeProvider theme={theme}>
         {props.children}

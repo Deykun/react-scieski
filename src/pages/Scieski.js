@@ -7,7 +7,10 @@ import styled from 'styled-components';
 import GlobalStyle from '../styles/globalStyle';
 import Theme from '../styles/theme';
 
+import textGradient from '../styles/textGradient';
+
 import Logo from '../logo.svg';
+import Notifications from '../components/notifications/Notifications'; 
 import Tracks from '../components/tracks/Tracks'; 
 
 const AppWrapper = styled.div`
@@ -16,14 +19,14 @@ const AppWrapper = styled.div`
 const MainEditor = styled.aside`
   position: fixed;
   top: 0;
-  left: ${props => props.open ? '0' : '-400px'};
+  left: ${ props => props.open ? '0' : '-400px'};
   z-index: 50;
   height: 100%;
   width: 400px;
   overflow: auto;
   padding: 15px;
-  color: ${ props => props.theme.color.text || 'black' };
-  background-color: ${ props => props.theme.background.editor || 'black' };
+  color: ${ props => props.theme.color.text };
+  background-color: ${ props => props.theme.background.component };
   box-shadow: 0 0 40px -35px rgba(0,0,0,.5);
   transition: .3s;
 
@@ -37,8 +40,10 @@ const activeClassName = 'active'
 const TabNavLink = styled(NavLink).attrs({
   activeClassName: activeClassName,
 })`
+  text-shadow: none;
   &.${activeClassName} {
     color: ${ props => props.theme.color.active || 'red' };
+    ${ textGradient };
   }
 `
 
@@ -47,9 +52,10 @@ class App extends Component {
     return (
       <Router>
         <Theme>
-          <AppWrapper>
+          <AppWrapper className="scieski-app">
             <GlobalStyle />
-            <NavLink to="/editor/" activeClassName="active">scieski <img src={Logo} style={{height:100}}/></NavLink>
+            <Notifications></Notifications>
+            <NavLink to="/editor/tracks/" activeClassName="active">scieski <img src={Logo} style={{height:100}} alt="logo"/></NavLink>
             <Route path="*" render={
               ({match}) => {
                 return (

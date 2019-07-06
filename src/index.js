@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 import reducerTracks from './store/reducers/reducerTracks'; 
-import reducerMap from './store/reducers/reducerMap'; 
+import reducerMap from './store/reducers/reducerMap';  
 
 const rootReducer = combineReducers({
     rTracks: reducerTracks,

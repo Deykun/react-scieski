@@ -142,7 +142,10 @@ const dataFromFile = (fileContent, fileFormat) => {
         default:
     }
     
-    const calculatedDistance = calculateDistance(points);
+    let calculatedDistance = 0;
+    fragments.forEach( fragment => {
+        calculatedDistance += calculateDistance( fragment );
+    } );
 
     let firstPoint = fragments[0][0];
     let lastPoint = fragments[ fragments.length - 1 ][ fragments[ fragments.length - 1 ].length - 1 ];
@@ -195,6 +198,5 @@ const calculateDistance = (points) => {
         var pointsDistance = earthRadius * c; // in km
         totalDistance += pointsDistance;
     }
-
     return totalDistance;
 }
