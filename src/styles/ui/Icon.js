@@ -1,5 +1,9 @@
 import React from 'react';
 import iconPaths from './icomoon_selection.json';
+import styled from 'styled-components';
+
+const StyledIcon = styled.svg`
+`;
 
 function getIconPath(iconName) {
   const icon = iconPaths.icons.find(icon => icon.properties.name === iconName);
@@ -12,9 +16,9 @@ function getIconPath(iconName) {
 }
 
 const Icon = props => (
-  <svg width="22" height="22" viewBox="0 0 1024 1024">
+  <StyledIcon width="22" height="22" viewBox="0 0 1024 1024" {...props}>
     <path d={getIconPath(props.name)}></path>
-  </svg>
+  </StyledIcon>
 );
 
 export default Icon;

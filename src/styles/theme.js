@@ -2,21 +2,15 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 const theme = {
-  import: {
-    fontFromGoogle: true
-  },
-  color: {
-    brand: '#d4db96',
-    text: '#333333',
-    inactive: '#c0c0c0',
-    active: '#a4b324',
-    active75: '#737e10',
-    border: '#f8f8f8'
-  },
-  background: {
-    app: '#e5e5e5',
-    component: 'white' 
-  }
+  importFontFromGoogle: true,
+  colorBrand: '#d4db96',
+  colorText: '#333333',
+  colorInactive: '#c0c0c0',
+  colorActive: '#a4b324',
+  colorActive75: '#737e10',
+  colorBorder: '#f8f8f8',
+  backgroundApp: '#e5e5e5',
+  backgroundComponent: 'white'
 }
 
 const Theme = (props) => {

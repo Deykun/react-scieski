@@ -39,8 +39,8 @@ const Notification = styled.li`
   }
 
   font-size: 15px;
-  color: ${ props => props.theme.color.text };
-  background-color: ${ props => props.theme.background.component };
+  color: ${ props => props.theme.colorText || 'black' };
+  background-color: ${ props => props.theme.backgroundComponent || 'white' };
   box-shadow: 0 -3px 10px rgba(0,0,0,0.02), 0 14px 9px -5px rgba(0,0,0,.04);
    
   transition: .2s ease-in-out;
@@ -61,9 +61,9 @@ class Notifications extends Component {
   render() {
     return(
       <NotificationsList>
-        {notificationsList.map( notification => {
+        {notificationsList.map( (notification, index) => {
           return(
-            <Notification tabIndex='0'>
+            <Notification key={index} tabIndex="0">
               <Icon name="cross" />
               <h3>{notification.title}</h3>
               {notification.content}

@@ -7,13 +7,14 @@ import styled from 'styled-components';
 import GlobalStyle from '../styles/globalStyle';
 import Theme from '../styles/theme';
 
-import textGradient from '../styles/textGradient';
+import textGradient from '../styles/enhancements/textGradient';
 
 import Logo from '../logo.svg';
 import Notifications from '../components/notifications/Notifications'; 
 import Tracks from '../components/tracks/Tracks'; 
 
 import Icon from '../styles/ui/Icon';
+import Button from '../styles/ui/Button';
 
 const AppWrapper = styled.div`
 `
@@ -27,8 +28,8 @@ const MainEditor = styled.aside`
   width: 400px;
   overflow: auto;
   padding: 15px;
-  color: ${ props => props.theme.color.text };
-  background-color: ${ props => props.theme.background.component };
+  color: ${ props => props.theme.colorText || 'black' };
+  background-color: ${ props => props.theme.backgroundComponent || 'white' };
   box-shadow: 0 0 40px -35px rgba(0,0,0,.5);
   transition: .3s;
 
@@ -38,19 +39,19 @@ const MainEditor = styled.aside`
   }
 `;
 
-const activeClassName = 'active'
+const activeClassName = 'active';
 const TabNavLink = styled(NavLink).attrs({
   activeClassName: activeClassName,
 })`
   text-shadow: none;
   &:hover, &.${activeClassName} {
-    color: ${ props => props.theme.color.active || 'red' };
+    color: ${ props => props.theme.colorActive || 'red' };
     ${ textGradient };
   }
 `
 const TabNavLinkExternal = styled.a`
   text-shadow: none;
-  color: ${ props => props.theme.color.active || 'red' };
+  color: ${ props => props.theme.colorActive || 'red' };
   &:hover {
     ${ textGradient };
   }
@@ -70,10 +71,8 @@ class App extends Component {
                 return (
                   <MainEditor open={ match.url.startsWith('/editor/') }>
                     <nav>
-                      <NavLink to="/">
-                        <Icon name="cross" />
-                        Close
-                      </NavLink>
+                      <Button as={NavLink} iconleft="cross" aria-label="Zamknij" to="/">
+                      </Button>
                       <TabNavLink to="/editor/tracks/">
                         <Icon name="flag"/>
                         Trasy

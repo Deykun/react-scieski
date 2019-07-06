@@ -17,7 +17,7 @@ const TrackTab = styled.section`
   .number {
     display: inline-block;
     color: white;
-    background-color: ${ props => props.theme.color.brand };
+    background-color: ${ props => props.theme.colorBrand };
   }
 `
 

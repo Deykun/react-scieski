@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 import {useDropzone} from 'react-dropzone';
 import styled, {css} from 'styled-components';
 
-import textGradient from '../../styles/textGradient';
+import textGradient from '../../styles/enhancements/textGradient';
 
 const DropZoneContainer = styled.div`
   display: flex;
@@ -17,8 +17,10 @@ const DropZoneContainer = styled.div`
   font-size: 12px;
   line-height: 18px;
 
-  border: 1px dashed ${ props => props.theme.color.brand };
+  border: 1px dashed ${ props => props.theme.colorBrand };
   border-radius: 3px;
+
+  cursor: pointer;
   
   &, * {
     transition: .1s;
@@ -27,10 +29,10 @@ const DropZoneContainer = styled.div`
     pointer-events: none;
   }
   strong {
-    color: ${ props => props.theme.color.active75 };
+    color: ${ props => props.theme.colorActive75 };
   }
   ${props => (props.isDragActive) && css`
-    border-color: ${ props => props.theme.color.active75 };
+    border-color: ${ props => props.theme.colorActive75 };
     p {
       ${ textGradient };
     }
