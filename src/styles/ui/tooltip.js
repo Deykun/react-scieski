@@ -7,6 +7,7 @@ const tooltip = css`
     position: absolute;
     top: calc( 100% + 3px);
     left: 50%;
+    z-index: 10;
     transform: translate(-50%, -3px) scale(0.7);
     opacity: 0;
 
@@ -19,6 +20,11 @@ const tooltip = css`
 
     color: ${ props => props.theme.colorText || '#333' };
     background-color: ${ props => props.theme.colorActive || '#f3e977' };    
+
+    ${ props => props.danger && css`
+      color: ${ props => props.theme.backgroundComponent || 'white' };
+      background-color: ${ props => props.theme.colorDanger75 || 'red' }; 
+    `}; 
 
     pointer-events: none;
     

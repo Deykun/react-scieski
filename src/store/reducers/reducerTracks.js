@@ -30,6 +30,8 @@ const reducer = ( state = initialState, action ) => {
         case 'REMOVE_TRACK':
             newState.tracks = newState.tracks.filter( track => track.id !== action.id ); 
             break;
+        default:
+            
     }
     return newState;
 }

@@ -5,7 +5,6 @@ import {
 } from '../constants/actions';
 
 import { v4 } from 'node-uuid';
-import { type } from 'os';
 
 export const addTracksFromFiles = (files) => {
     return (dispatch) => {

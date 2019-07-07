@@ -9,9 +9,9 @@ const StyledButton = styled.button`
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-
   background-color: transparent;
   border: none;
+  cursor: pointer;
 
   line-height: 22px;
   font-size: 15px;
@@ -27,10 +27,28 @@ const StyledButton = styled.button`
       margin: 0;
     }
   }
-  cursor: pointer;
-  ${props => props['aria-label'] && css`
+
+  ${ props => props.danger && css`
+    fill: ${ props => props.theme.colorDanger || 'Red' };
+    color: ${ props => props.theme.colorDanger || 'Red' };
+    &:hover {
+      fill: ${ props => props.theme.colorDanger75 || 'Red' };
+      color: ${ props => props.theme.colorDanger75 || 'Red' };
+    }
+  `}
+  ${ props => props.main && css`
+    fill: ${ props => props.theme.colorMain || 'Red' };
+    color: ${ props => props.theme.colorMain || 'Red' };
+    &:hover {
+      fill: ${ props => props.theme.colorMain75 || 'Red' };
+      color: ${ props => props.theme.colorMain75 || 'Red' };
+    }
+  `}
+
+  ${ props => props['aria-label'] && css`
     ${tooltip};
   `};
+  transition: .2s ease-in-out;
 `;
 
 const Button = props => (

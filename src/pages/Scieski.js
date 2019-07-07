@@ -22,10 +22,12 @@ const AppWrapper = styled.div`
 const MainEditor = styled.aside`
   position: fixed;
   top: 0;
-  left: ${ props => props.open ? '0' : '-400px'};
-  z-index: 50;
+  left: 0;
+  transform: ${ props => props.open ? 'translateX(0)' : 'translateX(-100%)' };
+  width: 100%;
+  max-width: 400px;
   height: 100%;
-  width: 400px;
+  z-index: 50;
   overflow: auto;
   padding: 15px;
   color: ${ props => props.theme.colorText || 'black' };
@@ -73,11 +75,11 @@ class App extends Component {
                     <nav>
                       <Button as={NavLink} iconleft="cross" aria-label="Zamknij" to="/">
                       </Button>
-                      <TabNavLink to="/editor/tracks/">
+                      <TabNavLink to="/editor/tracks">
                         <Icon name="flag"/>
                         Trasy
                       </TabNavLink>
-                      <TabNavLink to="/editor/settings/">
+                      <TabNavLink to="/editor/settings">
                         <Icon name="cog"/>
                         Ustawienia
                       </TabNavLink>
@@ -87,9 +89,14 @@ class App extends Component {
                       </TabNavLinkExternal>
                     
                     </nav>
-                    <div>
-                      <Route path="/editor/tracks" component={Tracks} /> 
-                    </div>
+                    <Route path='/editor/tracks' component={Tracks} />
+                    <Route path='/editor/settings' render={
+                      () => {
+                        return (
+                          <p>Ustawienia</p>
+                        )
+                      }
+                    } />
                   </MainEditor>
                 )
               }

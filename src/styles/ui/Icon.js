@@ -3,6 +3,8 @@ import iconPaths from './icomoon_selection.json';
 import styled from 'styled-components';
 
 const StyledIcon = styled.svg`
+  display: inline-block;
+  vertical-align: sub;
 `;
 
 function getIconPath(iconName) {
@@ -16,7 +18,7 @@ function getIconPath(iconName) {
 }
 
 const Icon = props => (
-  <StyledIcon width="22" height="22" viewBox="0 0 1024 1024" {...props}>
+  <StyledIcon height={props.size ? props.size : 22} viewBox="0 0 1024 1024" {...props}>
     <path d={getIconPath(props.name)}></path>
   </StyledIcon>
 );

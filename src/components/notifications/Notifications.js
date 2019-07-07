@@ -23,7 +23,6 @@ const NotificationsList = styled.ul`
   width: 360px;
   margin: 0;
   padding: 0;
-  border-top: 1px solid gray;
   list-style: none;
   perspective: 500px;
 `

@@ -13,6 +13,7 @@ const reducer = ( state = initialState, action ) => {
         case 'CHANGE_RANGE':
             newState.settings.map = action.range;
             break;
+        default:
     }
 
     return newState;
