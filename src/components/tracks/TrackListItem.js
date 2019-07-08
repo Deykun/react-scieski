@@ -17,7 +17,7 @@ const TrackItemContainer = styled.li`
   position: relative;
   margin-bottom: 8px;
   padding-bottom: 8px;
-  border-bottom: 1px solid ${ props => props.theme.colorBorder };
+  /* border-bottom: 1px solid ${ props => props.theme.color.border || 'gray' }; */
   ${ props => props.status === 'loading' && css`
     opacity: .4;
     cursor: wait;
@@ -62,7 +62,6 @@ const timeAgoFormatter = buildFormatter(timeAgoTranslation);
 
 class TrackListItem extends PureComponent {
   render() {
-    console.log( this.props.track );
     const { id, status, title, activity, date, distance } = this.props.track;
     return (
       <TrackItemContainer key={id} status={status} >  
@@ -80,7 +79,7 @@ class TrackListItem extends PureComponent {
         </p>
         <TrackActions>
           <Button danger iconleft="block" aria-label="Usuń" onClick={this.props.onRemoveTrack.bind(this, id)} />
-          <Button main iconleft="edit" aria-label="Edytuj" as={Link} to={`/editor/tracks/${id}`} />
+          <Button main={1} iconleft="edit" aria-label="Edytuj" as={Link} to={`/editor/tracks/${id}`} />
         </TrackActions>
       </TrackItemContainer> 
     )

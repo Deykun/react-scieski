@@ -6,7 +6,7 @@ import Icon from '../../styles/ui/Icon';
 import textGradient from '../../styles/enhancements/textGradient';
 
 const dragOrHover = css`
-  border-color: ${ props => props.theme.colorActive75 };
+  border-color: ${ props => props.theme.color.active75 };
   p {
     ${ textGradient };
   }
@@ -14,7 +14,6 @@ const dragOrHover = css`
     opacity: .6;
   }
 `
-
 
 const DropZoneContainer = styled.div`
   display: flex;
@@ -29,7 +28,7 @@ const DropZoneContainer = styled.div`
   font-size: 12px;
   line-height: 18px;
 
-  border: 1px dashed ${ props => props.theme.colorBrand || 'red' };
+  border: 1px dashed ${ props => props.theme.color.brand || 'red' };
   border-radius: 3px;
 
   cursor: pointer;
@@ -50,7 +49,7 @@ const DropZoneContainer = styled.div`
     z-index: 2;
   }
   strong {
-    color: ${ props => props.theme.colorActive75 };
+    color: ${ props => props.theme.color.active75 };
   }
   ${props => props.isDragActive && css`
     ${dragOrHover}
@@ -60,7 +59,7 @@ const DropZoneContainer = styled.div`
   }
   &:focus {
     outline: none;
-    border-color: ${ props => props.theme.colorActive75 || 'red' };
+    border-color: ${ props => props.theme.color.active75 || 'red' };
   }
   &, * {
     transition: .3s ease-in-out;

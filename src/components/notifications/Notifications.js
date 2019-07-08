@@ -38,8 +38,8 @@ const Notification = styled.li`
   }
 
   font-size: 15px;
-  color: ${ props => props.theme.colorText || 'black' };
-  background-color: ${ props => props.theme.backgroundComponent || 'white' };
+  color: ${ props => props.theme.color.text || 'black' };
+  background-color: ${ props => props.theme.background.component || 'white' };
   box-shadow: 0 -3px 10px rgba(0,0,0,0.02), 0 14px 9px -5px rgba(0,0,0,.04);
    
   transition: .2s ease-in-out;

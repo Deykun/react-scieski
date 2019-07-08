@@ -30,8 +30,8 @@ const MainEditor = styled.aside`
   z-index: 50;
   overflow: auto;
   padding: 15px;
-  color: ${ props => props.theme.colorText || 'black' };
-  background-color: ${ props => props.theme.backgroundComponent || 'white' };
+  color: ${ props => props.theme.color.text || 'black' };
+  background-color: ${ props => props.theme.background.component || 'white' };
   box-shadow: 0 0 40px -35px rgba(0,0,0,.5);
   transition: .3s;
 
@@ -47,13 +47,13 @@ const TabNavLink = styled(NavLink).attrs({
 })`
   text-shadow: none;
   &:hover, &.${activeClassName} {
-    color: ${ props => props.theme.colorActive || 'red' };
+    color: ${ props => props.theme.color.active || 'red' };
     ${ textGradient };
   }
 `
 const TabNavLinkExternal = styled.a`
   text-shadow: none;
-  color: ${ props => props.theme.colorActive || 'red' };
+  color: ${ props => props.theme.color.active || 'red' };
   &:hover {
     ${ textGradient };
   }
@@ -73,8 +73,7 @@ class App extends Component {
                 return (
                   <MainEditor open={ match.url.startsWith('/editor/') }>
                     <nav>
-                      <Button as={NavLink} iconleft="cross" aria-label="Zamknij" to="/">
-                      </Button>
+                      <Button as={NavLink} iconleft="cross" aria-label="Zamknij" to="/" />
                       <TabNavLink to="/editor/tracks">
                         <Icon name="flag"/>
                         Trasy

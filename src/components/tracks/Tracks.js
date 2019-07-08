@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import { Redirect } from 'react-router-dom';
 import Route from 'react-router-dom/Route';
  
 import { connect } from 'react-redux';
@@ -22,8 +21,8 @@ const TrackTab = styled.section`
     font-size: 13px;
     line-height: 30px;
     padding: 0 5px;
-    color: ${ props => props.theme.colorText|| 'white' };
-    background-color: ${ props => props.theme.colorBrand || 'black' };
+    color: ${ props => props.theme.color.text|| 'white' };
+    background-color: ${ props => props.theme.color.brand || 'black' };
     border-radius: 30px;
   }
 `
@@ -37,12 +36,13 @@ class Tracks extends Component {
         <AddTrack onAddFiles={this.props.onAddFiles}></AddTrack>
         <Route path="/editor/tracks/:trackid" render={ 
           ( {match} ) => {
-            const indexOfTrack = tracks.findIndex( (track) => { return match.params.trackid === track.id } ); 
-            return indexOfTrack >= 0 ? <TrackDetail track={tracks[indexOfTrack]} onRemoveTrack={this.props.onRemoveTrack} /> : <Redirect to="/editor/tracks" />;
+            return (
+              <TrackDetail id={match.params.trackid} /> 
+            )
           }
         } 
         />
-        <TrackList tracks={tracks} ></TrackList>
+        <TrackList tracks={tracks} />
       </TrackTab>
     ) 
   }

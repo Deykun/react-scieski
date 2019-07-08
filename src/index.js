@@ -7,11 +7,11 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'; 
 import thunk from 'redux-thunk';
 
-import reducerTracks from './store/reducers/reducerTracks'; 
+import reducerEditor from './store/reducers/reducerEditor'; 
 import reducerMap from './store/reducers/reducerMap';  
 
 const rootReducer = combineReducers({
-    rTracks: reducerTracks,
+    rTracks: reducerEditor,
     rMap: reducerMap
 });
 

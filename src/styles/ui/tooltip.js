@@ -17,13 +17,19 @@ const tooltip = css`
     font-size: 11px;
     line-height: 11px;
     font-weight: 500;
+    white-space: nowrap;
 
-    color: ${ props => props.theme.colorText || '#333' };
-    background-color: ${ props => props.theme.colorActive || '#f3e977' };    
+    color: ${ props => props.theme.color.text || 'black' };
+    background-color: ${ props => props.theme.color.active || 'gray' };    
 
     ${ props => props.danger && css`
-      color: ${ props => props.theme.backgroundComponent || 'white' };
-      background-color: ${ props => props.theme.colorDanger75 || 'red' }; 
+      color: ${ props => props.theme.background.danger || 'white' };
+      background-color: ${ props => props.theme.color.danger75 || 'red' }; 
+    `}; 
+
+    ${ props => props.main && css`
+      color: ${ props => props.theme.background.main || 'white' };
+      background-color: ${ props => props.theme.color.main75 || 'green' };
     `}; 
 
     pointer-events: none;

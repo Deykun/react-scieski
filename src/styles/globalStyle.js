@@ -16,7 +16,7 @@ export default createGlobalStyle`
   ${ normalize }
   ${ props => props.theme.importFontFromGoogle && importFontFromGoogle }
   body {
-    background-color: ${ props => props.theme.backgroundApp ? props.theme.backgroundApp : '#e5e5e5' };
+    background-color: ${ props => props.theme.background.app ? props.theme.background.app : '#e5e5e5' };
   }
   * {
     box-sizing: border-box;

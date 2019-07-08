@@ -29,19 +29,20 @@ const StyledButton = styled.button`
   }
 
   ${ props => props.danger && css`
-    fill: ${ props => props.theme.colorDanger || 'Red' };
-    color: ${ props => props.theme.colorDanger || 'Red' };
+    fill: ${ props => props.theme.color.danger || 'Red' };
+    color: ${ props => props.theme.color.danger || 'Red' };
     &:hover {
-      fill: ${ props => props.theme.colorDanger75 || 'Red' };
-      color: ${ props => props.theme.colorDanger75 || 'Red' };
+      fill: ${ props => props.theme.color.danger75 || 'Red' };
+      color: ${ props => props.theme.color.danger75 || 'Red' };
     }
-  `}
+  `} 
+
   ${ props => props.main && css`
-    fill: ${ props => props.theme.colorMain || 'Red' };
-    color: ${ props => props.theme.colorMain || 'Red' };
+    fill: ${ props => props.theme.color.main || 'Green' };
+    color: ${ props => props.theme.color.main || 'Green' };
     &:hover {
-      fill: ${ props => props.theme.colorMain75 || 'Red' };
-      color: ${ props => props.theme.colorMain75 || 'Red' };
+      fill: ${ props => props.theme.color.main75 || 'Green' };
+      color: ${ props => props.theme.color.main75 || 'Green' };
     }
   `}
 
