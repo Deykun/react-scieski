@@ -7,11 +7,15 @@ import * as actionCreator from './../../store/actions/actions';
 
 import TrackDetail from './TrackDetail';
 import AddTrack from './AddTrack'; 
-import TrackList from './TrackList';
+import TrackPreview from './TrackPreview';
 
 import styled from 'styled-components';
 
 const TrackTab = styled.section`
+  max-height: calc( 100vh - 50px );
+  flex-basis: 100%;
+  display: flex;
+  flex-flow: column;
   .number {
     display: inline-block;
     vertical-align: middle;
@@ -21,10 +25,17 @@ const TrackTab = styled.section`
     font-size: 13px;
     line-height: 30px;
     padding: 0 5px;
-    color: ${ props => props.theme.color.text|| 'white' };
+    color: ${ props => props.theme.color.text || 'white' };
     background-color: ${ props => props.theme.color.brand || 'black' };
     border-radius: 30px;
   }
+`
+const TracksContainer = styled.ul`
+  flex-basis: 100%;
+  list-style: none;
+  overflow-y: scroll;
+  margin: 0 -15px;
+  padding: 10px 15px;
 `
 
 class Tracks extends Component {
@@ -42,7 +53,9 @@ class Tracks extends Component {
           }
         } 
         />
-        <TrackList tracks={tracks} />
+        <TracksContainer>
+          {tracks.map( (track) => { return ( <TrackPreview key={track.id} track={track} /> ) })}
+        </TracksContainer>
       </TrackTab>
     ) 
   }

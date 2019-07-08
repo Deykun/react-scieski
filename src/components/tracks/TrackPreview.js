@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import TimeAgo from 'react-timeago';
-import timeAgoTranslation  from 'react-timeago/lib/language-strings/pl';
-import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
+import moment from 'moment';
 
 import styled, {css} from 'styled-components';
 import tooltip from '../../styles/ui/tooltip';
@@ -13,21 +11,21 @@ import Icon from '../../styles/ui/Icon';
 import Button from '../../styles/ui/Button';
 import textGradient from '../../styles/enhancements/textGradient';
 
-const TrackItemContainer = styled.li`
+const TrackPreviewContainer = styled.li`
   position: relative;
   margin-bottom: 8px;
   padding-bottom: 8px;
-  /* border-bottom: 1px solid ${ props => props.theme.color.border || 'gray' }; */
+  border-bottom: 1px solid ${ props => props.theme.color.border || 'gray' }; 
   ${ props => props.status === 'loading' && css`
     opacity: .4;
     cursor: wait;
   `}
   h2 {
-    margin-bottom: 4px;
-    font-size: 15px;
+    font-size: 14px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-bottom: 12px;
     a {
       &:hover {
         ${textGradient};
@@ -39,7 +37,11 @@ const TrackItemContainer = styled.li`
 
 const TrackDataCell = styled.span`
   font-size: 12px;
+  svg {
+    fill: ${ props => props.theme.color.active75 || 'black' };
+  }
   ${props => props['aria-label'] && css`
+    cursor: help;
     ${tooltip};
   `};
   &:not(:last-child) {
@@ -58,13 +60,11 @@ const TrackActions = styled.nav`
   }
 `
 
-const timeAgoFormatter = buildFormatter(timeAgoTranslation);
-
-class TrackListItem extends PureComponent {
+class TrackPreview extends PureComponent {
   render() {
     const { id, status, title, activity, date, distance } = this.props.track;
     return (
-      <TrackItemContainer key={id} status={status} >  
+      <TrackPreviewContainer key={id} status={status} >  
         <h2>
           <Link to={`/editor/tracks/${id}`}>
             <Icon name="flag" />
@@ -73,15 +73,24 @@ class TrackListItem extends PureComponent {
         </h2>
         <p>
           {status === 'loading' && <strong>Ładowanie</strong>}
-          {activity && <TrackDataCell aria-label="Dyscyplina"><Icon name="man" size={14} /> {activity}</TrackDataCell>}
-          {date && <TrackDataCell aria-label="Data"><Icon name="clock" size={14} /> <TimeAgo date={date.start} formatter={timeAgoFormatter} /></TrackDataCell>}
-          {distance && <TrackDataCell aria-label="Dystans"><Icon name="ruler" size={14} /> {distance.toFixed(2)} km</TrackDataCell>}
+          {date && 
+          <TrackDataCell aria-label="Data">
+            <Icon name="calendar" size={18} /> {moment(date.end).fromNow()}
+          </TrackDataCell>}
+          {activity && 
+          <TrackDataCell aria-label="Dyscyplina">
+            <Icon name="man" size={18} /> {activity}
+          </TrackDataCell>}
+          {distance && 
+          <TrackDataCell aria-label="Dystans">
+            <Icon name="ruler" size={18} /> { distance > 0.8 ? `${distance.toFixed(2)} km` : `${(distance*1000).toFixed(1)} m` }
+          </TrackDataCell>}
         </p>
         <TrackActions>
           <Button danger iconleft="block" aria-label="Usuń" onClick={this.props.onRemoveTrack.bind(this, id)} />
           <Button main={1} iconleft="edit" aria-label="Edytuj" as={Link} to={`/editor/tracks/${id}`} />
         </TrackActions>
-      </TrackItemContainer> 
+      </TrackPreviewContainer> 
     )
   }
 }
@@ -96,4 +105,4 @@ const mapDispatchToProps = (dispach) => {
   }
 }
   
-export default connect(mapStateToProps, mapDispatchToProps)( TrackListItem );
+export default connect(mapStateToProps, mapDispatchToProps)( TrackPreview );

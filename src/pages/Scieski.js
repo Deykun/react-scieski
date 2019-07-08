@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, NavLink } from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 
+import 'moment/locale/pl';
+
 import styled from 'styled-components';
 import GlobalStyle from '../styles/globalStyle';
 import Theme from '../styles/theme';
@@ -20,25 +22,31 @@ const AppWrapper = styled.div`
 `
 
 const MainEditor = styled.aside`
+  display: flex;
+  flex-flow: column;
   position: fixed;
   top: 0;
   left: 0;
   transform: ${ props => props.open ? 'translateX(0)' : 'translateX(-100%)' };
   width: 100%;
   max-width: 400px;
-  height: 100%;
+  height: 100vh;
   z-index: 50;
-  overflow: auto;
-  padding: 15px;
+  padding: 0 15px;
   color: ${ props => props.theme.color.text || 'black' };
   background-color: ${ props => props.theme.background.component || 'white' };
   box-shadow: 0 0 40px -35px rgba(0,0,0,.5);
   transition: .3s;
-
   a {
     color: inherit;
     text-decoration: none;
   }
+`;
+
+const MainNav = styled.nav`
+  flex-shrink: 0;
+  flex-basis: 50px;
+  line-height: 50px;
 `;
 
 const activeClassName = 'active';
@@ -72,7 +80,7 @@ class App extends Component {
               ({match}) => {
                 return (
                   <MainEditor open={ match.url.startsWith('/editor/') }>
-                    <nav>
+                    <MainNav>
                       <Button as={NavLink} iconleft="cross" aria-label="Zamknij" to="/" />
                       <TabNavLink to="/editor/tracks">
                         <Icon name="flag"/>
@@ -86,8 +94,7 @@ class App extends Component {
                         <Icon name="flow-branch" />
                         GitHub
                       </TabNavLinkExternal>
-                    
-                    </nav>
+                    </MainNav>
                     <Route path='/editor/tracks' component={Tracks} />
                     <Route path='/editor/settings' render={
                       () => {
