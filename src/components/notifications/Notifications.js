@@ -1,20 +1,11 @@
 import React, { Component } from 'react';
 import Icon from '../../styles/ui/Icon';
 
-// import { connect } from 'react-redux';
-// import * as actionCreator from './../../store/actions/actions';
+import { connect } from 'react-redux';
+import * as actionCreator from './../../store/actions/actions';
 
-
-import styled from 'styled-components';
-
-const notificationsList = [
-  { title: 'Wrong format...', content: 'Lorem' }, 
-  { title: 'Wrong format...', content: 'elo 2' }, 
-  { title: 'Wrong format...', content: 'elo 3' }, 
-  { title: 'Wrong format...', content: 'Suspendisse aliquam nibh vel lacus convallis' }, 
-  { title: 'Wrong format...', content: 'Quisque ante ex, posuere non ante non, bibendum varius sem.' }, 
-  { title: 'Wrong format...', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }, 
-]
+import styled, { keyframes } from 'styled-components';
+import Button from '../../styles/ui/Button';
 
 const NotificationsList = styled.ul`
   position: fixed;
@@ -27,6 +18,17 @@ const NotificationsList = styled.ul`
   perspective: 500px;
 `
 
+const newNotification = keyframes`
+  0% {
+    transform: scale(0) rotateX(45deg);
+    ${'' /* opacity: 0; */}
+  }
+  100% {
+    transform: scale(1) rotateX(0deg);
+    ${'' /* opacity: 1; */}
+  }
+`;
+
 const Notification = styled.li`
   position: relative;
   z-index: 1;
@@ -37,13 +39,18 @@ const Notification = styled.li`
     margin-top: -30px;
   }
 
+  word-break: break-word;
+
   font-size: 15px;
   color: ${ props => props.theme.color.text || 'black' };
   background-color: ${ props => props.theme.background.component || 'white' };
   box-shadow: 0 -3px 10px rgba(0,0,0,0.02), 0 14px 9px -5px rgba(0,0,0,.04);
    
   transition: .2s ease-in-out;
+  transform-origin: 50% 0;
+  animation: ${newNotification} .4s ease-in-out;
   &:hover, &:focus, &:focus-within {
+    outline: none;
     box-shadow: 0 -5px 3px -3px rgba(0,0,0,0.1), 0 14px 9px -5px rgba(0,0,0,.04);
     z-index: 2;
     + * {
@@ -54,40 +61,82 @@ const Notification = styled.li`
       transition: .2s ease-in-out;
     }
   }
+
+  .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+`
+
+const NotificationTitle = styled.h3`
+  padding-right: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+`;
+
+const NotificationContent = styled.p`
+  font-size: 10px;
+`;
+
+const NotificationsGlobalNav = styled.li`
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  z-index: 5;
+  .close-all {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: ${ props => props.theme.color.danger || 'Red' };
+    &:hover {
+      background-color: ${ props => props.theme.color.danger75 || 'Red' };
+    }
+    svg {
+      width: 20px;
+      height: 18px;
+      fill: white;
+    }
+  }
 `
 
 class Notifications extends Component {
   render() {
     return(
       <NotificationsList>
-        {notificationsList.map( (notification, index) => {
+        {this.props.notifications.map( (notification) => {
+          const {id, title, content} = notification;
           return(
-            <Notification key={index} tabIndex="0">
-              <Icon name="cross" />
-              <h3>{notification.title}</h3>
-              {notification.content}
-              <button>Test</button>
+            <Notification key={id} tabIndex="0">
+              <Button className="close" danger iconleft="cross" aria-label="Zamknij" onClick={this.props.onRemoveNotification.bind(this, id)} />
+              <NotificationTitle>{title}</NotificationTitle>
+              <NotificationContent>{content}</NotificationContent>
             </Notification>
           )
         })}
+        {this.props.notifications.length > 5 &&
+          <NotificationsGlobalNav>
+            <Button className="close-all" danger iconleft="cross" aria-label="Zamknij wszystkie" onClick={this.props.onRemoveNotifications.bind(this)} />
+          </NotificationsGlobalNav>
+        }
       </NotificationsList>
     ) 
   }
 }
 
 
-// const mapStateToProps = (store) => {
-//   return {
-//       tracks: store.rTracks.tracks
-//   }
-// }
+const mapStateToProps = (store) => {
+  return {
+    notifications: store.rEditor.notifications
+  }
+}
 
-// const mapDispacToProps = (dispach) => {
-// return {
-//     onAddFiles: (files) => dispach( actionCreator.addTracksFromFiles(files) ),
-//     onRemoveTrack: (id) => dispach( { type: 'REMOVE_TRACK', id }),
-// }
-// }
+const mapDispacToProps = (dispach) => {
+  return {
+    onRemoveNotification: (id) => dispach( { type: 'REMOVE_NOTIFICATION', id }),
+    onRemoveNotifications: () => dispach( { type: 'REMOVE_ALL_NOTIFICATION' }),
+  }
+}
 
-// export default connect(mapStateToProps, mapDispacToProps)( Tracks );
-export default Notifications;
+export default connect(mapStateToProps, mapDispacToProps)( Notifications );

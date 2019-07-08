@@ -104,7 +104,7 @@ class TrackDetail extends Component {
 
 
 const mapStateToProps = (store, props) => {
-  const track = store.rTracks.tracks.find( (track) => { return props.id === track.id } ); 
+  const track = store.rEditor.tracks.find( (track) => { return props.id === track.id } ); 
   return {
     track: track
   }

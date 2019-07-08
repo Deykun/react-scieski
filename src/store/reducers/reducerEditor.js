@@ -1,18 +1,22 @@
 import {
-    ADD_NEW_TRACK,
+    ADD_TRACK,
     UPDATE_TRACK,
-    REMOVE_TRACK
+    REMOVE_TRACK,
+    ADD_NOTIFICATION,
+    REMOVE_NOTIFICATION,
+    REMOVE_ALL_NOTIFICATION
 } from '../constants/actions';
 
 const initialState = {
   tracks: [],
+  notifications: []
 };
 
 const reducer = ( state = initialState, action ) => {
   let newState = {...state};
 
   switch (action.type) {
-    case ADD_NEW_TRACK: 
+    case ADD_TRACK: 
       newState.tracks = [ ...newState.tracks, action.track ];
       break;
 
@@ -30,8 +34,19 @@ const reducer = ( state = initialState, action ) => {
       newState.tracks = newState.tracks.filter( track => track.id !== action.id ); 
       break;
 
+    case ADD_NOTIFICATION: 
+      newState.notifications = [ ...newState.notifications, action.notification ];
+      break;
+
+    case REMOVE_NOTIFICATION:
+      newState.notifications = newState.notifications.filter( notification => notification.id !== action.id ); 
+      break;
+
+    case REMOVE_ALL_NOTIFICATION:
+      newState.notifications = []; 
+      break;
+
     default: 
-      console.warn( `Unknow action type: ${action.type}`);
   }
   return newState;
 }

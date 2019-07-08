@@ -64,7 +64,7 @@ class Tracks extends Component {
 
 const mapStateToProps = (store) => {
   return {
-    tracks: store.rTracks.tracks
+    tracks: store.rEditor.tracks
   }
 }
 

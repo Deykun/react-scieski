@@ -14,7 +14,6 @@ const reducer = ( state = initialState, action ) => {
       newState.settings.map = action.range;
       break;
     default:
-      console.warn( `Unknow action type: ${action.type}`);
   }
 
   return newState;

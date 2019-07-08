@@ -101,7 +101,7 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispach) => {
   return {
-      onRemoveTrack: (id) => dispach( { type: 'REMOVE_TRACK', id }),
+    onRemoveTrack: (id) => dispach( { type: 'REMOVE_TRACK', id }),
   }
 }
   

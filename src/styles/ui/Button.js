@@ -28,6 +28,10 @@ const StyledButton = styled.button`
     }
   }
 
+  &:focus {
+    outline: none;
+  }
+
   ${ props => props.danger && css`
     fill: ${ props => props.theme.color.danger || 'Red' };
     color: ${ props => props.theme.color.danger || 'Red' };

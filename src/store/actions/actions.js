@@ -1,7 +1,8 @@
 import {
-  ADD_NEW_TRACK,
+  ADD_TRACK,
   UPDATE_TRACK,
   FILE_IMPORT_ERROR,
+  ADD_NOTIFICATION,
 } from '../constants/actions';
 
 import { v4 } from 'node-uuid';
@@ -23,9 +24,10 @@ export const addTracksFromFiles = (files) => {
 const createTrackFromFile = (file, dispatch) => {
   const allowedFormats = ['gpx','tcx'];
 
-  let formatDot = file.name.lastIndexOf(".");
-  let fileTitle = file.name.slice(0, formatDot);
-  let fileFormat = file.name.substring(formatDot + 1).toLowerCase();  
+  let filteName = file.name;
+  let formatDot = filteName.lastIndexOf(".");
+  let fileTitle = filteName.slice(0, formatDot);
+  let fileFormat = filteName.substring(formatDot + 1).toLowerCase();  
 
   if ( allowedFormats.includes(fileFormat) ) {
     let newTrack = {
@@ -35,12 +37,13 @@ const createTrackFromFile = (file, dispatch) => {
       status: 'loading'
     };
     
-    dispatch ( { type: ADD_NEW_TRACK, track: newTrack } );
+    dispatch ( { type: ADD_TRACK, track: newTrack } );
+    dispatch( { type: ADD_NOTIFICATION, notification: { id: v4(), title: fileTitle, content: 'Został dodany.' } } )
 
     const reader = new FileReader();
 
-    reader.onabort = () => { dispatch( { type: FILE_IMPORT_ERROR, id: newTrack.id, msg: 'File reading was aborted' } ) };
-    reader.onerror = () => { dispatch( { type: FILE_IMPORT_ERROR, id: newTrack.id, msg: 'File reading has failed' } ) };
+    reader.onabort = () => { dispatch( { type: FILE_IMPORT_ERROR, id: newTrack.id, msg: 'File reading was aborted.' } ) };
+    reader.onerror = () => { dispatch( { type: FILE_IMPORT_ERROR, id: newTrack.id, msg: 'File reading has failed.' } ) };
 
     reader.readAsBinaryString(file);
 
@@ -52,12 +55,10 @@ const createTrackFromFile = (file, dispatch) => {
       
       dispatch( { type: UPDATE_TRACK, id: newTrack.id, track: trackData } );
     }
-
-    return;
-
   } else {
-    return { type: FILE_IMPORT_ERROR, msg: 'Wrong file format.' };
+    dispatch( { type: ADD_NOTIFICATION, notification: { id: v4(), title: `Zły format pliku (.${fileFormat})`, content: `${filteName} nie został dodany ponieważ  nie jest obsługiwanym formatem.` }})
   }
+  return;
 }
 
 const dataFromFile = (fileContent, fileFormat) => {

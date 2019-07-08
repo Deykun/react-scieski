@@ -11,7 +11,7 @@ import reducerEditor from './store/reducers/reducerEditor';
 import reducerMap from './store/reducers/reducerMap';  
 
 const rootReducer = combineReducers({
-    rTracks: reducerEditor,
+    rEditor: reducerEditor,
     rMap: reducerMap
 });
 

@@ -1,6 +1,6 @@
 import reducerEditor from './reducerEditor';
 import {
-  ADD_NEW_TRACK,
+  ADD_TRACK,
   REMOVE_TRACK,
   UPDATE_TRACK
 } from '../constants/actions';
@@ -24,7 +24,7 @@ describe('Tracks reducer', () => {
 
     expect( 
       reducerEditor(initialState, {
-        type: ADD_NEW_TRACK,
+        type: ADD_TRACK,
         track: {
           id: '63fea2a3-b1d2-4e44-ac8a-5f5d5325bbb1',
           title: '2013-02-03 156294493 Walking Endomondo',
