@@ -35,7 +35,7 @@ const StyledButton = styled.button`
   ${ props => props.danger && css`
     fill: ${ props => props.theme.color.danger || 'Red' };
     color: ${ props => props.theme.color.danger || 'Red' };
-    &:hover {
+    &:hover, &:focus {
       fill: ${ props => props.theme.color.danger75 || 'Red' };
       color: ${ props => props.theme.color.danger75 || 'Red' };
     }
@@ -44,7 +44,7 @@ const StyledButton = styled.button`
   ${ props => props.main && css`
     fill: ${ props => props.theme.color.main || 'Green' };
     color: ${ props => props.theme.color.main || 'Green' };
-    &:hover {
+    &:hover, &:focus {
       fill: ${ props => props.theme.color.main75 || 'Green' };
       color: ${ props => props.theme.color.main75 || 'Green' };
     }

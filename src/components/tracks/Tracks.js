@@ -16,6 +16,9 @@ const TrackTab = styled.section`
   flex-basis: 100%;
   display: flex;
   flex-flow: column;
+  h3 {
+    margin-bottom: 12px;
+  }
   .number {
     display: inline-block;
     vertical-align: middle;
@@ -35,7 +38,21 @@ const TracksContainer = styled.ul`
   list-style: none;
   overflow-y: scroll;
   margin: 0 -15px;
-  padding: 10px 15px;
+  background-color: ${ props => props.theme.background.component || 'white' };
+  position: relative;
+  &::before {
+    content: '';
+    position: sticky;
+    top: 0;
+    left: 0;
+    display: block;
+    pointer-events: none;
+    z-index: 1;
+    background-image: linear-gradient( to bottom, rgba(0,0,0,.8) 0%, rgba(0,0,0,.6) 12%, rgba(0,0,0,0) 100%);
+    width: 100%;
+    height: 7px;
+    opacity: .1;
+  }
 `
 
 class Tracks extends Component {

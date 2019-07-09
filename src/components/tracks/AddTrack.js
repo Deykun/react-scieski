@@ -13,6 +13,9 @@ const dragOrHover = css`
   svg {
     opacity: .6;
   }
+  * {
+    transition: .3s ease-in-out;
+  }
 `
 
 const DropZoneContainer = styled.div`
@@ -61,8 +64,9 @@ const DropZoneContainer = styled.div`
     outline: none;
     border-color: ${ props => props.theme.color.active75 || 'red' };
   }
-  &, * {
-    transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  * {
+    transition: 0s ease-in-out;
   }
 `
 

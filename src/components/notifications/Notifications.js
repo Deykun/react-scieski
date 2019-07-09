@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Icon from '../../styles/ui/Icon';
 
 import { connect } from 'react-redux';
-import * as actionCreator from './../../store/actions/actions';
 
 import styled, { keyframes } from 'styled-components';
 import Button from '../../styles/ui/Button';
@@ -21,11 +19,9 @@ const NotificationsList = styled.ul`
 const newNotification = keyframes`
   0% {
     transform: scale(0) rotateX(45deg);
-    ${'' /* opacity: 0; */}
   }
   100% {
     transform: scale(1) rotateX(0deg);
-    ${'' /* opacity: 1; */}
   }
 `;
 
@@ -41,8 +37,6 @@ const Notification = styled.li`
 
   word-break: break-word;
 
-  font-size: 15px;
-  color: ${ props => props.theme.color.text || 'black' };
   background-color: ${ props => props.theme.background.component || 'white' };
   box-shadow: 0 -3px 10px rgba(0,0,0,0.02), 0 14px 9px -5px rgba(0,0,0,.04);
    
@@ -70,14 +64,19 @@ const Notification = styled.li`
 `
 
 const NotificationTitle = styled.h3`
-  padding-right: 30px;
+  color: ${ props => props.theme.color.text || 'black' };
   font-size: 12px;
   font-weight: 600;
+  padding-right: 30px;
   margin-bottom: 8px;
 `;
 
 const NotificationContent = styled.p`
-  font-size: 10px;
+  color: ${ props => props.theme.color.textMuted || 'black' };
+  font-size: 12px;
+  font-weight: 400;
+  text-align: justify;
+  hyphens: auto;
 `;
 
 const NotificationsGlobalNav = styled.li`
@@ -85,6 +84,7 @@ const NotificationsGlobalNav = styled.li`
   top: -5px;
   left: -5px;
   z-index: 5;
+  margin: 0 !important;
   .close-all {
     width: 20px;
     height: 20px;

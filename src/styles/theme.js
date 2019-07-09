@@ -5,7 +5,8 @@ const theme = {
   importFontFromGoogle: true,
   color: {
     brand: '#d4db96',
-    text: '#333333',
+    text: '#333',
+    textMuted: '#878787',
     inactive: '#c0c0c0',
     active: '#a4b324',
     active75: '#737e10',
@@ -13,7 +14,7 @@ const theme = {
     main75: '#087442',
     danger: '#d53030',
     danger75: '#7e1010',
-    border: '#f8f8f8'
+    border: '#e9e9e9'
   },
   background: {
     app: '#e5e5e5',

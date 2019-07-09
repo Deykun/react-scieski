@@ -34,14 +34,14 @@ const EditableTitle = styled.textarea`
   }
 `;
 
-const TrackDataCells = styled.ul`
+const DataCells = styled.ul`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
   align-items: center;
 `
 
-const TrackDataCell = styled.li`
+const DataCell = styled.li`
   display: inline-block;
   margin-bottom: 8px;
   font-size: 14px;
@@ -65,31 +65,29 @@ class TrackDetail extends Component {
       const { title, activity, date, duration, speed, distance } = track;
       return (
         <TrackDetailWrapper key={id}>
-          <EditableTitle placeholder="Nazwa" autoFocus name="title" onChange={this.onChange.bind(this)}>
-            {title}
-          </EditableTitle>
-          <TrackDataCells>
+          <EditableTitle placeholder="Nazwa" name="title" onChange={this.onChange.bind(this)} defaultValue={title} />
+          <DataCells>
             {date && 
-            <TrackDataCell aria-label="Data">
+            <DataCell aria-label="Data">
               <Icon name="calendar" size={18} /> {moment(date.end).fromNow()}
-            </TrackDataCell>}
+            </DataCell>}
             {activity && 
-            <TrackDataCell aria-label="Dyscyplina">
+            <DataCell aria-label="Dyscyplina">
               <Icon name="man" size={18} /> {activity}
-            </TrackDataCell>}
+            </DataCell>}
             {duration && 
-            <TrackDataCell aria-label="Czas trwania">
+            <DataCell aria-label="Czas trwania">
               <Icon name="clock" size={18} /> {duration}
-            </TrackDataCell>} 
+            </DataCell>} 
             {speed && 
-            <TrackDataCell aria-label="Średnia prędkość">
+            <DataCell aria-label="Średnia prędkość">
               <Icon name="gauge" size={18} /> {speed.toFixed(2)} km/h 
-            </TrackDataCell>} 
+            </DataCell>} 
             {distance && 
-            <TrackDataCell aria-label="Dystans">
+            <DataCell aria-label="Dystans">
               <Icon name="ruler" size={18} /> { distance > 0.8 ? `${distance.toFixed(2)} km` : `${(distance*1000).toFixed(1)} m` }
-            </TrackDataCell>}
-          </TrackDataCells>
+            </DataCell>}
+          </DataCells>
           <button onClick={this.props.onRemoveTrack.bind(this, track.id)}>Usuń</button> 
         </TrackDetailWrapper>
       )
