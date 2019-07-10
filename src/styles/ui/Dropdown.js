@@ -36,6 +36,9 @@ const DropdownList = styled.div`
 
 const StyledDropdown = styled.div`
   position: relative;
+  display: inline-block;
+  width: 25px;
+  text-align: center
   .dropdown-toggle {
     svg {
       margin: 0;

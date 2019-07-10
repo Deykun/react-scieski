@@ -41,7 +41,7 @@ const TrackPreviewContainer = styled.li`
 const Title = styled(Link)`
   display: block;
   margin-bottom: 12px;
-  padding-right: 20px;
+  padding-right: 25px;
   font-size: 12px;
   font-weight: 500;
   &:focus, &:focus-within {

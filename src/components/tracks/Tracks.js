@@ -7,6 +7,8 @@ import AddTrack from './AddTrack';
 import TrackPreview from './TrackPreview';
 
 import styled from 'styled-components';
+import Dropdown from '../../styles/ui/Dropdown';
+import Button from '../../styles/ui/Button';
 
 const TrackTab = styled.section`
   max-height: calc( 100vh - 50px );
@@ -30,6 +32,11 @@ const TrackTab = styled.section`
     border-radius: 30px;
   }
 `
+
+const TracksNav = styled.nav`
+  text-align: right;
+`;
+
 const TracksContainer = styled.ul`
   flex-basis: 100%;
   list-style: none;
@@ -59,6 +66,12 @@ class Tracks extends Component {
       <TrackTab>
         <h3>Trasy <span className='number'>{tracks.length}</span></h3>
         <AddTrack onAddFiles={this.props.onAddFiles}></AddTrack>
+        <TracksNav>
+          <Dropdown>
+            <Button iconleft="ruler" onClick={ () => this.props.onSortTracks('distance') }> Dystans</Button>
+            <Button iconleft="calendar" onClick={ () => this.props.onSortTracks('date') }> Data</Button>
+          </Dropdown>
+        </TracksNav>
         <TracksContainer>
           {tracks.map( (track) => { return ( <TrackPreview key={track.id} track={track} /> ) })}
         </TracksContainer>
@@ -77,7 +90,7 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = (dispach) => {
   return {
     onAddFiles: (files) => dispach( actionCreator.addTracksFromFiles(files) ),
-    onRemoveTrack: (id) => dispach( { type: 'REMOVE_TRACK', id }),
+    onSortTracks: (by) => dispach( { type: 'SORT_TRACKS', by })
   }
 }
 

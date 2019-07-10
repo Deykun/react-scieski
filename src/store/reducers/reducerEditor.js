@@ -2,6 +2,7 @@ import {
     ADD_TRACK,
     UPDATE_TRACK,
     REMOVE_TRACK,
+    SORT_TRACKS,
     ADD_NOTIFICATION,
     REMOVE_NOTIFICATION,
     REMOVE_ALL_NOTIFICATION
@@ -35,6 +36,18 @@ const reducer = ( state = initialState, action ) => {
     case REMOVE_TRACK:
       newState.tracks = newState.tracks.filter( track => track.id !== action.id ); 
       newState.notifications = [ ...newState.notifications, { id: v4(), content: 'Trasa została usunięta.'} ];
+      break;
+
+    case SORT_TRACKS:
+      switch(action.by) {
+        case 'date':
+          newState.tracks = newState.tracks.sort( (a, b) => new Date( a.date.start ) < new Date( b.date.start ) ).map( track => track );
+          break;
+
+        default: 
+          newState.tracks = newState.tracks.sort( (a, b) => a.distance < b.distance ).map( track => track );
+      }
+      
       break;
 
     case ADD_NOTIFICATION: 
