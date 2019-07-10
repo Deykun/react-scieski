@@ -44,6 +44,7 @@ const Title = styled(Link)`
   padding-right: 25px;
   font-size: 12px;
   font-weight: 500;
+  word-break: break-word;
   &:focus, &:focus-within {
     outline: none;
     opacity: .5 ;

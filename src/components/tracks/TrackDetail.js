@@ -26,6 +26,7 @@ const EditableTitle = styled.textarea`
     resize: vertical;
   }
   &:focus {
+    outline: none;
     border-bottom-color: ${ props => props.theme.background.active || 'white' };
   }
 `;
@@ -41,6 +42,9 @@ const DataCell = styled.li`
   display: inline-block;
   margin-bottom: 8px;
   font-size: 14px;
+  svg {
+    fill: ${ props => props.theme.color.active75 || 'black' };
+  }
   ${props => props['aria-label'] && css`
     ${tooltip};
   `};

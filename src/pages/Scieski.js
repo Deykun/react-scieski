@@ -5,13 +5,12 @@ import Route from 'react-router-dom/Route';
 
 import 'moment/locale/pl';
 
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import GlobalStyle from '../styles/globalStyle';
 import Theme from '../styles/theme';
 
 import textGradient from '../styles/enhancements/textGradient';
 
-import Logo from '../logo.svg';
 import Notifications from '../components/notifications/Notifications'; 
 import Tracks from '../components/tracks/Tracks'; 
 import TrackDetail from '../components/tracks/TrackDetail';
@@ -21,6 +20,18 @@ import Button from '../styles/ui/Button';
 
 const AppWrapper = styled.div`
 `
+
+const AppNameLink = styled.a`
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  color: ${ props => props.theme.color.text || 'black' };
+  &:hover {
+    ${ textGradient };
+  }
+`;
 
 const MainEditor = styled.aside`
   display: flex;
@@ -48,6 +59,12 @@ const MainNav = styled.nav`
   flex-shrink: 0;
   flex-basis: 50px;
   line-height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  svg {
+    margin-right: 5px;
+  }
 `;
 
 const activeClassName = 'active';
@@ -76,13 +93,12 @@ class App extends Component {
           <AppWrapper className="scieski-app">
             <GlobalStyle />
             <Notifications></Notifications>
-            <NavLink to="/editor/tracks/" activeClassName="active">scieski <img src={Logo} style={{height:100}} alt="logo"/></NavLink>
+            <AppNameLink aria-label="Otwórz edytor" as={NavLink} to="/editor/tracks/">scieski</AppNameLink>
             <Route path="*" render={
               ({match}) => {
                 return (
                   <MainEditor open={ match.url.startsWith('/editor/') }>
                     <MainNav>
-                      <Button as={NavLink} iconleft="cross" aria-label="Zamknij" to="/" />
                       <TabNavLink to="/editor/tracks">
                         <Icon name="flag"/>
                         Trasy
@@ -95,12 +111,13 @@ class App extends Component {
                         <Icon name="flow-branch" />
                         GitHub
                       </TabNavLinkExternal>
+                      <Button danger={1} as={NavLink} iconleft="cross" aria-label="Zamknij" to="/" />
                     </MainNav>
                     <Route path='/editor/tracks' component={Tracks} />
                     <Route path='/editor/settings' render={
                       () => {
                         return (
-                          <p>Ustawienia</p>
+                          <p>Wkrótce.</p>
                         )
                       }
                     } />

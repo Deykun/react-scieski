@@ -18,10 +18,14 @@ const NotificationsList = styled.ul`
 
 const newNotification = keyframes`
   0% {
-    transform: scale(0) rotateX(45deg);
+    transform: scale(0) translateY(100px) rotateX(45deg);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
   }
   100% {
-    transform: scale(1) rotateX(0deg);
+    transform: scale(1) translateY(0) rotateX(0deg);
   }
 `;
 

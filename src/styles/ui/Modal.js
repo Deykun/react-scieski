@@ -41,8 +41,7 @@ const ModalOverlay = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: #666f17;
-    background-image: linear-gradient( -163deg,#3e3f32 0%,#747a31 100%);
+    background-color: #7e7e7e;
     opacity: .7;
     z-index: 1;
     animation: ${ModalOverlayPopup} .5s; 
