@@ -41,11 +41,13 @@ const reducer = ( state = initialState, action ) => {
     case SORT_TRACKS:
       switch(action.by) {
         case 'date':
-          newState.tracks = newState.tracks.sort( (a, b) => new Date( a.date.start ) < new Date( b.date.start ) ).map( track => track );
+          newState.tracks = newState.tracks.sort( (a, b) => ( a.date && b.date && (new Date( a.date.start ) < new Date( b.date.start ) ) ) ).map( track => track );
+          newState.notifications = [ ...newState.notifications, { id: v4(), title: 'Sortowanie', content: 'Trasy zostały posortowane po dacie.'} ];
           break;
 
         default: 
-          newState.tracks = newState.tracks.sort( (a, b) => a.distance < b.distance ).map( track => track );
+          newState.tracks = newState.tracks.sort( (a, b) => ( a.distance && b.distance && ( a.distance < b.distance ) ) ).map( track => track );
+          newState.notifications = [ ...newState.notifications, { id: v4(), title: 'Sortowanie', content: 'Trasy zostały posortowane po dystansie.'} ];
       }
       
       break;
