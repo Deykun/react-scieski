@@ -110,7 +110,7 @@ class TrackPreview extends PureComponent {
         <DataCells>
           {status === 'loading' && 
           <DataCell>
-            <Icon rotate name="circular-graph" size={18} /> Ładowanie...
+            <Icon rotate={1} name="circular-graph" size={18} /> Ładowanie...
           </DataCell>}
           {activity && 
           <DataCell aria-label="Dyscyplina">

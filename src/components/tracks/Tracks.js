@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-import Route from 'react-router-dom/Route';
  
 import { connect } from 'react-redux';
 import * as actionCreator from './../../store/actions/actions';

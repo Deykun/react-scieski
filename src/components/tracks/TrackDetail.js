@@ -9,13 +9,8 @@ import moment from 'moment';
 import styled, {css} from 'styled-components';
 import tooltip from '../../styles/ui/tooltip';
 import Icon from '../../styles/ui/Icon';
+import Button from '../../styles/ui/Button';
 import Modal from '../../styles/ui/Modal';
-
-const TrackDetailWrapper = styled.section`
-  /* margin: 0 -15px;
-  padding: 15px;
-  background-color: ${ props => props.theme.color.brand || 'green' }; */
-`;
 
 const EditableTitle = styled.textarea`
   display: block;
@@ -60,41 +55,47 @@ class TrackDetail extends Component {
     this.props.onUpdateTrack( this.props.id, { [name]: value });
   }
 
+  onRemove = () => {
+    if ( window.confirm('Jesteś pewien?') ) {
+      this.props.onRemoveTrack(this.props.track.id);
+    }
+  }
+
   render() {
     const { id, track } = this.props;
     if ( track ) {
       const { title, activity, date, duration, speed, distance } = track;
       return (
         <Modal
+          key={id}
           title="Edycja trasy"
           closePath="/editor/tracks/"
+          from="left"
         >
-          <TrackDetailWrapper key={id}>
-            <EditableTitle placeholder="Nazwa" name="title" onChange={this.onChange.bind(this)} defaultValue={title} />
-            <DataCells>
-              {date && 
-              <DataCell aria-label="Data">
-                <Icon name="calendar" size={18} /> {moment(date.end).fromNow()}
-              </DataCell>}
-              {activity && 
-              <DataCell aria-label="Dyscyplina">
-                <Icon name="man" size={18} /> {activity}
-              </DataCell>}
-              {duration && 
-              <DataCell aria-label="Czas trwania">
-                <Icon name="clock" size={18} /> {duration}
-              </DataCell>} 
-              {speed && 
-              <DataCell aria-label="Średnia prędkość">
-                <Icon name="gauge" size={18} /> {speed.toFixed(2)} km/h 
-              </DataCell>} 
-              {distance && 
-              <DataCell aria-label="Dystans">
-                <Icon name="ruler" size={18} /> { distance > 0.8 ? `${distance.toFixed(2)} km` : `${(distance*1000).toFixed(1)} m` }
-              </DataCell>}
-            </DataCells>
-            <button onClick={this.props.onRemoveTrack.bind(this, track.id)}>Usuń</button> 
-          </TrackDetailWrapper>
+          <EditableTitle autoFocus placeholder="Nazwa" name="title" onChange={this.onChange.bind(this)} defaultValue={title} />
+          <DataCells>
+            {date && 
+            <DataCell aria-label="Data">
+              <Icon name="calendar" size={18} /> {moment(date.end).fromNow()}
+            </DataCell>}
+            {activity && 
+            <DataCell aria-label="Dyscyplina">
+              <Icon name="man" size={18} /> {activity}
+            </DataCell>}
+            {duration && 
+            <DataCell aria-label="Czas trwania">
+              <Icon name="clock" size={18} /> {duration}
+            </DataCell>} 
+            {speed && 
+            <DataCell aria-label="Średnia prędkość">
+              <Icon name="gauge" size={18} /> {speed.toFixed(2)} km/h 
+            </DataCell>} 
+            {distance && 
+            <DataCell aria-label="Dystans">
+              <Icon name="ruler" size={18} /> { distance > 0.8 ? `${distance.toFixed(2)} km` : `${(distance*1000).toFixed(1)} m` }
+            </DataCell>}
+          </DataCells>
+          <Button danger iconleft="block" onClick={this.onRemove}>Usuń</Button> 
         </Modal>
       )
     } else {

@@ -55,7 +55,7 @@ const createTrackFromFile = (file, dispatch) => {
       dispatch( { type: UPDATE_TRACK, id: newTrack.id, track: trackData } );
     }
   } else {
-    dispatch( { type: ADD_NOTIFICATION, notification: { id: v4(), title: `Zły format pliku (.${fileFormat})`, content: `${filteName} nie został dodany ponieważ  nie jest obsługiwanym formatem.` }})
+    dispatch( { type: ADD_NOTIFICATION, notification: { id: v4(), title: `Zły format pliku`, content: `${filteName} nie został dodany ponieważ .${fileFormat} nie jest obsługiwanym formatem.` }})
   }
   return;
 }
