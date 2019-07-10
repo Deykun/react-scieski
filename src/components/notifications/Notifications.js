@@ -110,7 +110,7 @@ class Notifications extends Component {
           return(
             <Notification key={id} tabIndex="0">
               <Button className="close" danger iconleft="cross" aria-label="Zamknij" onClick={this.props.onRemoveNotification.bind(this, id)} />
-              <NotificationTitle>{title}</NotificationTitle>
+              <NotificationTitle>{title ? title : 'Powiadomienie'}</NotificationTitle>
               <NotificationContent>{content}</NotificationContent>
             </Notification>
           )

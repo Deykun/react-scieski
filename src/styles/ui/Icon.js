@@ -1,10 +1,22 @@
 import React from 'react';
 import iconPaths from './icomoon_selection.json';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+
+const rotate = keyframes`
+  0% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(405deg);
+  }
+`;
 
 const StyledIcon = styled.svg`
   display: inline-block;
   vertical-align: sub;
+  ${props => props.rotate && css`
+    animation: ${rotate} .4s infinite linear;
+  `}
 `;
 
 function getIconPath(iconName) {

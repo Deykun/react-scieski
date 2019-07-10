@@ -5,7 +5,6 @@ import Route from 'react-router-dom/Route';
 import { connect } from 'react-redux';
 import * as actionCreator from './../../store/actions/actions';
 
-import TrackDetail from './TrackDetail';
 import AddTrack from './AddTrack'; 
 import TrackPreview from './TrackPreview';
 
@@ -62,14 +61,6 @@ class Tracks extends Component {
       <TrackTab>
         <h3>Trasy <span className='number'>{tracks.length}</span></h3>
         <AddTrack onAddFiles={this.props.onAddFiles}></AddTrack>
-        <Route path="/editor/tracks/:trackid" render={ 
-          ( {match} ) => {
-            return (
-              <TrackDetail id={match.params.trackid} /> 
-            )
-          }
-        } 
-        />
         <TracksContainer>
           {tracks.map( (track) => { return ( <TrackPreview key={track.id} track={track} /> ) })}
         </TracksContainer>

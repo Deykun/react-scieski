@@ -21,6 +21,9 @@ const theme = {
     component: 'white',
     main: 'white',
     danger: 'white',
+  },
+  other: {
+    borderRadius: '2px'
   }
 }
 

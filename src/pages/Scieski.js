@@ -14,6 +14,7 @@ import textGradient from '../styles/enhancements/textGradient';
 import Logo from '../logo.svg';
 import Notifications from '../components/notifications/Notifications'; 
 import Tracks from '../components/tracks/Tracks'; 
+import TrackDetail from '../components/tracks/TrackDetail';
 
 import Icon from '../styles/ui/Icon';
 import Button from '../styles/ui/Button';
@@ -107,6 +108,14 @@ class App extends Component {
                 )
               }
             } /> 
+            <Route path="/editor/tracks/:trackid" render={ 
+              ( {match} ) => {
+                return (
+                  <TrackDetail id={match.params.trackid} /> 
+                )
+              }
+            } 
+            />
           </AppWrapper> 
         </Theme>
       </Router>

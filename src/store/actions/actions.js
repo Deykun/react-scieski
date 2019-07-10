@@ -38,7 +38,6 @@ const createTrackFromFile = (file, dispatch) => {
     };
     
     dispatch ( { type: ADD_TRACK, track: newTrack } );
-    dispatch( { type: ADD_NOTIFICATION, notification: { id: v4(), title: fileTitle, content: 'Został dodany.' } } )
 
     const reader = new FileReader();
 

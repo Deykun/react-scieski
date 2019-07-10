@@ -11,7 +11,7 @@ const DropdownList = styled.div`
   transform: translateX(-50%);
   background-color: ${ props => props.theme.background.component || 'white' }; 
   border: 1px solid ${ props => props.theme.color.border || 'gray' };
-  border-radius: 2px;
+  border-radius: ${ props => props.theme.other.borderRadius || '2px' };
   text-align: center;
   overflow: hidden;
   max-height: 0;

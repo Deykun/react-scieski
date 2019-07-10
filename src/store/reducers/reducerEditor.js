@@ -7,6 +7,8 @@ import {
     REMOVE_ALL_NOTIFICATION
 } from '../constants/actions';
 
+import { v4 } from 'node-uuid';
+
 const initialState = {
   tracks: [],
   notifications: []
@@ -32,6 +34,7 @@ const reducer = ( state = initialState, action ) => {
 
     case REMOVE_TRACK:
       newState.tracks = newState.tracks.filter( track => track.id !== action.id ); 
+      newState.notifications = [ ...newState.notifications, { id: v4(), content: 'Trasa została usunięta.'} ];
       break;
 
     case ADD_NOTIFICATION: 
