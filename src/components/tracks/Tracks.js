@@ -67,6 +67,7 @@ class Tracks extends Component {
         <h3>Trasy <span className='number'>{tracks.length}</span></h3>
         <AddTrack onAddFiles={this.props.onAddFiles}></AddTrack>
         <TracksNav>
+          <Button iconleft="map" aria-label="Dodaj mapę" onClick={this.props.onAddMap} />
           <Dropdown>
             <Button iconleft="ruler" onClick={ () => this.props.onSortTracks('distance') }> Dystans</Button>
             <Button iconleft="calendar" onClick={ () => this.props.onSortTracks('date') }> Data</Button>
@@ -90,7 +91,8 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = (dispach) => {
   return {
     onAddFiles: (files) => dispach( actionCreator.addTracksFromFiles(files) ),
-    onSortTracks: (by) => dispach( { type: 'SORT_TRACKS', by })
+    onSortTracks: (by) => dispach( { type: 'SORT_TRACKS', by }),
+    onAddMap: () => dispach( { type: 'ADD_MAP' })
   }
 }
 
