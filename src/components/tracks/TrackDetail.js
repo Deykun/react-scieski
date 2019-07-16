@@ -22,10 +22,10 @@ const EditableTitle = styled.textarea`
   background-color: transparent;
   border: none;
   border-bottom: 1px solid transparent;
-  &:hover, &:focus {
+  :hover, :focus {
     resize: vertical;
   }
-  &:focus {
+  :focus {
     outline: none;
     border-bottom-color: ${ props => props.theme.background.active || 'white' };
   }
@@ -48,7 +48,7 @@ const DataCell = styled.li`
   ${props => props['aria-label'] && css`
     ${tooltip};
   `};
-  &:not(:last-child) {
+  :not(:last-child) {
     margin-right: 10px;
   }
 `;

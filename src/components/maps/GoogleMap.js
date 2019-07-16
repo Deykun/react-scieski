@@ -6,10 +6,11 @@ class GoogleMap extends Component {
 
   colorOfTrack(track) {
     /* Color repeat itself after yearBase + colorsLength */
-    const yearColors = ['#f4960f', '#0ba9cc', '#795046', '#9ec83e', '#f8971b', '#db4436', '#4186f0', '#7c3592'];
+    const yearColors = [ '#9ec83e', '#f4960f', '#db4436', '#4186f0', '#7c3592', '#cc3eb6', '#18b963' ];
     const colorsLength = yearColors.length;
+    const colorsOffset = -( 2013 % colorsLength );
     const trackYear = new Date( track.date.start ).getFullYear();
-    return yearColors[ ( trackYear % colorsLength ) ];
+    return yearColors[ ( (trackYear + colorsOffset) % colorsLength ) ];
   }
 
   renderTracks() {
@@ -54,5 +55,5 @@ class GoogleMap extends Component {
 }
   
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyCr9Uvjcrht84ncO5yJYpXgkhlhciDM2acnp'
+  apiKey: 'AIzaSyCr9Uvjcrht84ncO5yJYpXgkhlhciDM2ac'
 })(GoogleMap);

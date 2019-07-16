@@ -57,10 +57,10 @@ const DropZoneContainer = styled.div`
   ${props => props.isDragActive && css`
     ${dragOrHover}
   `}
-  &:hover {
+  :hover {
     ${dragOrHover}
   }
-  &:focus {
+  :focus {
     outline: none;
     border-color: ${ props => props.theme.color.active75 || 'red' };
   }

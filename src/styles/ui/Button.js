@@ -17,25 +17,25 @@ const StyledButton = styled.button`
   font-size: 15px;
   
   svg {
-    &:first-child {
+    :first-child {
       margin-right: 5px;
     }
-    &:last-child {
+    :last-child {
       margin-left: 5px;
     }
-    &:only-child {
+    :only-child {
       margin: 0;
     }
   }
 
-  &:focus {
+  :focus {
     outline: none;
   }
 
   ${ props => props.danger && css`
     fill: ${ props => props.theme.color.danger || 'Red' };
     color: ${ props => props.theme.color.danger || 'Red' };
-    &:hover, &:focus {
+    :hover, :focus {
       fill: ${ props => props.theme.color.danger75 || 'Red' };
       color: ${ props => props.theme.color.danger75 || 'Red' };
     }
@@ -44,7 +44,7 @@ const StyledButton = styled.button`
   ${ props => props.main && css`
     fill: ${ props => props.theme.color.main || 'Green' };
     color: ${ props => props.theme.color.main || 'Green' };
-    &:hover, &:focus {
+    :hover, :focus {
       fill: ${ props => props.theme.color.main75 || 'Green' };
       color: ${ props => props.theme.color.main75 || 'Green' };
     }

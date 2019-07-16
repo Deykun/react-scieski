@@ -27,10 +27,11 @@ const AppNameLink = styled.a`
   position: absolute;
   top: 12px;
   left: 12px;
+  z-index: 50;
   font-weight: 500;
   text-decoration: none;
   color: ${ props => props.theme.color.text || 'black' };
-  &:hover {
+  :hover {
     ${ textGradient };
   }
 `;
@@ -74,7 +75,7 @@ const TabNavLink = styled(NavLink).attrs({
   activeClassName: activeClassName,
 })`
   text-shadow: none;
-  &:hover, &.${activeClassName} {
+  :hover, &.${activeClassName} {
     color: ${ props => props.theme.color.active || 'red' };
     ${ textGradient };
   }
@@ -82,7 +83,7 @@ const TabNavLink = styled(NavLink).attrs({
 const TabNavLinkExternal = styled.a`
   text-shadow: none;
   color: ${ props => props.theme.color.active || 'red' };
-  &:hover {
+  :hover {
     ${ textGradient };
   }
 `

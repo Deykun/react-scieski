@@ -35,7 +35,7 @@ const Notification = styled.li`
   width: 100%;
   padding: 15px;
   margin: 0;
-  &:not(:first-child) {
+  :not(:first-child) {
     margin-top: -30px;
   }
 
@@ -47,7 +47,7 @@ const Notification = styled.li`
   transition: .2s ease-in-out;
   transform-origin: 50% 0;
   animation: ${newNotification} .4s ease-in-out;
-  &:hover, &:focus, &:focus-within {
+  :hover, :focus, :focus-within {
     outline: none;
     box-shadow: 0 -5px 3px -3px rgba(0,0,0,0.1), 0 14px 9px -5px rgba(0,0,0,.04);
     z-index: 2;
@@ -94,7 +94,7 @@ const NotificationsGlobalNav = styled.li`
     height: 20px;
     border-radius: 50%;
     background-color: ${ props => props.theme.color.danger || 'Red' };
-    &:hover {
+    :hover {
       background-color: ${ props => props.theme.color.danger75 || 'Red' };
     }
     svg {

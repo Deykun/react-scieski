@@ -2,7 +2,7 @@ import {css} from 'styled-components';
 
 const tooltip = css`
   position: relative;
-  &::after {
+  ::after {
     content: attr(aria-label);
     position: absolute;
     top: calc( 100% + 3px);
@@ -36,8 +36,8 @@ const tooltip = css`
     
     transition: .1s ease-in-out;
   }
-  &:hover, &:focus {
-    &::after {
+  :hover, :focus {
+    ::after {
       transform: translate(-50%, 0) scale(1);
       opacity: 1;
     }

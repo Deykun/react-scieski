@@ -24,7 +24,7 @@ const DropdownList = styled.div`
     text-align: center;
     white-space: nowrap;
     font-size: 13px;
-    &:not(:last-child) {
+    :not(:last-child) {
       border-bottom: 1px solid ${ props => props.theme.color.border || 'gray' };
     }
     svg {
@@ -38,7 +38,7 @@ const StyledDropdown = styled.div`
   position: relative;
   display: inline-block;
   width: 25px;
-  text-align: center
+  text-align: center;
   .dropdown-toggle {
     svg {
       margin: 0;
@@ -46,7 +46,7 @@ const StyledDropdown = styled.div`
       transition: .1s ease-in-out;
     }
   }
-  &:hover, &:focus, &:focus-within {
+  :hover, :focus, :focus-within {
     .dropdown-toggle {
       svg {
         transform: rotate(180deg);

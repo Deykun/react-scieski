@@ -1,3 +1,7 @@
+import {
+  ADD_MAP
+} from '../constants/actions';
+
 import { v4 } from 'node-uuid';
 
 const initialState = {
@@ -13,7 +17,7 @@ const reducer = ( state = initialState, action ) => {
   let newState = {...state};
 
   switch (action.type) {
-    case 'ADD_MAP': 
+    case ADD_MAP: 
       newState.maps = [ ...newState.maps, { id: v4() } ];
       break;
 
