@@ -34,7 +34,15 @@ const TrackTab = styled.section`
 `
 
 const TracksNav = styled.nav`
+  margin: 0 -12px;
+  padding: 5px 0;
   text-align: right;
+  > *:not(:last-child) {
+    margin-right: 10px;
+  }
+`;
+
+const TrackNavButton = styled(Button)`
 `;
 
 const TracksContainer = styled.ul`
@@ -44,7 +52,7 @@ const TracksContainer = styled.ul`
   margin: 0 -15px;
   background-color: ${ props => props.theme.background.component || 'white' };
   position: relative;
-  &::before {
+  ::before {
     content: '';
     position: sticky;
     top: 0;
@@ -67,6 +75,7 @@ class Tracks extends Component {
         <h3>Trasy <span className='number'>{tracks.length}</span></h3>
         <AddTrack onAddFiles={this.props.onAddFiles}></AddTrack>
         <TracksNav>
+          <TrackNavButton iconleft="map" aria-label="Dodaj mapę" onClick={this.props.onAddMap} />
           <Dropdown>
             <Button iconleft="ruler" onClick={ () => this.props.onSortTracks('distance') }> Dystans</Button>
             <Button iconleft="calendar" onClick={ () => this.props.onSortTracks('date') }> Data</Button>
@@ -90,7 +99,8 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = (dispach) => {
   return {
     onAddFiles: (files) => dispach( actionCreator.addTracksFromFiles(files) ),
-    onSortTracks: (by) => dispach( { type: 'SORT_TRACKS', by })
+    onSortTracks: (by) => dispach( { type: 'SORT_TRACKS', by }),
+    onAddMap: () => dispach( { type: 'ADD_MAP' })
   }
 }
 

@@ -15,6 +15,8 @@ import Notifications from '../components/notifications/Notifications';
 import Tracks from '../components/tracks/Tracks'; 
 import TrackDetail from '../components/tracks/TrackDetail';
 
+import Maps from '../components/maps/Maps';
+
 import Icon from '../styles/ui/Icon';
 import Button from '../styles/ui/Button';
 
@@ -25,10 +27,11 @@ const AppNameLink = styled.a`
   position: absolute;
   top: 12px;
   left: 12px;
+  z-index: 50;
   font-weight: 500;
   text-decoration: none;
   color: ${ props => props.theme.color.text || 'black' };
-  &:hover {
+  :hover {
     ${ textGradient };
   }
 `;
@@ -72,7 +75,7 @@ const TabNavLink = styled(NavLink).attrs({
   activeClassName: activeClassName,
 })`
   text-shadow: none;
-  &:hover, &.${activeClassName} {
+  :hover, &.${activeClassName} {
     color: ${ props => props.theme.color.active || 'red' };
     ${ textGradient };
   }
@@ -80,7 +83,7 @@ const TabNavLink = styled(NavLink).attrs({
 const TabNavLinkExternal = styled.a`
   text-shadow: none;
   color: ${ props => props.theme.color.active || 'red' };
-  &:hover {
+  :hover {
     ${ textGradient };
   }
 `
@@ -133,6 +136,7 @@ class App extends Component {
               }
             } 
             />
+            <Maps />
           </AppWrapper> 
         </Theme>
       </Router>

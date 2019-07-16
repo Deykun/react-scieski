@@ -34,7 +34,7 @@ const ModalOverlay = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: center;
-  &::before {
+  ::before {
     content: '';
     position: absolute;
     top: 0;

@@ -30,7 +30,7 @@ const TrackPreviewContainer = styled.li`
   border: 1px solid ${ props => props.theme.color.border || 'gray' };
   border-radius: 2px;
   box-shadow: 0 8px 4px -8px rgba(0,0,0,.2), 0 12px 8px -12px rgba(0,0,0,.4);
-  &:focus, &:focus-within {
+  :focus, :focus-within {
     outline: none;
     box-shadow: 0 8px 4px -8px rgba(0,0,0,.6), 0 12px 8px -12px rgba(0,0,0,.4);
   }
@@ -45,7 +45,7 @@ const Title = styled(Link)`
   font-size: 12px;
   font-weight: 500;
   word-break: break-word;
-  &:focus, &:focus-within {
+  :focus, :focus-within {
     outline: none;
     opacity: .5 ;
   }
@@ -74,7 +74,7 @@ const DataCell = styled.span`
     cursor: help;
     ${tooltip};
   `};
-  &:not(:last-child) {
+  :not(:last-child) {
     margin-right: 10px;
   }
 `;

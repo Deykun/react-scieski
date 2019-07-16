@@ -18,7 +18,7 @@ export default createGlobalStyle`
   body {
     background-color: ${ props => props.theme.background.app ? props.theme.background.app : '#e5e5e5' };
   }
-  * {
+  *, ::before, ::after {
     box-sizing: border-box;
   }
   .scieski-app * {
