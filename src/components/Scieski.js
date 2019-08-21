@@ -91,7 +91,7 @@ const TabNavLinkExternal = styled.a`
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router basename={'lab/scieski-react'}>
         <Theme>
           <AppWrapper className="scieski-app">
             <GlobalStyle />
