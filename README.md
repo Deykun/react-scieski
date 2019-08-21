@@ -5,7 +5,10 @@ W założeniu skrypt ma na podstawie tras Endomondo generować mapy których dom
 - Dodawanie i obliczanie długości tras z plików .tcx i .gpx
 - Sortowanie i edytowanie trasy
 - Notyfikacje
-![](http://deykun.it/lab/img/scieski-react-work-flow.gif)
+- Generowanie mapy z trasami
+
+![](http://deykun.it/lab/img/mapa.gif)
+
 
 ## Demo
 http://deykun.it/lab/scieski-react/
