@@ -12,11 +12,11 @@ const Editor = () => {
 
   const tabs = [
     {
-      title: 'Trasy',
+      title: 'trasy',
       path: '/editor/tracks'
     },
     {
-      title: 'Ustawienia',
+      title: 'ustawienia',
       path: '/editor/settings'
     }
   ]
@@ -24,7 +24,7 @@ const Editor = () => {
   return (
     <Panel className={location.pathname.startsWith('/editor') ? 'active' : ''}>
       <TabNav>
-        <Button className="close" as={Link} to="/" negative={1} aria-label="Zamknij" iconleft="cross"></Button>
+        <Button className="close" as={Link} to="/" negative={1} aria-label="Zamknij" iconleft="cross" iconsize={31} />
         <ul>
           {tabs.map( (tab, index) => 
             <li key={index}>

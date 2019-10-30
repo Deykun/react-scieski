@@ -56,9 +56,9 @@ const StyledButton = styled.button`
 
 const Button = props => (
   <StyledButton {...props}>
-    {props.iconleft && <Icon name={props.iconleft} />}
+    {props.iconleft && <Icon name={props.iconleft} size={props.iconsize} />}
     {props.children && <span>{props.children}</span>}
-    {props.iconright && <Icon name={props.iconright} />}
+    {props.iconright && <Icon name={props.iconright} size={props.iconsize} />}
   </StyledButton>
 )
 
@@ -66,6 +66,7 @@ Button.propTypes = {
   iconleft: PropTypes.string,
   children: PropTypes.node,
   iconright: PropTypes.string,
+  iconsize: PropTypes.number,
 }
 
 export default Button

@@ -23,6 +23,9 @@ export const Panel = styled.section`
 
 export const TabNav = styled.nav`
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 35px;
   ul {
     list-style: none;
   }
@@ -39,10 +42,12 @@ export const TabNav = styled.nav`
 
 const activeClassName = 'active'
 export const TabNavLink = styled(NavLink).attrs({ activeClassName: activeClassName })`
+  display: inline-block;
+  padding: 5px 12px;
   font-size: 12px;
   font-weight: 300;
   transition: .3s ${ props => props.theme.other.transitionBounceFunction || 'ease-in-out'};
   :hover, &.${activeClassName} {
-    color: ${ props => props.theme.color.positve || 'black' };
+    color: ${ props => props.theme.color.positive || 'black' };
   }
 `

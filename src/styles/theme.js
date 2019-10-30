@@ -7,8 +7,8 @@ const theme = {
   color: {
     card: '#9f9f9f',
     cardStrong: 'white',
-    positve: '#c4d33e',
-    positveLife: '#c4d33e',
+    positive: '#c4d33e',
+    positiveLife: '#c4d33e',
     negative: '#f4960f',
     negativeLife: '#e19930',
   },
