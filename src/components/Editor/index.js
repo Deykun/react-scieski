@@ -1,27 +1,43 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, NavLink, Route } from 'react-router-dom'
+import { Switch, Route, Link, useLocation } from 'react-router-dom'
 
 import Tracks from './Tracks.js'
 import Settings from './Settings.js'
 
-import { EditorPanel } from '../../styles/components/Editor'
+import Button from '../../styles/ui/Button'
+import { Panel, TabNav, TabNavLink } from '../../styles/components/Editor'
 
 const Editor = () => {
+  const location = useLocation()
+
+  const tabs = [
+    {
+      title: 'Trasy',
+      path: '/editor/tracks'
+    },
+    {
+      title: 'Ustawienia',
+      path: '/editor/settings'
+    }
+  ]
+
   return (
-    <EditorPanel>
-      <ul>
-        <li>
-          <NavLink to="/editor/tracks">Trasy</NavLink>
-        </li>
-        <li>
-          <NavLink to="/editor/settings">Ustawienia</NavLink>
-        </li>
-      </ul>
+    <Panel className={location.pathname.startsWith('/editor') ? 'active' : ''}>
+      <TabNav>
+        <Button className="close" as={Link} to="/" negative={1} aria-label="Zamknij" iconleft="cross"></Button>
+        <ul>
+          {tabs.map( (tab, index) => 
+            <li key={index}>
+              <TabNavLink to={tab.path}>{tab.title}</TabNavLink>
+            </li>
+          )}
+        </ul>
+      </TabNav>
       <Switch>
         <Route path="/editor/tracks" component={Tracks} />
         <Route component={Settings} />
       </Switch>
-    </EditorPanel>
+    </Panel>
   )
 }
 
