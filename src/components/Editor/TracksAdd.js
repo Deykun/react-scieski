@@ -1,20 +1,60 @@
 import React, {useCallback} from 'react'
-import {useDropzone} from 'react-dropzone'
+
+import { useDispatch } from 'react-redux'
+import { multipleActions } from '../../actions/'
+import { addTrack } from '../../actions/tracks'
+import { addNotification } from '../../actions/notifications'
+
+import { v4 } from 'node-uuid'
+import { useDropzone } from 'react-dropzone'
 
 import { DropZoneContainer } from '../../styles/components/Editor/TracksAdd.js'
 
+import { divideIntoSmallerArrays, checkFileMetadata } from '../../utils/helpers'
+
 import WebWorker from '../../workers/WebWorker.js'
-import filereader from '../../workers/filereader.js'
+import FileToTrack from '../../workers/FileToTrack.js'
 
 const TracksAdd = () => {
-  const onDrop = useCallback(acceptedFiles => {
-    // props.onAddFiles([...acceptedFiles]);
-    const FileWorker = new WebWorker(filereader)
-    FileWorker.addEventListener('message', (response) => { 
-      console.log(response.data) 
+  const dispatch = useDispatch()
+
+  const onDrop = useCallback(files => {
+    if ( !Array.isArray( files ) ) { files = [files] }
+    
+    files = divideIntoSmallerArrays(files, 100)
+
+    files = files.map( ( fileArr ) => {
+      const actions = []
+      const newFileArr = fileArr.filter( ( file ) => {
+        const fileMetadata = checkFileMetadata( file )
+        if ( fileMetadata.isFormatAllowed ) {
+          file.id = v4()
+          file.format = fileMetadata.data.format
+          actions.push( addTrack({ data: { id: file.id, status: 'loading', ...fileMetadata.data } } ) )
+        } else {
+          actions.push( addNotification({ id: v4(), data: {
+            title: `Pominięto plik z rozszerzeniem .${fileMetadata.data.format}`,
+            message: `Plik ${fileMetadata.data.name} został pominięty.`
+          }}) )
+        }
+        return fileMetadata.isFormatAllowed
+      })
+      dispatch( multipleActions( actions ) )
+      
+      return newFileArr
     })
-    FileWorker.postMessage( acceptedFiles )
-  }, [])
+    const xmlParser = new DOMParser()
+
+    files = files.flat(1)
+
+    const FileWorker = new WebWorker(FileToTrack)
+    FileWorker.addEventListener('message', (response) => { 
+      // console.log(response.data) 
+      // response.data.forEach( ( response) => console.log(response) )
+    })
+    FileWorker.postMessage( files )
+  }, [dispatch])
+
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
   return (

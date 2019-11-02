@@ -1,29 +1,43 @@
 import { v4 } from 'node-uuid'
 
-const ADD_NOTIFICATION = 'ADD_NOTIFICATION'
-const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION'
-const REMOVE_ALL_NOTIFICATION = 'REMOVE_ALL_NOTIFICATION'
+export const ADD_NOTIFICATION = 'ADD_NOTIFICATION'
+export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION'
+export const REMOVE_ALL_NOTIFICATION = 'REMOVE_ALL_NOTIFICATION'
 
-const initialState = []
+const initialState = {
+  items: []
+}
+
+const applyAction = (state, action) => {
+  switch (action.type) {
+    case ADD_NOTIFICATION: 
+      state.items = [ ...state.items, action.notification ]
+      break
+
+    case REMOVE_NOTIFICATION:
+      state.items = state.items.filter( notification => notification.id !== action.id )
+      break
+
+    case REMOVE_ALL_NOTIFICATION:
+      state.items = [] 
+      break
+
+    default:
+  }
+  return state
+}
 
 const reducer = ( state = initialState, action ) => {
   let newState = {...state}
 
-  switch (action.type) {
-    case ADD_NOTIFICATION: 
-      newState.notifications = [ ...newState.notifications, action.notification ]
-      break
-
-    case REMOVE_NOTIFICATION:
-      newState.notifications = newState.notifications.filter( notification => notification.id !== action.id )
-      break
-
-    case REMOVE_ALL_NOTIFICATION:
-      newState.notifications = [] 
-      break
-
-    default: 
+  if ( action.type === 'MULTIPLE') {
+    action.actions.forEach( subaction => {
+      newState = applyAction(newState, subaction)
+    })
+  } else {
+    newState = applyAction(newState, action)
   }
+  
   return newState
 }
 
