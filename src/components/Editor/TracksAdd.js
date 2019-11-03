@@ -19,7 +19,7 @@ const TracksAdd = () => {
   const onDrop = useCallback(files => {
     if ( !Array.isArray( files ) ) { files = [files] }
     
-    files = divideIntoSmallerArrays(files, 100)
+    files = divideIntoSmallerArrays(files, 5)
 
     files = files.map( ( fileArr ) => {
       const actions = []

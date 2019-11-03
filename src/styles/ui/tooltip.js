@@ -1,6 +1,6 @@
-import {css} from 'styled-components';
+import {css} from 'styled-components'
 
-const tooltip = css`
+export const tooltip = css`
   position: relative;
   ::after {
     content: attr(aria-label);
@@ -36,7 +36,7 @@ const tooltip = css`
     
     transition: .1s ease-in-out;
   }
-  :hover, :focus {
+  :hover {
     ::after {
       transform: translate(-50%, 0) scale(1);
       opacity: 1;
@@ -44,4 +44,9 @@ const tooltip = css`
   }
 `
 
-export default tooltip
+export const tooltipTop = css`
+  &::after {
+    top: auto;
+    bottom: calc( 100% + 3px);
+  }
+`

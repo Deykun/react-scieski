@@ -1,8 +1,9 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 
 import { card } from '../../shared/panel'
+import { tooltip, tooltipTop } from '../../ui/tooltip'
 
-const newNotification = keyframes`
+const newTrackItem = keyframes`
   0% {
     transform: scale(0) translateY(100px) rotateX(45deg);
     opacity: 0;
@@ -15,7 +16,7 @@ const newNotification = keyframes`
   }
 `
 
-export const NotificationItem = styled.li`
+export const TrackItem = styled.li`
   ${card}
   padding: 10px;
 
@@ -33,7 +34,7 @@ export const NotificationItem = styled.li`
    
   transition: .2s ease-in-out;
   transform-origin: 50% 0;
-  animation: ${newNotification} .4s ease-in-out;
+  animation: ${newTrackItem} .4s ease-in-out;
   :focus, :focus-within {
     outline: none;
     box-shadow: 0 -10px 10px -5px rgba(0,0,0,0.9),0 14px 9px -5px rgba(0,0,0,.04);
@@ -47,30 +48,27 @@ export const NotificationItem = styled.li`
     }
   }
 
-  .close {
-    position: absolute;
-    top: 8px;
-    right: 5px;
+  [aria-label] {
+    cursor: help;
+    ${tooltip}
+    ${tooltipTop}
   }
 `
 
-export const NotificationTitle = styled.h3`
+export const TrackTitle = styled.h3`
   color: ${ props => props.theme.color.cardStrong || 'white' };
   font-size: 11px;
   font-weight: 400;
   padding-right: 10px;
   padding-bottom: 8px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
 `
 
-export const NotificationSubtitle = styled.span`
+export const TrackSubtitle = styled.span`
   color: ${ props => props.theme.color.card || 'gray' };
   font-size: 9px;
 `
 
-export const NotificationContent = styled.p`
+export const TrackContent = styled.p`
   font-size: 8px;
   font-weight: 400;
   text-align: justify;

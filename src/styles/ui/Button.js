@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled, { css } from 'styled-components'
 import Icon from './Icon';
-import tooltip from './tooltip'
+import { tooltip } from './tooltip'
 
 const StyledButton = styled.button`
   /* Reset */

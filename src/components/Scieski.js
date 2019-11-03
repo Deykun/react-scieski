@@ -1,6 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 
+import 'moment/locale/pl'
+
 import Editor from './Editor'
 import Notifications from './Notifications'
 
