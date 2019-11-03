@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import Editor from './Editor'
+import Notifications from './Notifications'
 
 import GlobalStyle from '../styles/globalStyle'
 import Theme from '../styles/theme'
@@ -13,9 +14,10 @@ const App = () => {
       <Theme>  
         <>
           <GlobalStyle />
+          <Notifications />
           <Editor />
         </>
-        {/* <Notifications></Notifications>
+        {/* 
         <Editor />
         <Maps /> */}
         

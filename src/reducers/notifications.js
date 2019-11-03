@@ -1,8 +1,6 @@
-import { v4 } from 'node-uuid'
-
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION'
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION'
-export const REMOVE_ALL_NOTIFICATION = 'REMOVE_ALL_NOTIFICATION'
+export const REMOVE_ALL_NOTIFICATIONS = 'REMOVE_ALL_NOTIFICATION'
 
 const initialState = {
   items: []
@@ -10,15 +8,15 @@ const initialState = {
 
 const applyAction = (state, action) => {
   switch (action.type) {
-    case ADD_NOTIFICATION: 
-      state.items = [ ...state.items, action.notification ]
+    case ADD_NOTIFICATION:
+      state.items = [ ...state.items,  { ...action.notification } ]
       break
 
     case REMOVE_NOTIFICATION:
       state.items = state.items.filter( notification => notification.id !== action.id )
       break
 
-    case REMOVE_ALL_NOTIFICATION:
+    case REMOVE_ALL_NOTIFICATIONS:
       state.items = [] 
       break
 

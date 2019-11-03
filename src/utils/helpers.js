@@ -29,3 +29,11 @@ export const checkFileMetadata = ( file ) => {
 
   return response
 }
+
+export const forEachPromise = (items, fn, fnres) => {
+  return items.reduce(function (promise, item) {
+    return promise.then(function () {
+      return fn(item)
+    }).then( (res) => { fnres(res) } )
+  }, Promise.resolve())
+}

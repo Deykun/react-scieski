@@ -30,4 +30,7 @@ export default createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
+  svg {
+    fill: currentColor;
+  }
 `;

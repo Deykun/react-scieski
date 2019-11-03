@@ -18,7 +18,7 @@ const applyAction = (state, action) => {
 
     case UPDATE_TRACK:
       state.items = state.items.map( track => {
-        if (track.id === action.id) {
+        if (track.id === action.track.id) {
           return { ...track, ...action.track }
         } else {
           return track

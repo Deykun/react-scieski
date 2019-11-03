@@ -10,10 +10,8 @@ import { useDropzone } from 'react-dropzone'
 
 import { DropZoneContainer } from '../../styles/components/Editor/TracksAdd.js'
 
-import { divideIntoSmallerArrays, checkFileMetadata } from '../../utils/helpers'
-
-import WebWorker from '../../workers/WebWorker.js'
-import FileToTrack from '../../workers/FileToTrack.js'
+import { divideIntoSmallerArrays, checkFileMetadata, forEachPromise } from '../../utils/helpers'
+import { readFile } from '../../utils/tracks.js'
 
 const TracksAdd = () => {
   const dispatch = useDispatch()
@@ -33,8 +31,9 @@ const TracksAdd = () => {
           actions.push( addTrack({ data: { id: file.id, status: 'loading', ...fileMetadata.data } } ) )
         } else {
           actions.push( addNotification({ id: v4(), data: {
-            title: `Pominięto plik z rozszerzeniem .${fileMetadata.data.format}`,
-            message: `Plik ${fileMetadata.data.name} został pominięty.`
+            title: `Pominięto plik .${fileMetadata.data.format}`,
+            subtitle: 'nieobsługiwane roszerzenie',
+            message: `Plik: ${fileMetadata.data.name} został pominięty.`
           }}) )
         }
         return fileMetadata.isFormatAllowed
@@ -43,16 +42,13 @@ const TracksAdd = () => {
       
       return newFileArr
     })
-    const xmlParser = new DOMParser()
 
     files = files.flat(1)
 
-    const FileWorker = new WebWorker(FileToTrack)
-    FileWorker.addEventListener('message', (response) => { 
-      // console.log(response.data) 
-      // response.data.forEach( ( response) => console.log(response) )
+    forEachPromise( files, readFile, dispatch ).then(() => {
+      console.log('done')
     })
-    FileWorker.postMessage( files )
+
   }, [dispatch])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})

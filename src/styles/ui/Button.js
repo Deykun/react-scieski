@@ -32,24 +32,28 @@ const StyledButton = styled.button`
   :focus {
     outline: none;
   }
+  color: inherit;
 
-   ${ props => props.negative && css`
-    fill: ${ props => props.theme.color.negative || 'Red' };
+  ${ props => props.negative && css`
     color: ${ props => props.theme.color.negative || 'Red' };
-    :hover, :focus {
-      fill: ${ props => props.theme.color.negativeLife || 'Red' };
-      color: ${ props => props.theme.color.negativeLife || 'Red' };
-    }
   `} 
 
-  ${ props => props.positive && css`
-    fill: ${ props => props.theme.color.positive || 'Green' };
-    color: ${ props => props.theme.color.positive || 'Green' };
+  ${ props => ( props.negative || props.negativeActive ) && css`
     :hover, :focus {
-      fill: ${ props => props.theme.color.positiveLife || 'Green' };
+      color: ${ props => props.theme.color.negativeLife || 'Red' };
+    }
+  `}
+
+  ${ props => props.positive && css`
+    color: ${ props => props.theme.color.positive || 'Green' };
+  `}
+
+  ${ props => ( props.positive || props.positiveActive ) && css`
+    :hover, :focus {
       color: ${ props => props.theme.color.positiveLife || 'Green' };
     }
   `}
+
   ${ props => props['aria-label'] && css` ${tooltip}; `}
   transition: .2s ease-in-out;
 `
