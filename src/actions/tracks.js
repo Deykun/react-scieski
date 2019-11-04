@@ -10,8 +10,9 @@ export const addTrack = ( { data={} } ) => ({
   track: data
 })
 
-export const updateTrack = ( { data={} } ) => ({
+export const updateTrack = ( { id, data={} } ) => ({
   type: UPDATE_TRACK,
+  id: id ? id : data.id,
   track: data
 })
 

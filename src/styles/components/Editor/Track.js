@@ -37,7 +37,7 @@ export const TrackItem = styled.li`
   animation: ${newTrackItem} .4s ease-in-out;
   :focus, :focus-within {
     outline: none;
-    box-shadow: 0 -10px 10px -5px rgba(0,0,0,0.9),0 14px 9px -5px rgba(0,0,0,.04);
+    box-shadow: 0 0 15px -5px rgba(0,0,0,0.9), 0 14px 9px -5px rgba(0,0,0,.04);
     z-index: 2;
     + * {
       margin-top: 5px;

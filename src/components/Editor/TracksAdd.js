@@ -3,7 +3,7 @@ import React, {useCallback} from 'react'
 import { useDispatch } from 'react-redux'
 import { multipleActions } from '../../actions/'
 import { addTrack } from '../../actions/tracks'
-import { addNotification } from '../../actions/notifications'
+import { addNotification, updateNotification } from '../../actions/notifications'
 
 import { v4 } from 'node-uuid'
 import { useDropzone } from 'react-dropzone'
@@ -45,8 +45,31 @@ const TracksAdd = () => {
 
     files = files.flat(1)
 
-    forEachPromise( files, readFile, dispatch ).then(() => {
-      console.log('done')
+    const progressNotificationId = v4()
+    let processed = 0
+    dispatch( addNotification({ data: {
+      id: progressNotificationId,
+      title: 'Ładowanie',
+      subtitle: `${files.length} plików`,
+      message: 'Analizowanie plików z trasami plików.'
+    }}) )
+
+    const updateProgress = ( action ) => {
+      processed = processed + 1;
+      const progress = ( (processed / files.length ) * 100).toFixed(1);
+      dispatch( updateNotification({ id: progressNotificationId, data: {
+        subtitle: `${files.length} plików - ${progress}%`,
+      }}) )
+      dispatch( action )
+    }
+
+    forEachPromise( files, readFile, updateProgress ).then(() => {
+      dispatch( updateNotification({ data: {
+        id: progressNotificationId,
+        title: `Przeanalizowano ${files.length} plików`,
+        subtitle: '',
+        message: 'Trasy zostały dodane.'
+      }}) )
     })
 
   }, [dispatch])

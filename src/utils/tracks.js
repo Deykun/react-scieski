@@ -19,8 +19,7 @@ export const readFile = (file) => {
       const fileContent = reader.result
       const track = dataFromFile( fileContent, file.format )
       track.status = 'success'
-      track.id = file.id
-      return resolve( updateTrack( { data: track } )  )
+      return resolve( updateTrack( { id: file.id, data: track } )  )
     }
   })
 }

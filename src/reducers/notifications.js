@@ -1,4 +1,5 @@
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION'
+export const UPDATE_NOTIFICATION = 'UPDATE_NOTIFICATION'
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION'
 export const REMOVE_ALL_NOTIFICATIONS = 'REMOVE_ALL_NOTIFICATION'
 
@@ -10,6 +11,16 @@ const applyAction = (state, action) => {
   switch (action.type) {
     case ADD_NOTIFICATION:
       state.items = [ ...state.items,  { ...action.notification } ]
+      break
+
+    case UPDATE_NOTIFICATION:
+      state.items = state.items.map( notification => {
+        if (notification.id === action.id) {
+          return { ...notification, ...action.notification }
+        } else {
+          return notification
+        }
+      })
       break
 
     case REMOVE_NOTIFICATION:
