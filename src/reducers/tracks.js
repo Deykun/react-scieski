@@ -33,15 +33,14 @@ const applyAction = (state, action) => {
       break
 
     case SORT_TRACKS:
-      
       switch(action.by) {
         case 'date':
-          state.items = state.items.sort( (a, b) => ( a.date && b.date && (new Date( a.date.start ) < new Date( b.date.start ) ) ) )
+          state.items = state.items.sort( (a, b) => ( a.date && b.date && (new Date( a.date.start ) < new Date( b.date.start ) ) ) ? 1 : -1 )
           state.sorted_by = 'date'
           break
 
         default: 
-          state.items = state.items.sort( (a, b) => ( a.distance && b.distance && ( a.distance < b.distance ) ) ).map( track => track )
+          state.items = state.items.sort( (a, b) => ( a.distance && b.distance && ( a.distance < b.distance ) ? 1 : -1 ) )
           state.sorted_by = 'distance'
       }
       break
