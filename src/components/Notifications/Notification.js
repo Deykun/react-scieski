@@ -9,7 +9,7 @@ const Notification = ({id, title, subtitle, message}) => {
   const dispatch = useDispatch()
   return (
     <NotificationItem key={id} tabIndex="0">
-      <Button className="close" negativeActive iconleft="cross" iconsize={16} aria-label="Zamknij" onClick={() => dispatch( removeNotification({ id }) ) } />
+      <Button className="close" negativeActive iconleft="cross" iconsize={16} aria-label="Zamknij" tooltiptop onClick={() => dispatch( removeNotification({ id }) ) } />
       <NotificationTitle>{title ? title : 'Powiadomienie'}{subtitle && <NotificationSubtitle> - {subtitle}</NotificationSubtitle>}</NotificationTitle>
       <NotificationContent>{message}</NotificationContent>
     </NotificationItem>

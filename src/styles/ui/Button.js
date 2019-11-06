@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled, { css } from 'styled-components'
 import Icon from './Icon'
-import { tooltip } from './tooltip'
+import { tooltip, tooltipTop } from './tooltip'
 
 const StyledButton = styled.button`
   /* Reset */
@@ -55,6 +55,8 @@ const StyledButton = styled.button`
   `}
 
   ${ props => props['aria-label'] && css` ${tooltip}; `}
+  ${ props => props['aria-label'] && props.tooltiptop && css` ${tooltipTop}; `}
+  
   transition: .2s ease-in-out;
 `
 
@@ -71,6 +73,7 @@ Button.propTypes = {
   children: PropTypes.node,
   iconright: PropTypes.string,
   iconsize: PropTypes.number,
+  tooltiptop: PropTypes.bool,
 }
 
 export default Button

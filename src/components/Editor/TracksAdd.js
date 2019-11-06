@@ -18,6 +18,14 @@ const TracksAdd = () => {
 
   const onDrop = useCallback(files => {
     if ( !Array.isArray( files ) ) { files = [files] }
+
+    const progressNotificationId = v4()
+    dispatch( addNotification({ data: {
+      id: progressNotificationId,
+      title: 'Importowanie',
+      subtitle: `sprawdzanie ${files.length} plików`,
+      message: 'Tylko pliki w odpowiednim formacie zostaną dodane.'
+    }}) )
     
     files = divideIntoSmallerArrays(files, 5)
 
@@ -45,18 +53,16 @@ const TracksAdd = () => {
 
     files = files.flat(1)
 
-    const progressNotificationId = v4()
-    let processed = 0
-    dispatch( addNotification({ data: {
-      id: progressNotificationId,
+    dispatch( updateNotification({ id: progressNotificationId, data: {
       title: 'Importowanie',
       subtitle: `${files.length} plików`,
       message: 'Analizowanie plików z trasami plików.'
     }}) )
 
+    let processed = 0
     const updateProgress = ( action ) => {
-      processed = processed + 1;
-      const progress = ( (processed / files.length ) * 100).toFixed(1);
+      processed = processed + 1
+      const progress = ( (processed / files.length ) * 100).toFixed(1)
       dispatch( updateNotification({ id: progressNotificationId, data: {
         subtitle: `${files.length} plików - ${progress}%`,
       }}) )
@@ -64,8 +70,7 @@ const TracksAdd = () => {
     }
 
     forEachPromise( files, readFile, updateProgress ).then(() => {
-      dispatch( updateNotification({ data: {
-        id: progressNotificationId,
+      dispatch( updateNotification({ id: progressNotificationId, data: {
         title: `Zaimportowano dane z ${files.length} plików`,
         subtitle: '',
         message: 'Trasy zostały dodane.'
