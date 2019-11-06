@@ -5,9 +5,14 @@ export const TracksList = styled.ul`
   overflow-y: scroll;
   margin: 0;
   margin-left: -3px;
-  padding: 20px 3px;
   list-style: none;
   perspective: 500px;
+  padding: 20px 3px 0;
+  &::after {
+    content: '';
+    display: block;
+    height: 20px;
+  }
 `
 
 export const TracksNav = styled.p`

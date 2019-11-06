@@ -49,7 +49,7 @@ const TracksAdd = () => {
     let processed = 0
     dispatch( addNotification({ data: {
       id: progressNotificationId,
-      title: 'Ładowanie',
+      title: 'Importowanie',
       subtitle: `${files.length} plików`,
       message: 'Analizowanie plików z trasami plików.'
     }}) )
@@ -66,7 +66,7 @@ const TracksAdd = () => {
     forEachPromise( files, readFile, updateProgress ).then(() => {
       dispatch( updateNotification({ data: {
         id: progressNotificationId,
-        title: `Przeanalizowano ${files.length} plików`,
+        title: `Zaimportowano dane z ${files.length} plików`,
         subtitle: '',
         message: 'Trasy zostały dodane.'
       }}) )
