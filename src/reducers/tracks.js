@@ -40,7 +40,7 @@ const applyAction = (state, action) => {
           break
 
         default: 
-          state.items = state.items.sort( (a, b) => ( a.distance && b.distance && ( a.distance > b.distance ) ? 1 : -1 ) )
+          state.items = state.items.sort( (a, b) => ( a.distance && b.distance && ( a.distance < b.distance ) ? 1 : -1 ) )
           state.sorted_by = 'distance'
       }
       break

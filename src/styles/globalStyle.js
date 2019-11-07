@@ -17,7 +17,6 @@ export default createGlobalStyle`
   ${ props => props.theme.importFontFromGoogle && importFontFromGoogle }
   body {
     background-color: ${ props => props.theme.background.app ? props.theme.background.app : '#e5e5e5' };
-    background-image: url('/images/mockup-map.png');
   }
   *, ::before, ::after {
     box-sizing: border-box;

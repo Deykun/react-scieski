@@ -10,6 +10,7 @@ export const Panel = styled.section`
   left: 16px;
   width: 270px;
   height: 65vh;
+  z-index: 50;
   padding: 3px;
   display: flex;
   flex-flow: column;

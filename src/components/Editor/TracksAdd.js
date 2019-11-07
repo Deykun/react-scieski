@@ -65,6 +65,7 @@ const TracksAdd = () => {
       const progress = ( (processed / files.length ) * 100).toFixed(1)
       dispatch( updateNotification({ id: progressNotificationId, data: {
         subtitle: `${files.length} plików - ${progress}%`,
+        message: `Przeanalizowano ${processed} pliki.`
       }}) )
       dispatch( action )
     }

@@ -6,6 +6,7 @@ export const NotificationsList = styled.ul`
   top: 15px;
   right: 15px;
   width: 250px;
+  z-index: 50;
   margin: 0;
   padding: 0;
   list-style: none;

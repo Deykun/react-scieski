@@ -5,6 +5,7 @@ import 'moment/locale/pl'
 
 import Editor from './Editor'
 import Notifications from './Notifications'
+import Maps from './Maps'
 
 import GlobalStyle from '../styles/globalStyle'
 import Theme from '../styles/theme'
@@ -18,11 +19,8 @@ const App = () => {
           <GlobalStyle />
           <Notifications />
           <Editor />
-        </>
-        {/* 
-        <Editor />
-        <Maps /> */}
-        
+          <Maps />
+        </>        
       </Theme>
     </Router>
   );
