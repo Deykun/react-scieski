@@ -1,11 +1,10 @@
 import React from 'react'
 import moment from 'moment'
-
 import Icon from '../../styles/ui/Icon'
 
 import { TrackItem, TrackTitle, TrackSubtitle, TrackContent } from '../../styles/components/Editor/Track.js'
 
-const Track = ({id, status, title, activity, date, distance}) => {
+const Track = ({active=false, id, status, title, activity, date, distance}) => {
 
   const renderLoading = () => (
     <>
@@ -32,7 +31,7 @@ const Track = ({id, status, title, activity, date, distance}) => {
     </>
   )
 
-  return <TrackItem tabIndex="0">
+  return <TrackItem active={active} tabIndex="0">
     { status === 'loading' && renderLoading() }
     { status === 'success' && renderSuccess() }
   </TrackItem>

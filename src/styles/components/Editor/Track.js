@@ -48,6 +48,14 @@ export const TrackItem = styled.li`
     }
   }
 
+  ${props => props.active && css`
+    position: sticky;
+    top: -20px;
+    z-index: 5;
+    margin-bottom: 30px;
+    box-shadow: 0 0 15px -5px rgba(#c4d33e,0.9), 0 14px 9px -5px rgba(0,0,0,.04);
+  `}
+
   [aria-label] {
     cursor: help;
     ${tooltip}

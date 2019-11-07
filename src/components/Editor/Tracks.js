@@ -11,7 +11,7 @@ import Loading from '../../styles/ui/Loading'
 
 import { TracksList, TracksNav } from '../../styles/components/Editor/Tracks.js'
 
-const Tracks = () => {
+const Tracks = ( {match} ) => {
   const tracks = useSelector(state => state.tracks)
   const dispatch = useDispatch()
   const pageSize = 45
@@ -32,8 +32,9 @@ const Tracks = () => {
 
   return (
     <>
-      <TracksAdd />
+      <TracksAdd />      
       <TracksList onScroll={e => handleScroll(e)}>
+        {match.params.id && tracks.items.filter( (track) => track.id === match.params.id ).map( (track) => <Track active key={track.id} {...track} />)}
         {tracks.items.slice(0, page * pageSize ).map( (track) => 
           <Track key={track.id} {...track} />
         )}

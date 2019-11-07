@@ -34,7 +34,7 @@ const Editor = () => {
         </ul>
       </TabNav>
       <Switch>
-        <Route path="/editor/tracks" component={Tracks} />
+        <Route path="/editor/tracks/:id?" component={Tracks} />
         <Route component={Settings} />
       </Switch>
     </Panel>
