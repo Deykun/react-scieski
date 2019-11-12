@@ -48,19 +48,34 @@ export const TrackItem = styled.li`
     }
   }
 
-  ${props => props.active && css`
+  ${props => props.pined && css`
     position: sticky;
+    margin-top: -20px;
     top: -20px;
     z-index: 5;
     margin-bottom: 30px;
     box-shadow: 0 0 15px -5px rgba(#c4d33e,0.9), 0 14px 9px -5px rgba(0,0,0,.04);
+    background-color: ${ props => props.theme.color.cardStrong || 'white' };
+    
+    .close {
+      position: absolute;
+      top: 50%;
+      right: 7px;
+      transform: translateY( -50% );
+    }
+
+    ${TrackTitle},
+    ${TrackSubtitle} {
+      color: ${ props => props.theme.background.card || 'red' };
+    }
   `}
 
-  [aria-label] {
+  ${props => !props.pined && css`[aria-label] {
     cursor: help;
     ${tooltip}
     ${tooltipTop}
-  }
+  }`}
+
 `
 
 export const TrackTitle = styled.h3`
@@ -69,6 +84,9 @@ export const TrackTitle = styled.h3`
   font-weight: 400;
   padding-right: 10px;
   padding-bottom: 8px;
+  &:last-child {
+    padding-bottom: 0;
+  }
 `
 
 export const TrackSubtitle = styled.span`

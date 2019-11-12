@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { sortTracks } from '../../actions/tracks'
 
 import TracksAdd from './TracksAdd.js'
 import Track from './Track.js'
+import TrackPined from './TrackPined.js'
 
 import Button from '../../styles/ui/Button'
 import Loading from '../../styles/ui/Loading'
@@ -34,7 +35,9 @@ const Tracks = ( {match} ) => {
     <>
       <TracksAdd />      
       <TracksList onScroll={e => handleScroll(e)}>
-        {match.params.id && tracks.items.filter( (track) => track.id === match.params.id ).map( (track) => <Track active key={track.id} {...track} />)}
+        {match.params.id && tracks.items.filter( (track) => track.id === match.params.id ).map( 
+          (track) => <TrackPined key={track.id} {...track} />
+        )}
         {tracks.items.slice(0, page * pageSize ).map( (track) => 
           <Track key={track.id} {...track} />
         )}

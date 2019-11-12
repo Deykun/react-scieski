@@ -1,10 +1,17 @@
 import React from 'react'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { updateStyle } from '../../actions/maps'
+
 const Settings = () => {
+  const mapsStyle = useSelector(state => state.maps.style)
+  const dispatch = useDispatch()
+
   return (
-    <p>
-      To do.
-    </p>
+    <>
+      <h3>Stroke</h3>
+      <input type="number" min="0.2" max="5" step="0.1" value={mapsStyle.stroke.width} onChange={ (e) => dispatch( updateStyle( { data:  { stroke: { width: e.target.value } } } ) ) } />
+    </>
   )
 }
 
