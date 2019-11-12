@@ -79,7 +79,7 @@ export const DropZoneContainer = styled.div`
   }
   :focus {
     outline: none;
-    border-color: ${ props => props.theme.color.positive || 'red' };
+    border-color: ${ props => props.theme.color.positive || 'green' };
   }
   * {
     transition: .9s ease-in-out; 

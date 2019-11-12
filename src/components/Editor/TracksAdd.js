@@ -1,4 +1,5 @@
 import React, {useCallback} from 'react'
+import moment from 'moment'
 
 import { useDispatch } from 'react-redux'
 import { multipleActions } from '../../actions/'
@@ -16,18 +17,23 @@ import { readFile } from '../../utils/tracks.js'
 const TracksAdd = () => {
   const dispatch = useDispatch()
 
-  const onDrop = useCallback(files => {
+  const onDrop = useCallback( files => {
+    /* One file is treated the same way */
     if ( !Array.isArray( files ) ) { files = [files] }
+
+    const startTime = new Date()
 
     const progressNotificationId = v4()
     dispatch( addNotification({ data: {
+      type: 'loading',
+      percent: 0,
       id: progressNotificationId,
       title: 'Importowanie',
       subtitle: `sprawdzanie ${files.length} plików`,
       message: 'Tylko pliki w odpowiednim formacie zostaną dodane.'
     }}) )
     
-    files = divideIntoSmallerArrays(files, 5)
+    files = divideIntoSmallerArrays(files, 500)
 
     files = files.map( ( fileArr ) => {
       const actions = []
@@ -65,16 +71,23 @@ const TracksAdd = () => {
       const progress = ( (processed / files.length ) * 100).toFixed(1)
       dispatch( updateNotification({ id: progressNotificationId, data: {
         subtitle: `${files.length} plików - ${progress}%`,
-        message: `Przeanalizowano ${processed} pliki.`
+        percent: progress,
+        message: `Sprawdzono ${processed} pliki.`
       }}) )
       dispatch( action )
     }
 
     forEachPromise( files, readFile, updateProgress ).then(() => {
+      const endTime = new Date()
+      const performenceInMs = moment(endTime).diff(moment(startTime))
+      const performenceInSec = Math.floor( performenceInMs / 1000 )
+      const performenceInMin = Math.floor( performenceInMs / 1000 / 60 )
+
       dispatch( updateNotification({ id: progressNotificationId, data: {
-        title: `Zaimportowano dane z ${files.length} plików`,
+        title: `Zaimportowano ${files.length} plików`,
+        type: 'success',
         subtitle: '',
-        message: 'Trasy zostały dodane.'
+        message: `Trasy zostały dodane w ${performenceInMin > 0 ? `${performenceInMin} minut` : ''}${performenceInSec} sekund.`
       }}) )
     })
 

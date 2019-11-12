@@ -18,6 +18,26 @@ const StyledIcon = styled.svg`
   ${props => props.rotate && css`
     animation: ${rotate} .4s infinite linear;
   `}
+
+  ${ props => props.negative && css`
+    color: ${ props => props.theme.color.negative || 'Red' };
+  `} 
+
+  ${ props => ( props.negative || props.negativeActive ) && css`
+    :hover, :focus {
+      color: ${ props => props.theme.color.negativeLife || 'Red' };
+    }
+  `}
+
+  ${ props => props.positive && css`
+    color: ${ props => props.theme.color.positive || 'Green' };
+  `}
+
+  ${ props => ( props.positive || props.positiveActive ) && css`
+    :hover, :focus {
+      color: ${ props => props.theme.color.positiveLife || 'Green' };
+    }
+  `}
 `
 
 function getIconPath(iconName) {

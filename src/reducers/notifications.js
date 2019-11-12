@@ -14,8 +14,10 @@ const applyAction = (state, action) => {
       break
 
     case UPDATE_NOTIFICATION:
+      
       state.items = state.items.map( notification => {
         if (notification.id === action.id) {
+          console.log(notification)
           return { ...notification, ...action.notification }
         } else {
           return notification
