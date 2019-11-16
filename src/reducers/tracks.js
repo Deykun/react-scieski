@@ -4,8 +4,20 @@ export const ADD_TRACK = 'ADD_TRACK'
 export const UPDATE_TRACK = 'UPDATE_TRACK'
 export const REMOVE_TRACK = 'UPDATE_TRACK'
 export const SORT_TRACKS = 'SORT_TRACKS'
+export const REFRESH_SUMMARY = 'REFRESH_SUMMARY'
 
 const initialState = {
+  summary: {
+    avg: {
+      distance: 0,
+      durationMs: 0,
+      speed: 0,
+    },
+    total: {
+      distance: 0,
+      durationMs: 0
+    }
+  },
   items: [],
   sorted_by: ''
 }
@@ -45,6 +57,32 @@ const applyAction = (state, action) => {
       }
       break
 
+    case REFRESH_SUMMARY: {
+      let distance = 0
+      let durationMs = 0
+      let speed = 0
+      let total = 0
+      state.items.map( track => {
+        if ( track.status === 'success' ) {
+          distance += track.distance
+          durationMs += track.durationMs
+          speed += track.speed
+          total += 1
+        }
+      })
+      if ( total > 0 ) {
+        state.summary.total = {
+          distance,
+          durationMs
+        }
+        state.summary.avg = {
+          distance: (distance / total),
+          durationMs: (durationMs / total),
+          speed: (speed / total)
+        }
+      } 
+    }
+      break
     default: 
   }
   return state

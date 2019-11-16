@@ -3,7 +3,7 @@ import moment from 'moment'
 
 import { useDispatch } from 'react-redux'
 import { multipleActions } from '../../actions/'
-import { addTrack } from '../../actions/tracks'
+import { addTrack, refreshTracksSummary } from '../../actions/tracks'
 import { addNotification, updateNotification } from '../../actions/notifications'
 
 import { v4 } from 'node-uuid'
@@ -70,7 +70,8 @@ const TracksAdd = () => {
       processed = processed + 1
       const progress = ( (processed / files.length ) * 100).toFixed(1)
       dispatch( updateNotification({ id: progressNotificationId, data: {
-        subtitle: `${files.length} plików - ${progress}%`,
+        title: `Importowanie ${progress}%`,
+        subtitle: `${files.length} plików`,
         percent: progress,
         message: `Sprawdzono ${processed} pliki.`
       }}) )
@@ -89,6 +90,7 @@ const TracksAdd = () => {
         subtitle: '',
         message: `Trasy zostały dodane w ${performenceInMin > 0 ? `${performenceInMin} minut` : ''}${performenceInSec} sekund.`
       }}) )
+      dispatch( refreshTracksSummary() )
     })
 
   }, [dispatch])

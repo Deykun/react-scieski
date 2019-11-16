@@ -124,7 +124,7 @@ const dataFromFile = (fileContent, fileFormat) => {
     activity: activity,
     distance: calculatedDistance,
     distanceFromFile: distanceFromFile,
-    duration: calculatedTimeDifference,
+    durationMs: calculatedTimeDifference,
     speed: calculatedSpeed,
     fragments: fragments
   }
@@ -172,10 +172,5 @@ const calculateSpeed = ( start, end, distanceInKm ) => {
 }
 
 const calculateTimeDifference = ( start, end ) => { 
-  const differenceInMs = moment(end).diff(moment(start))
-
-  const difference = moment.duration(differenceInMs)
-  const formatedDifference = Math.floor(difference.asHours()) > 0 ? Math.floor(difference.asHours()) + moment.utc(differenceInMs).format(':mm:ss') : moment.utc(differenceInMs).format('mm:ss')
-
-  return formatedDifference
+  return moment(end).diff(moment(start))
 }
