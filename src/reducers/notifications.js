@@ -17,7 +17,6 @@ const applyAction = (state, action) => {
       
       state.items = state.items.map( notification => {
         if (notification.id === action.id) {
-          console.log(notification)
           return { ...notification, ...action.notification }
         } else {
           return notification

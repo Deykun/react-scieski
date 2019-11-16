@@ -24,16 +24,18 @@ const Bar = styled.div`
   transition: .3s ease-in-out;
 `
 
-const ProgressBar = ({min=0, max=100, value}) => (
-  <ProgressBarWrapper aria-valuenow={value} aria-valuemin={min} aria-valuemax={max}>
+const ProgressBar = ({max=100, value}) => (
+  <ProgressBarWrapper aria-valuenow={value} aria-valuemin={0} aria-valuemax={max}>
     <Bar style={{ width: `${value}%`}} />
   </ProgressBarWrapper>
 )
 
 ProgressBar.propTypes = {
-  min: PropTypes.number,
   max: PropTypes.number,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string
+  ]).isRequired
 }
 
 export default ProgressBar

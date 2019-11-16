@@ -1,8 +1,9 @@
 import React from 'react'
 import { Switch, Route, Link, useLocation } from 'react-router-dom'
 
-import Tracks from './Tracks.js'
-import Settings from './Settings.js'
+import TabTracks from './TabTracks.js'
+import TabTrack from './TabTrack.js'
+import TabSettings from './TabSettings.js'
 
 import Button from '../../styles/ui/Button'
 import { Panel, TabNav, TabNavLink } from '../../styles/components/Editor'
@@ -34,8 +35,9 @@ const Editor = () => {
         </ul>
       </TabNav>
       <Switch>
-        <Route path="/editor/tracks/:id?" component={Tracks} />
-        <Route component={Settings} />
+        <Route path="/editor/tracks/:id?/edit" component={TabTrack} />
+        <Route path="/editor/tracks/:id?" component={TabTracks} />
+        <Route component={TabSettings} />
       </Switch>
     </Panel>
   )

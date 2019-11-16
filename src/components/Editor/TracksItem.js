@@ -1,10 +1,13 @@
 import React from 'react'
 import moment from 'moment'
+
+import { Link } from 'react-router-dom'
+
 import Icon from '../../styles/ui/Icon'
 
 import { TrackItem, TrackTitle, TrackSubtitle, TrackContent } from '../../styles/components/Editor/Track.js'
 
-const Track = ({active=false, id, status, title, activity, date, distance}) => {
+const TrackPreview = ({active=false, id, status, title, activity, date, distance}) => {
 
   const renderLoading = () => (
     <>
@@ -22,12 +25,13 @@ const Track = ({active=false, id, status, title, activity, date, distance}) => {
     <>
       <TrackTitle>
         { distance > 0.8 ? `${distance.toFixed(2)} km` : `${(distance*1000).toFixed(1)} m` }
+        
         <TrackSubtitle>
           {' '}- <span aria-label={moment(date.end).format('LL')}>{moment(date.end).fromNow()}</span>
           {' '}- <span>{activity}</span>
         </TrackSubtitle>
       </TrackTitle>
-      <TrackContent>{title}</TrackContent>
+      <TrackContent><Link to={`/editor/tracks/${id}/edit`}>{title}</Link></TrackContent>
     </>
   )
 
@@ -37,4 +41,4 @@ const Track = ({active=false, id, status, title, activity, date, distance}) => {
   </TrackItem>
 }
 
-export default Track
+export default TrackPreview

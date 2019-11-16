@@ -3,7 +3,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateStyle } from '../../actions/maps'
 
-const Settings = () => {
+const TabSettings = () => {
   const mapsStyle = useSelector(state => state.maps.style)
   const dispatch = useDispatch()
 
@@ -15,4 +15,4 @@ const Settings = () => {
   )
 }
 
-export default Settings
+export default TabSettings

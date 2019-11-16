@@ -4,15 +4,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { sortTracks } from '../../actions/tracks'
 
 import TracksAdd from './TracksAdd.js'
-import Track from './Track.js'
-import TrackPined from './TrackPined.js'
+import TracksItem from './TracksItem.js'
+import TracksItemPined from './TracksItemPined.js'
 
 import Button from '../../styles/ui/Button'
 import Loading from '../../styles/ui/Loading'
 
 import { TracksList, TracksNav } from '../../styles/components/Editor/Tracks.js'
 
-const Tracks = ( {match} ) => {
+const TabTracks = ( {match} ) => {
   const tracks = useSelector(state => state.tracks)
   const dispatch = useDispatch()
   const pageSize = 45
@@ -36,10 +36,10 @@ const Tracks = ( {match} ) => {
       <TracksAdd />      
       <TracksList onScroll={e => handleScroll(e)}>
         {match.params.id && tracks.items.filter( (track) => track.id === match.params.id ).map( 
-          (track) => <TrackPined key={track.id} {...track} />
+          (track) => <TracksItemPined key={track.id} {...track} />
         )}
         {tracks.items.slice(0, page * pageSize ).map( (track) => 
-          <Track key={track.id} {...track} />
+          <TracksItem key={track.id} {...track} />
         )}
         {moreTracksToShow() && <Loading text="Ładowanie tras" />}
       </TracksList>
@@ -52,4 +52,4 @@ const Tracks = ( {match} ) => {
   )
 }
 
-export default Tracks
+export default TabTracks

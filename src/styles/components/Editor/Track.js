@@ -79,6 +79,7 @@ export const TrackItem = styled.li`
 `
 
 export const TrackTitle = styled.h3`
+  display: block;
   color: ${ props => props.theme.color.cardStrong || 'white' };
   font-size: 11px;
   font-weight: 400;

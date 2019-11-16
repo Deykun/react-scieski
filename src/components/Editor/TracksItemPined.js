@@ -8,7 +8,7 @@ import Button from '../../styles/ui/Button'
 
 import { TrackItem, TrackTitle, TrackSubtitle } from '../../styles/components/Editor/Track.js'
 
-const TrackPined = ({id, status, title, activity, date, distance}) => {
+const TracksItemPined = ({id, status, title, activity, date, distance}) => {
 
   const renderLoading = () => (
     <TrackTitle>
@@ -20,7 +20,7 @@ const TrackPined = ({id, status, title, activity, date, distance}) => {
   )
 
   const renderSuccess = () => (
-    <TrackTitle>
+    <TrackTitle as={Link} to={`/editor/tracks/${id}/edit`}>
       { distance > 0.8 ? `${distance.toFixed(2)} km` : `${(distance*1000).toFixed(1)} m` }
       <TrackSubtitle>
         {' '}- <span aria-label={moment(date.end).format('LL')}>{moment(date.end).fromNow()}</span>
@@ -37,4 +37,4 @@ const TrackPined = ({id, status, title, activity, date, distance}) => {
   </TrackItem>
 }
 
-export default TrackPined
+export default TracksItemPined
