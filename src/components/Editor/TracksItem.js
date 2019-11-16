@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import Icon from '../../styles/ui/Icon'
 
-import { TrackItem, TrackTitle, TrackSubtitle, TrackContent } from '../../styles/components/Editor/Track.js'
+import { TrackItem, TrackTitle, TrackSubtitle, TrackContent } from '../../styles/components/Editor/TracksItem.js'
 
 const TrackPreview = ({active=false, id, status, title, activity, date, distance}) => {
 

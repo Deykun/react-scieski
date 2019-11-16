@@ -7,6 +7,8 @@ import { addNotification } from '../../actions/notifications'
 
 import Button from '../../styles/ui/Button'
 
+import TrackMap from './TrackMap.js'
+
 const TabTrack = ( {match} ) => {
   const track = useSelector(state => state.tracks.items.filter( track => track.id === match.params.id )[0] )
   // const track = useSelector(state => state.tracks )
@@ -21,7 +23,10 @@ const TabTrack = ( {match} ) => {
   }
 
   return (
-    <h1>{track.title}d</h1>  
+    <>
+      {/* <h1>{track.title}d</h1>   */}
+      <TrackMap track={track} />
+    </>
   )
 }
 

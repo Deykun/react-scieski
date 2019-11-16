@@ -1,16 +1,16 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import GoogleMap from './GoogleMap'
+import GMap from './GMap.js'
 
 import { MapsList } from '../../styles/components/Maps'
 
 const Maps = () => {
-  const tracks = useSelector(state => state.tracks)
+  const tracks = useSelector(state => state.tracks.items)
   const maps = useSelector(state => state.maps)
 
   return( 
     <MapsList>
-      {maps.items.map( (map) => { return ( <GoogleMap key={map.id} tracks={tracks} style={maps.style} /> ) })}
+      {maps.items.map( (map) => { return ( <GMap key={map.id} tracks={tracks} mapStyle={maps.style} /> ) })}
     </MapsList>
   )
 }
