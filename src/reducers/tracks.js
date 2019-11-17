@@ -2,7 +2,7 @@ import { v4 } from 'node-uuid'
 
 export const ADD_TRACK = 'ADD_TRACK'
 export const UPDATE_TRACK = 'UPDATE_TRACK'
-export const REMOVE_TRACK = 'UPDATE_TRACK'
+export const REMOVE_TRACK = 'REMOVE_TRACK'
 export const SORT_TRACKS = 'SORT_TRACKS'
 export const REFRESH_SUMMARY = 'REFRESH_SUMMARY'
 
@@ -23,6 +23,7 @@ const initialState = {
 }
 
 const applyAction = (state, action) => {
+  console.log(action)
   switch (action.type) {
     case ADD_TRACK: 
       state.items = [ ...state.items, action.track ]
@@ -41,7 +42,6 @@ const applyAction = (state, action) => {
 
     case REMOVE_TRACK:
       state.items = state.items.filter( track => track.id !== action.id )
-      state.notifications = [ ...state.notifications, { id: v4(), content: 'Trasa została usunięta.'} ]
       break
 
     case SORT_TRACKS:

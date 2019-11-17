@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { card } from '../../shared/panel'
 import { tooltip } from '../../ui/tooltip'
 
-export const Card = styled.div`
+export const Card = styled.header`
   ${card}
   padding: 8px;
   text-align: center;

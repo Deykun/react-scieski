@@ -1,7 +1,7 @@
 import { 
   ADD_TRACK, 
   UPDATE_TRACK, 
-  // REMOVE_TRACK, 
+  REMOVE_TRACK, 
   SORT_TRACKS,
   REFRESH_SUMMARY
 } from '../reducers/tracks'
@@ -15,6 +15,11 @@ export const updateTrack = ( { id, data={} } ) => ({
   type: UPDATE_TRACK,
   id: id ? id : data.id,
   track: data
+})
+
+export const removeTrack = ( { id, data={} } ) => ({
+  type: REMOVE_TRACK,
+  id: id ? id : data.id
 })
 
 export const sortTracks = ( { by, data={} } ) => ({
