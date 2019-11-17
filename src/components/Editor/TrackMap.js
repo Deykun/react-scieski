@@ -8,9 +8,9 @@ import { TrackMapPreview } from '../../styles/components/Editor/Track.js'
 const TrackMap = ({track}) => {
   const maps = useSelector(state => state.maps)
 
-  return (<TrackMapPreview>
+  return <TrackMapPreview>
     <GMap tracks={[track]} mapStyle={maps.style} style={{ minHeight: 300 }} centerBounds={true} />
-  </TrackMapPreview>)
+  </TrackMapPreview>
 }
 
 export default TrackMap
