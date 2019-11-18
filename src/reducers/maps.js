@@ -7,12 +7,15 @@ export const MAP_STYLE_UPDATE = 'MAP_STYLE_UPDATE'
 const initialState = {
   style: {
     stroke: {
-      width: 3,
+      width: 1,
       opacity: 1
     }
   },
   items: [
-    { id: v4() }
+    { 
+      id: v4(),
+      filters: []
+    }
   ]
 }
 

@@ -107,15 +107,17 @@ const dataFromFile = (fileContent, fileFormat) => {
     calculatedDistance += calculateDistance( fragment )
   } )
 
-  let firstPoint = fragments[0][0];
-  let lastPoint = fragments[ fragments.length - 1 ][ fragments[ fragments.length - 1 ].length - 1 ]
+  let firstPoint = fragments.length ? fragments[0][0] : {}
+  let lastPoint = fragments.length ? fragments[ fragments.length - 1 ][ fragments[ fragments.length - 1 ].length - 1 ] : {}
   let calculatedTimeDifference = calculateTimeDifference( firstPoint.time, lastPoint.time )
   let calculatedSpeed = calculateSpeed( firstPoint.time, lastPoint.time, calculatedDistance )
 
-  if ( typeof lastPoint === 'undefined') {
+
+  if ( !lastPoint ) {
     console.log(fileContent)
     console.log(fragments)
   }
+
   const trackData = {
     date: {
       start: firstPoint.time,

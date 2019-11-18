@@ -1,5 +1,3 @@
-import { v4 } from 'node-uuid'
-
 export const ADD_TRACK = 'ADD_TRACK'
 export const UPDATE_TRACK = 'UPDATE_TRACK'
 export const REMOVE_TRACK = 'REMOVE_TRACK'
@@ -23,7 +21,6 @@ const initialState = {
 }
 
 const applyAction = (state, action) => {
-  console.log(action)
   switch (action.type) {
     case ADD_TRACK: 
       state.items = [ ...state.items, action.track ]
@@ -69,6 +66,7 @@ const applyAction = (state, action) => {
           speed += track.speed
           total += 1
         }
+        return null
       })
       if ( total > 0 ) {
         state.summary.total = {

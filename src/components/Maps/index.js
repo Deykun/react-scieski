@@ -10,7 +10,7 @@ const Maps = () => {
 
   return( 
     <MapsList>
-      {maps.items.map( (map) => { return ( <GMap key={map.id} tracks={tracks} mapStyle={maps.style} /> ) })}
+      {maps.items.map( (map) => { return ( <GMap key={map.id} tracks={tracks} /> ) })}
     </MapsList>
   )
 }
