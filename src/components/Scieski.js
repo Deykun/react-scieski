@@ -23,7 +23,7 @@ const App = () => {
         </>        
       </Theme>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

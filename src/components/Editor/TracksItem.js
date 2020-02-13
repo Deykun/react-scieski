@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 
 import { Link } from 'react-router-dom'
@@ -39,6 +40,18 @@ const TrackPreview = ({active=false, id, status, title, activity, date, distance
     { status === 'loading' && renderLoading() }
     { status === 'success' && renderSuccess() }
   </TrackItem>
+}
+
+TrackPreview.propTypes = {
+  active: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  activity: PropTypes.string,
+  distance: PropTypes.number,
+  date: PropTypes.shape({
+    end: PropTypes.string,
+  })
 }
 
 export default TrackPreview

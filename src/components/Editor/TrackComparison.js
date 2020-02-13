@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 
 import moment from 'moment'
@@ -31,6 +32,14 @@ const TrackComparison = ({track}) => {
       </StatsListItem>
     </StatsList>
   </Card>
+}
+
+TrackComparison.propTypes = {
+  track: PropTypes.shape({
+    distance: PropTypes.number.isRequired,
+    speed: PropTypes.number.isRequired,
+    durationMs: PropTypes.number.isRequired
+  }).isRequired
 }
 
 export default TrackComparison

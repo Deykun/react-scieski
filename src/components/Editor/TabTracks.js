@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { sortTracks } from '../../actions/tracks'
@@ -50,6 +51,14 @@ const TabTracks = ( {match} ) => {
       </TracksNav>
     </>
   )
+}
+
+TabTracks.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string
+    })
+  })
 }
 
 export default TabTracks

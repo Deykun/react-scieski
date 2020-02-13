@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { removeNotification } from '../../actions/notifications'
 
@@ -24,6 +25,15 @@ const Notification = ({type, id, title, subtitle, message, percent}) => {
       </NotificationContent>
     </NotificationItem>
   )
+}
+
+Notification.propTypes = {
+  id: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  message: PropTypes.string,
+  percent: PropTypes.number
 }
 
 export default Notification

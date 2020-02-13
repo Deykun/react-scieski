@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
 import React from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 
 import { useHistory } from 'react-router-dom'
@@ -72,8 +72,6 @@ const GMap = ( {tracks, google, centerBounds=false, force={}} ) => {
   )
 }
   
-
-// const GMap = ( {tracks, google, mapStyle, style, centerBounds=false, force={}} ) => {
 GMap.propTypes = {
   tracks: PropTypes.array.isRequired,
   google: PropTypes.object.isRequired,

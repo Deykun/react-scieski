@@ -10,7 +10,14 @@ const TabSettings = () => {
   return (
     <>
       <h3>Stroke</h3>
-      <input type="number" min="0.2" max="5" step="0.1" value={mapsStyle.stroke.width} onChange={ (e) => dispatch( updateStyle( { data:  { stroke: { width: e.target.value } } } ) ) } />
+      <input 
+        type="number" 
+        min="0.2" 
+        max="5" 
+        step="0.1" 
+        value={mapsStyle.stroke.width} 
+        onChange={ (e) => dispatch( updateStyle( { data:  { stroke: { width: Number( e.target.value ) } } } ) ) } 
+      />
     </>
   )
 }
