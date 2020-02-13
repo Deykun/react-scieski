@@ -2,9 +2,10 @@ export const ADD_TRACK = 'ADD_TRACK'
 export const UPDATE_TRACK = 'UPDATE_TRACK'
 export const REMOVE_TRACK = 'REMOVE_TRACK'
 export const SORT_TRACKS = 'SORT_TRACKS'
+export const SAVE_TRACKS = 'SAVE_TRACKS'
 export const REFRESH_SUMMARY = 'REFRESH_SUMMARY'
 
-const initialState = {
+const defaultInitialState = {
   summary: {
     avg: {
       distance: 0,
@@ -19,6 +20,8 @@ const initialState = {
   items: [],
   sorted_by: ''
 }
+
+const initialState = localStorage.getItem('trackInitialState') ? JSON.parse(localStorage.getItem('trackInitialState')) : defaultInitialState
 
 const applyAction = (state, action) => {
   switch (action.type) {
@@ -54,19 +57,22 @@ const applyAction = (state, action) => {
       }
       break
 
+    case SAVE_TRACKS: 
+      localStorage.setItem('trackInitialState', JSON.stringify(state) )
+      break
+
     case REFRESH_SUMMARY: {
       let distance = 0
       let durationMs = 0
       let speed = 0
       let total = 0
-      state.items.map( track => {
+      state.items.forEach( track => {
         if ( track.status === 'success' ) {
           distance += track.distance
           durationMs += track.durationMs
           speed += track.speed
           total += 1
         }
-        return null
       })
       if ( total > 0 ) {
         state.summary.total = {
@@ -78,7 +84,7 @@ const applyAction = (state, action) => {
           durationMs: (durationMs / total),
           speed: (speed / total)
         }
-      } 
+      }
     }
       break
     default: 

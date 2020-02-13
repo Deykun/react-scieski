@@ -3,7 +3,7 @@ import moment from 'moment'
 
 import { useDispatch } from 'react-redux'
 import { multipleActions } from '../../actions/'
-import { addTrack, refreshTracksSummary } from '../../actions/tracks'
+import { addTrack, refreshTracksSummary, saveTracks } from '../../actions/tracks'
 import { addNotification, updateNotification } from '../../actions/notifications'
 
 import { v4 } from 'node-uuid'
@@ -91,6 +91,7 @@ const TracksAdd = () => {
         message: `Trasy zostały dodane w ${performenceInMin > 0 ? `${performenceInMin} minut` : ''}${performenceInSec} sekund.`
       }}) )
       dispatch( refreshTracksSummary() )
+      dispatch( saveTracks() )
     })
 
   }, [dispatch])

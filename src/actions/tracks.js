@@ -3,6 +3,7 @@ import {
   UPDATE_TRACK, 
   REMOVE_TRACK, 
   SORT_TRACKS,
+  SAVE_TRACKS,
   REFRESH_SUMMARY
 } from '../reducers/tracks'
 
@@ -29,4 +30,8 @@ export const sortTracks = ( { by, data={} } ) => ({
 
 export const refreshTracksSummary = () => ({
   type: REFRESH_SUMMARY,
+})
+
+export const saveTracks = () => ({
+  type: SAVE_TRACKS,
 })
