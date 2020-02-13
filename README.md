@@ -7,10 +7,10 @@ W założeniu skrypt ma na podstawie tras Endomondo generować mapy których dom
 - Notyfikacje
 - Generowanie mapy z trasami
 
-![](http://deykun.it/lab/img/mapa.gif)
+## Aktualna wersja
+http://scieski.deykun.it
 
-
-## Demo
+## Starsza wersja
 http://deykun.it/lab/scieski-react/
 
 ### Wersja nieoparta o React

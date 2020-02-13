@@ -1,7 +1,7 @@
 {
   "name": "react-scieski",
   "version": "0.1.0",
-  "homepage": "/lab/scieski-react/",
+  "homepage": "/",
   "private": true,
   "dependencies": {
     "google-maps-react": "^2.0.2",

@@ -39,6 +39,20 @@ export const TabNav = styled.nav`
     right: 5px;
     font-size: 12px;
   }
+ 
+`
+
+export const EditorOpener = styled.span`
+  ${card}
+  position: absolute;
+  right: -50px;
+  top: 0;
+  padding: 5px;
+  transform: scale(1);
+  transition: .3s ease-in-out;
+  .active & {
+    transform: scale(0)
+  }
 `
 
 const activeClassName = 'active'
