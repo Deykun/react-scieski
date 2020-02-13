@@ -1,7 +1,8 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import Icon from './Icon';
-import tooltip from './tooltip';
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled, { css } from 'styled-components'
+import Icon from './Icon'
+import { tooltip, tooltipTop } from './tooltip'
 
 const StyledButton = styled.button`
   /* Reset */
@@ -31,37 +32,48 @@ const StyledButton = styled.button`
   :focus {
     outline: none;
   }
+  color: inherit;
 
-  ${ props => props.danger && css`
-    fill: ${ props => props.theme.color.danger || 'Red' };
-    color: ${ props => props.theme.color.danger || 'Red' };
-    :hover, :focus {
-      fill: ${ props => props.theme.color.danger75 || 'Red' };
-      color: ${ props => props.theme.color.danger75 || 'Red' };
-    }
+  ${ props => props.negative && css`
+    color: ${ props => props.theme.color.negative || 'Red' };
   `} 
 
-  ${ props => props.main && css`
-    fill: ${ props => props.theme.color.main || 'Green' };
-    color: ${ props => props.theme.color.main || 'Green' };
+  ${ props => ( props.negative || props.negativeActive ) && css`
     :hover, :focus {
-      fill: ${ props => props.theme.color.main75 || 'Green' };
-      color: ${ props => props.theme.color.main75 || 'Green' };
+      color: ${ props => props.theme.color.negativeLife || 'Red' };
     }
   `}
 
-  ${ props => props['aria-label'] && css`
-    ${tooltip};
-  `};
+  ${ props => props.positive && css`
+    color: ${ props => props.theme.color.positive || 'Green' };
+  `}
+
+  ${ props => ( props.positive || props.positiveActive ) && css`
+    :hover, :focus {
+      color: ${ props => props.theme.color.positiveLife || 'Green' };
+    }
+  `}
+
+  ${ props => props['aria-label'] && css` ${tooltip}; `}
+  ${ props => props['aria-label'] && props.tooltiptop && css` ${tooltipTop}; `}
+  
   transition: .2s ease-in-out;
-`;
+`
 
 const Button = props => (
   <StyledButton {...props}>
-    {props.iconleft && <Icon name={props.iconleft} />}
+    {props.iconleft && <Icon name={props.iconleft} size={props.iconsize} />}
     {props.children && <span>{props.children}</span>}
-    {props.iconright && <Icon name={props.iconright} />}
+    {props.iconright && <Icon name={props.iconright} size={props.iconsize} />}
   </StyledButton>
-);
+)
 
-export default Button;
+Button.propTypes = {
+  iconleft: PropTypes.string,
+  children: PropTypes.node,
+  iconright: PropTypes.string,
+  iconsize: PropTypes.number,
+  tooltiptop: PropTypes.bool,
+}
+
+export default Button

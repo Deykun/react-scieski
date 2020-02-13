@@ -21,8 +21,15 @@ export default createGlobalStyle`
   *, ::before, ::after {
     box-sizing: border-box;
   }
-  .scieski-app * {
+  * {
     margin: 0;
     padding: 0;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  svg {
+    fill: currentColor;
   }
 `;

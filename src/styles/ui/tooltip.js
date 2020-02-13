@@ -1,6 +1,6 @@
-import {css} from 'styled-components';
+import {css} from 'styled-components'
 
-const tooltip = css`
+export const tooltip = css`
   position: relative;
   ::after {
     content: attr(aria-label);
@@ -19,29 +19,34 @@ const tooltip = css`
     font-weight: 500;
     white-space: nowrap;
 
-    color: ${ props => props.theme.color.text || 'black' };
-    background-color: ${ props => props.theme.color.active || 'gray' };    
+    color: ${ props => props.theme.background.card || 'black' };
+    background-color: ${ props => props.theme.color.card || 'gray' };    
 
-    ${ props => props.danger && css`
-      color: ${ props => props.theme.background.danger || 'white' };
-      background-color: ${ props => props.theme.color.danger75 || 'red' }; 
+    ${ props => props.negative && css`
+      color: ${ props => props.theme.background.negative || 'white' };
+      background-color: ${ props => props.theme.color.negative || 'red' }; 
     `}; 
 
-    ${ props => props.main && css`
-      color: ${ props => props.theme.background.main || 'white' };
-      background-color: ${ props => props.theme.color.main75 || 'green' };
+    ${ props => props.positive && css`
+      color: ${ props => props.theme.background.positive || 'white' };
+      background-color: ${ props => props.theme.color.positive || 'green' };
     `}; 
 
     pointer-events: none;
     
     transition: .1s ease-in-out;
   }
-  :hover, :focus {
+  :hover {
     ::after {
       transform: translate(-50%, 0) scale(1);
       opacity: 1;
     }
   }
-`;
+`
 
-export default tooltip;
+export const tooltipTop = css`
+  &::after {
+    top: auto;
+    bottom: calc( 100% + 3px);
+  }
+`

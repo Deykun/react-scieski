@@ -1,38 +1,38 @@
-import React from 'react';
-import { ThemeProvider } from 'styled-components';
+import PropTypes from 'prop-types'
+import React from 'react'
+import { ThemeProvider } from 'styled-components'
 
 const theme = {
   importFontFromGoogle: true,
   color: {
-    brand: '#d4db96',
-    text: '#333',
-    textMuted: '#878787',
-    inactive: '#c0c0c0',
-    active: '#a4b324',
-    active75: '#737e10',
-    main: '#0b9c59',
-    main75: '#087442',
-    danger: '#d53030',
-    danger75: '#7e1010',
-    border: '#e9e9e9'
+    card: '#9f9f9f',
+    cardStrong: 'white',
+    positive: '#c4d33e',
+    positiveLife: '#c4d33e',
+    negative: '#f4960f',
+    negativeLife: '#e19930',
   },
   background: {
     app: '#e5e5e5',
-    component: 'white',
-    main: 'white',
-    danger: 'white',
+    card: '#2d2d2d'
   },
   other: {
-    borderRadius: '2px'
+    borderRadius: '3px',
+    transition: '.3s',
+    transitionBounceFunction: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
   }
 }
 
-const Theme = (props) => {
-    return (
-      <ThemeProvider theme={theme}>
-        {props.children}
-      </ThemeProvider>
-    )
+const Theme = ({children}) => {
+  return (
+    <ThemeProvider theme={theme}>
+      {children}
+    </ThemeProvider>
+  )
 }
 
-export default Theme;
+Theme.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+
+export default Theme
