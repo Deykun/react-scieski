@@ -8,8 +8,8 @@ import Button from '../../styles/ui/Button'
 import { NotificationsList, NotificationsGlobalNav } from '../../styles/components/Notifications'
 
 const Notifications = () => {
-  const dispatch = useDispatch()
   const notifications = useSelector(state => state.notifications)
+  const dispatch = useDispatch()
   return (
     <NotificationsList aria-label="Lista powiadomień">
       {notifications.items.map( (notification) => <Notification key={notification.id} {...notification} /> )}
