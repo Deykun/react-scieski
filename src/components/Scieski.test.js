@@ -1,6 +1,6 @@
 import React from 'react'
 import Scieski from './Scieski'
-import StoreProvider from './StoreProvider'
+import StoreProvider from './Wrappers/StoreProvider'
 
 import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'

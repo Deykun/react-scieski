@@ -5,7 +5,7 @@ import { removeAllNotifications } from '../../actions/notifications'
 import Notification from './Notification.js'
 
 import Button from '../../styles/ui/Button'
-import { NotificationsList, NotificationsGlobalNav } from '../../styles/components/Notifications'
+import { NotificationsList, NotificationsGlobalNav } from '../../styles/components/Notifications/Notifications'
 
 const Notifications = () => {
   const notifications = useSelector(state => state.notifications)

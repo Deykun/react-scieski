@@ -6,7 +6,7 @@ import TabTrack from './TabTrack.js'
 import TabSettings from './TabSettings.js'
 
 import Button from '../../styles/ui/Button'
-import { Panel, TabNav, TabNavLink, EditorOpener } from '../../styles/components/Editor'
+import { Panel, TabNav, TabNavLink, EditorOpener } from '../../styles/components/Editor/Editor'
 
 const Editor = () => {
   const location = useLocation()
@@ -23,7 +23,7 @@ const Editor = () => {
   ]
 
   return (
-    <Panel className={location.pathname.startsWith('/editor') ? 'active' : ''}>
+    <Panel className={location.pathname.startsWith('/editor') ? 'open' : ''}>
       <EditorOpener>
         <Button className="open" as={Link} to="/editor" aria-label="Otwórz" iconleft="edit" iconsize={31} />
       </EditorOpener>
