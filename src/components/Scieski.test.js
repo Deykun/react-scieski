@@ -7,7 +7,7 @@ import Adapter from 'enzyme-adapter-react-16'
 configure({ adapter: new Adapter() })
 
 describe('Scieski', () => {
-  it('Renders without crashing', () => {
+  it('Renders <Editor> without crashing', () => {
     const wrapper = mount(<StoreProvider><Scieski /></StoreProvider>)
     expect(wrapper.find('Editor').length).toEqual(1)
   })
