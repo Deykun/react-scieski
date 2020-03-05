@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { updateTrack } from '../actions/tracks.js'
+import { addTrack } from '../actions/tracks.js'
 
 export const readFile = (file) => {
   return new Promise((resolve, reject) => {
@@ -19,7 +19,7 @@ export const readFile = (file) => {
       const fileContent = reader.result
       const track = dataFromFile( fileContent, file.format )
       track.status = 'success'
-      return resolve( updateTrack( { id: file.id, data: track } )  )
+      return resolve( addTrack( { id: file.id, data: track } )  )
     }
   })
 }

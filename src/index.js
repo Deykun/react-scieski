@@ -1,16 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Scieski from './components/Scieski'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-
-import rootReducer from './reducers/'  
-
-const store = createStore( rootReducer )
+import StoreProvider from './components/Wrappers/StoreProvider'
 
 ReactDOM.render( 
-  <Provider store={store}>
+  <StoreProvider>
     <Scieski />
-  </Provider>,
+  </StoreProvider>,
   document.getElementById('root')
 )

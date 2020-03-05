@@ -17,7 +17,7 @@ export const Panel = styled.section`
   justify-content: space-between;
   transform: translate( -286px );
   transition: .6s ${ props => props.theme.other.transitionBounceFunction || 'ease-in-out'};
-  &.active {
+  &.open {
     transform: translate( 0 );
   }
 `

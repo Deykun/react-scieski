@@ -58,7 +58,11 @@ const applyAction = (state, action) => {
       break
 
     case SAVE_TRACKS: 
-      localStorage.setItem('trackInitialState', JSON.stringify(state) )
+      try {
+        localStorage.setItem('trackInitialState', JSON.stringify(state) )
+      } catch (e) {
+        console.error(e)
+      }
       break
 
     case REFRESH_SUMMARY: {
