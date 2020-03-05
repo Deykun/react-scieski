@@ -1,4 +1,3 @@
-import 'core-js'
 import React from 'react'
 import TracksAdd from './TracksAdd'
 import * as notifications from '../../actions/notifications'

@@ -19,7 +19,7 @@ const Notification = ({type, id, title, subtitle, message, percent}) => {
         {title ? title : 'Powiadomienie'}
         {subtitle && <NotificationSubtitle> - {subtitle}</NotificationSubtitle>}
       </NotificationTitle>
-      {type === 'loading' && <ProgressBar value={percent} />}
+      {type === 'loading' && percent && <ProgressBar value={percent} />}
       <NotificationContent>
         {message}
       </NotificationContent>
