@@ -24,7 +24,7 @@ export const readFile = (file) => {
   })
 }
 
-const dataFromFile = (fileContent, fileFormat) => {
+export const dataFromFile = (fileContent, fileFormat) => {
   var points = []
   const fragments = []
 
@@ -133,12 +133,12 @@ const dataFromFile = (fileContent, fileFormat) => {
   return trackData
 }
 
-const createPoint = (latitude, longitude, time, altitude = 0) =>  {				
+export const createPoint = (latitude, longitude, time, altitude = 0) =>  {				
   return { lat: Number(latitude), lng: Number(longitude), time: time, alt: Number(altitude) };
 }
 
 /* Track distance in km,  altitude is being ignored */
-const calculateDistance = (points) => {
+export const calculateDistance = (points) => {
   if (points.length < 2) {
     return 0
   }
@@ -158,7 +158,7 @@ const calculateDistance = (points) => {
 
     var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
             Math.cos( (points[(i-1)].lat * Math.PI / 180 )) * Math.cos( ( points[i].lat * Math.PI / 180 ) ) * 
-            Math.sin(dLng/2) * Math.sin(dLng/2);
+            Math.sin(dLng/2) * Math.sin(dLng/2)
 
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
     var pointsDistance = earthRadius * c // in km
@@ -167,12 +167,12 @@ const calculateDistance = (points) => {
   return totalDistance
 }
 
-const calculateSpeed = ( start, end, distanceInKm ) => { 
+export const calculateSpeed = ( start, end, distanceInKm ) => { 
   const timeInMs = moment(end).diff(moment(start))
   const speedKmH = distanceInKm / ( timeInMs / 1000 / 60 / 60 )
   return speedKmH
 }
 
-const calculateTimeDifference = ( start, end ) => { 
+export const calculateTimeDifference = ( start, end ) => { 
   return moment(end).diff(moment(start))
 }
