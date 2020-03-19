@@ -6,11 +6,62 @@
   },
   "common": {
     "open": "Open",
-    "close": "Close"
+    "close": "Close",
+    "loading": "Loading..."
+  },
+  "notifications": {
+    "default": {
+      "title": "Notification"
+    },
+    "uploading": {
+      "title": "Importing",
+      "subtitle": "Checking a file.",
+      "subtitle_plural": "Checking {{count}} files.",
+      "message": "Only files with the right format are supported.",
+      "progress": {
+        "title": "Importing {{count}}%",
+        "subtitle": "{{count}} file",
+        "subtitle_plural": "{{count}} files",
+        "message": "One file was checked.",
+        "message_plural": "{{count}} files were checked."
+      }
+    },
+    "rejeced_format": {
+      "title": "Pominięto plik",
+      "subtitle": "nieobsługiwane roszerzenie .{{value}}",
+      "message": "Plik {{value}} został pominięty."
+    },
+    "completed": {
+      "title": "One file was imported",
+      "title_plural": "{{count}} files were imporeted",
+      "messageMin": "Routes were added in {{count}} minute.",
+      "messageMin_plural": "Routes were added in {{count}} minutes.",
+      "messageSec": "Routes were added in {{count}} second.",
+      "messageSec_plural": "Routes were added in {{count}} seconds."
+    }
+  },
+  "editor": {
+    "tabs": {
+      "routes": "routes",
+      "settings": "settings"
+    }
   },
   "settings": {
     "language": {
       "title": "Language"
+    }
+  },
+  "tracks": {
+    "add": {
+      "dropHere": "Drop files...",
+      "hint": {
+        "drop": "Drag and drop routes files",
+        "orPick": "or choose them",
+        "here": "here"
+      }
+    },
+    "item": {
+      "readingFile": "The file is being processed."
     }
   }
 }

@@ -27,7 +27,8 @@ i18n
     fallbackLng: 'en',
     debug: false,
     whitelist: LANGS,
-
+    transSupportBasicHtmlNodes: true,
+    transKeepBasicHtmlNodesFor: ['br', 'strong', 'em'],
     keySeparator: '.',
 
     interpolation: {

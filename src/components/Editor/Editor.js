@@ -15,11 +15,11 @@ const Editor = () => {
 
   const tabs = [
     {
-      title: 'trasy',
+      title: t('editor.tabs.routes'),
       path: '/editor/tracks'
     },
     {
-      title: 'ustawienia',
+      title: t('editor.tabs.settings'),
       path: '/editor/settings'
     }
   ]

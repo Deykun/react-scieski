@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import { useTranslation } from 'react-i18next'
 
 import { Link } from 'react-router-dom'
 
@@ -10,10 +11,11 @@ import Button from '../../../styles/ui/Button'
 import { TrackItem, TrackTitle, TrackSubtitle } from '../../../styles/components/Editor/TracksItem.js'
 
 const TracksItemPined = ({id, status, title, activity, date, distance}) => {
+  const { t } = useTranslation() 
 
   const renderLoading = () => (
     <TrackTitle>
-      <Icon rotate={1} name="circular-graph" size={13} />{' '}Ładowanie
+      <Icon rotate={1} name="circular-graph" size={13} />{' '}{t('common.loading')}
       <TrackSubtitle>
         {' '}- {title}
       </TrackSubtitle>
