@@ -1,8 +1,8 @@
 import React from 'react'
 import TracksAdd from './TracksAdd'
-import * as notifications from '../../actions/notifications'
+import * as notifications from '../../../actions/notifications'
 
-import TestWrapper from '../Wrappers/TestWrapper'
+import TestWrapper from '../../Wrappers/TestWrapper'
 
 import { configure, mount } from 'enzyme'
 import { act } from '@testing-library/react'

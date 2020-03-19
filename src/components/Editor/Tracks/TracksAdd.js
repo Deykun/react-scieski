@@ -3,17 +3,17 @@ import moment from 'moment'
 import pLimit from 'p-limit'
 
 import { useDispatch } from 'react-redux'
-import { multipleActions } from '../../actions/'
-import { refreshTracksSummary, saveTracks } from '../../actions/tracks'
-import { addNotification, updateNotification } from '../../actions/notifications'
+import { multipleActions } from '../../../actions'
+import { refreshTracksSummary, saveTracks } from '../../../actions/tracks'
+import { addNotification, updateNotification } from '../../../actions/notifications'
 
 import { v4 } from 'node-uuid'
 import { useDropzone } from 'react-dropzone'
 
-import { DropZoneContainer } from '../../styles/components/Editor/TracksAdd.js'
+import { DropZoneContainer } from '../../../styles/components/Editor/TracksAdd.js'
 
-import { checkFileMetadata } from '../../utils/helpers'
-import { readFile } from '../../utils/tracks.js'
+import { checkFileMetadata } from '../../../utils/helpers'
+import { readFile } from '../../../utils/tracks.js'
 
 const processFiles = (dispatch, files) => {
 /* One file is treated the same way */

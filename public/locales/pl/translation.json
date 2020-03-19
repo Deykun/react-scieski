@@ -1,0 +1,16 @@
+{
+  "tip": "You can compare languages with: http://www.jsondiff.com/",
+  "language": {
+    "pl": "Polski",
+    "en": "Angielski"
+  },
+  "common": {
+    "open": "Otwórz",
+    "close": "Zamknij"
+  },
+  "settings": {
+    "language": {
+      "title": "Język"
+    }
+  }
+}

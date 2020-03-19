@@ -50,7 +50,7 @@ export const EditorOpener = styled.span`
   padding: 5px;
   transform: scale(1);
   transition: .3s ease-in-out;
-  .active & {
+  .open & {
     transform: scale(0)
   }
 `

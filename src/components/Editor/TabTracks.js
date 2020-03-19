@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import { sortTracks } from '../../actions/tracks'
 
-import TracksAdd from './TracksAdd.js'
-import TracksItem from './TracksItem.js'
-import TracksItemPined from './TracksItemPined.js'
+import TracksAdd from './Tracks/TracksAdd.js'
+import TracksItem from './Tracks/TracksItem.js'
+import TracksItemPined from './Tracks/TracksItemPined.js'
 
 import Button from '../../styles/ui/Button'
 import Loading from '../../styles/ui/Loading'
