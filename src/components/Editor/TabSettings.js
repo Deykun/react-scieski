@@ -3,12 +3,15 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateStyle } from '../../actions/maps'
 
+import LangSwitcher from './Settings/LangSwitcher'
+
 const TabSettings = () => {
   const mapsStyle = useSelector(state => state.maps.style)
   const dispatch = useDispatch()
 
   return (
     <>
+      <LangSwitcher />
       <h3>Stroke</h3>
       <input 
         type="number" 

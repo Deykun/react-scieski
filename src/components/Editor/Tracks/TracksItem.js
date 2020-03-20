@@ -1,24 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import { useTranslation } from 'react-i18next'
 
 import { Link } from 'react-router-dom'
 
-import Icon from '../../styles/ui/Icon'
+import Icon from '../../../styles/ui/Icon'
 
-import { TrackItem, TrackTitle, TrackSubtitle, TrackContent } from '../../styles/components/Editor/TracksItem.js'
+import { TrackItem, TrackTitle, TrackSubtitle, TrackContent } from '../../../styles/components/Editor/TracksItem.js'
 
 const TrackPreview = ({active=false, id, status, title, activity, date, distance}) => {
+  const { t } = useTranslation() 
 
   const renderLoading = () => (
     <>
       <TrackTitle>
-        <Icon rotate={1} name="circular-graph" size={13} />{' '}Ładowanie
+        <Icon rotate={1} name="circular-graph" size={13} />{' '}{t('common.loading')}
         <TrackSubtitle>
           {' '}- {title}
         </TrackSubtitle>
       </TrackTitle>
-      <TrackContent>Trwa pobieranie danych z pliku.</TrackContent>
+      <TrackContent>{t('common.tracks.item.readingFile')}</TrackContent>
     </>
   )
 
@@ -54,4 +56,4 @@ TrackPreview.propTypes = {
   })
 }
 
-export default TrackPreview
+export default React.memo( TrackPreview )

@@ -1,0 +1,87 @@
+{
+  "tip": "You can compare languages with: http://www.jsondiff.com/",
+  "language": {
+    "pl": "Polski",
+    "en": "English"
+  },
+  "common": {
+    "open": "Open",
+    "close": "Close",
+    "closeAll": "Close all",
+    "loading": "Loading...",
+    "remove": "Remove",
+    "distance": "Distance",
+    "speed": "Speed",
+    "duration": "Duration"
+  },
+  "notifications": {
+    "title": "Notifications list",
+    "default": {
+      "title": "Notification"
+    },
+    "uploading": {
+      "title": "Importing",
+      "subtitle": "Checking a file.",
+      "subtitle_plural": "Checking {{count}} files.",
+      "message": "Only files with the right format are supported.",
+      "progress": {
+        "title": "Importing {{count}}%",
+        "subtitle": "{{count}} file",
+        "subtitle_plural": "{{count}} files",
+        "message": "One file was checked.",
+        "message_plural": "{{count}} files were checked."
+      }
+    },
+    "rejeced_format": {
+      "title": "A file was ignored",
+      "subtitle": "unknow format .{{value}}",
+      "message": "The file {{value}} was ignored."
+    },
+    "completed": {
+      "title": "One file was imported",
+      "title_plural": "{{count}} files were imporeted",
+      "messageMin": "Routes were added in {{count}} minute.",
+      "messageMin_plural": "Routes were added in {{count}} minutes.",
+      "messageSec": "Routes were added in {{count}} second.",
+      "messageSec_plural": "Routes were added in {{count}} seconds."
+    }
+  },
+  "editor": {
+    "tabs": {
+      "routes": "routes",
+      "settings": "settings"
+    }
+  },
+  "settings": {
+    "language": {
+      "title": "Language"
+    }
+  },
+  "tracks": {
+    "add": {
+      "dropHere": "Drop files...",
+      "hint": {
+        "drop": "Drag and drop routes files",
+        "orPick": "or choose them",
+        "here": "here"
+      }
+    },
+    "item": {
+      "readingFile": "The file is being processed."
+    },
+    "detail": {
+      "name": "Route name",
+      "nameExample": "A walking",
+      "statistics": "Statistics",
+      "activity": "Activity",
+      "activityExample": "walking",
+      "confirmRemove": "Are you sure about removing \"{{value}}\"?"
+    },
+    "loadingItems": "Loading routes",
+    "sort": {
+      "title": "sort",
+      "byDate": "date",
+      "byDistance": "distance"
+    }
+  }
+}

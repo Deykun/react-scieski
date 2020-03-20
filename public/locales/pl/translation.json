@@ -1,0 +1,93 @@
+{
+  "tip": "You can compare languages with: http://www.jsondiff.com/",
+  "language": {
+    "pl": "Polski",
+    "en": "English"
+  },
+  "common": {
+    "open": "Otwórz",
+    "close": "Zamknij",
+    "closeAll": "Zamknij wszystkie",
+    "loading": "Ładowanie...",
+    "remove": "Usuń",
+    "distance": "Dystans",
+    "speed": "Prędkość",
+    "duration": "Czas trwania"
+  },
+  "notifications": {
+    "title": "Lista powiadomień",
+    "default": {
+      "title": "Powiadomienie"
+    },
+    "uploading": {
+      "title": "Importowanie",
+      "subtitle_0": "Sprawdzanie {{count}} pliku.",
+      "subtitle_1": "Sprawdzanie {{count}} pliki.",
+      "subtitle_2": "Sprawdzanie {{count}} plików.",
+      "message": "Tylko pliki w odpowiednim formacie zostaną dodane.",
+      "progress": {
+        "title": "Importowanie {{count}}%",
+        "subtitle_0": "{{count}} plik",
+        "subtitle_1": "{{count}} pliki",
+        "subtitle_2": "{{count}} plików",
+        "message_0": "Sprawdzono {{count}} plik.",
+        "message_1": "Sprawdzono {{count}} pliki.",
+        "message_2": "Sprawdzono {{count}} plików."
+      }
+    },
+    "rejeced_format": {
+      "title": "Pominięto plik",
+      "subtitle": "nieobsługiwane roszerzenie .{{value}}",
+      "message": "Plik {{value}} został pominięty."
+    },
+    "completed": {
+      "title_0": "Zaimportowano {{count}} plik",
+      "title_1": "Zaimportowano {{count}} pliki",
+      "title_2": "Zaimportowano {{count}} plików",
+      "messageMin_0": "Trasy zostały dodane w {{count}} minutę.",
+      "messageMin_1": "Trasy zostały dodane w {{count}} minuty.",
+      "messageMin_2": "Trasy zostały dodane w {{count}} minut.",
+      "messageSec_0": "Trasy zostały dodane w {{count}} sekundę.",
+      "messageSec_1": "Trasy zostały dodane w {{count}} sekundy.",
+      "messageSec_2": "Trasy zostały dodane w {{count}} sekund."
+    }
+  },
+  "editor": {
+    "tabs": {
+      "routes": "trasy",
+      "settings": "ustawienia"
+    }
+  },
+  "settings": {
+    "language": {
+      "title": "Język"
+    }
+  },
+  "tracks": {
+    "add": {
+      "dropHere": "Upuść pliki...",
+      "hint": {
+        "drop": "Przeciągnij i upuść trasy",
+        "orPick": "lub wybierz pliki klikając",
+        "here": "tutaj"
+      }
+    },
+    "item": {
+      "readingFile": "Trwa pobieranie danych z pliku."
+    },
+    "detail": {
+      "name": "Nawa trasy",
+      "nameExample": "Spacer",
+      "statistics": "Statystyki",
+      "activity": "Rodzaj aktywności",
+      "activityExample": "walking",
+      "confirmRemove": "Usunąć trasę \"{{value}}\"?"
+    },
+    "loadingItems": "Ładowanie tras",
+    "sort": {
+      "title": "sotuj",
+      "byDate": "data",
+      "byDistance": "dystans"
+    }
+  }
+}

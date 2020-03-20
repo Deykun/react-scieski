@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route, Link, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 import TabTracks from './TabTracks.js'
 import TabTrack from './TabTrack.js'
@@ -10,14 +11,15 @@ import { Panel, TabNav, TabNavLink, EditorOpener } from '../../styles/components
 
 const Editor = () => {
   const location = useLocation()
+  const { t } = useTranslation() 
 
   const tabs = [
     {
-      title: 'trasy',
+      title: t('editor.tabs.routes'),
       path: '/editor/tracks'
     },
     {
-      title: 'ustawienia',
+      title: t('editor.tabs.settings'),
       path: '/editor/settings'
     }
   ]
@@ -25,10 +27,25 @@ const Editor = () => {
   return (
     <Panel className={location.pathname.startsWith('/editor') ? 'open' : ''}>
       <EditorOpener>
-        <Button className="open" as={Link} to="/editor" aria-label="Otwórz" iconleft="edit" iconsize={31} />
+        <Button 
+          className="open" 
+          as={Link} 
+          to="/editor" 
+          aria-label={t('common.open')} 
+          iconleft="edit" 
+          iconsize={31} 
+        />
       </EditorOpener>
       <TabNav>
-        <Button className="close" as={Link} to="/" negative={1} aria-label="Zamknij" iconleft="cross" iconsize={31} />
+        <Button 
+          className="close" 
+          as={Link} 
+          to="/" 
+          negative={1} 
+          aria-label={t('common.close')} 
+          iconleft="cross" 
+          iconsize={31} 
+        />
         <ul>
           {tabs.map( (tab, index) => 
             <li key={index}>

@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import 'moment/locale/pl'
 
 import ThemeWrapper from './Wrappers/ThemeWrapper'
+import LoadingApp from '../styles/ui/LoadingApp'
 
 import Editor from './Editor/Editor'
 import Notifications from './Notifications/Notifications'
@@ -13,9 +14,11 @@ const App = () => {
   return (
     <Router>
       <ThemeWrapper>
-        <Notifications />
-        <Editor />
-        <Maps /> 
+        <Suspense fallback={<LoadingApp />}>
+          <Notifications />
+          <Editor />
+          <Maps /> 
+        </Suspense>
       </ThemeWrapper>
     </Router>
   )

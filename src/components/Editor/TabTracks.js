@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
+import { useTranslation } from 'react-i18next'
+
 import { useSelector, useDispatch } from 'react-redux'
 import { sortTracks } from '../../actions/tracks'
 
-import TracksAdd from './TracksAdd.js'
-import TracksItem from './TracksItem.js'
-import TracksItemPined from './TracksItemPined.js'
+import TracksAdd from './Tracks/TracksAdd.js'
+import TracksItem from './Tracks/TracksItem.js'
+import TracksItemPined from './Tracks/TracksItemPined.js'
 
 import Button from '../../styles/ui/Button'
 import Loading from '../../styles/ui/Loading'
@@ -14,6 +16,7 @@ import Loading from '../../styles/ui/Loading'
 import { TracksList, TracksNav } from '../../styles/components/Editor/Tracks.js'
 
 const TabTracks = ( {match} ) => {
+  const { t } = useTranslation()
   const tracks = useSelector(state => state.tracks)
   const dispatch = useDispatch()
   const pageSize = 45
@@ -42,12 +45,22 @@ const TabTracks = ( {match} ) => {
         {tracks.items.slice(0, page * pageSize ).map( (track) => 
           <TracksItem key={track.id} {...track} />
         )}
-        {moreTracksToShow() && <Loading text="Ładowanie tras" />}
+        {moreTracksToShow() && <Loading text={t('tracks.loadingItems')} />}
       </TracksList>
       <TracksNav>
-        <span>sortuj:</span>
-        <Button onClick={ () => dispatch( sortTracks( { by: 'date'} )) } className={tracks.sorted_by === 'date' ? 'active' : ''}>data</Button>
-        <Button onClick={ () => dispatch( sortTracks( { by: 'distance'} )) } className={tracks.sorted_by === 'distance' ? 'active' : ''}>dystans</Button>
+        <span>{t('tracks.sort.title')}:</span>
+        <Button 
+          onClick={ () => dispatch( sortTracks( { by: 'date'} )) } 
+          className={tracks.sorted_by === 'date' ? 'active' : ''}
+        >
+          {t('tracks.sort.byDate')}
+        </Button>
+        <Button 
+          onClick={ () => dispatch( sortTracks( { by: 'distance'} )) } 
+          className={tracks.sorted_by === 'distance' ? 'active' : ''}
+        >
+          {t('tracks.sort.byDistance')}
+        </Button>
       </TracksNav>
     </>
   )

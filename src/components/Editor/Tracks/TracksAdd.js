@@ -3,17 +3,18 @@ import moment from 'moment'
 import pLimit from 'p-limit'
 
 import { useDispatch } from 'react-redux'
-import { multipleActions } from '../../actions/'
-import { refreshTracksSummary, saveTracks } from '../../actions/tracks'
-import { addNotification, updateNotification } from '../../actions/notifications'
+import { multipleActions } from '../../../actions'
+import { refreshTracksSummary, saveTracks } from '../../../actions/tracks'
+import { addNotification, updateNotification } from '../../../actions/notifications'
 
 import { v4 } from 'node-uuid'
 import { useDropzone } from 'react-dropzone'
+import { useTranslation } from 'react-i18next'
 
-import { DropZoneContainer } from '../../styles/components/Editor/TracksAdd.js'
+import { DropZoneContainer } from '../../../styles/components/Editor/TracksAdd.js'
 
-import { checkFileMetadata } from '../../utils/helpers'
-import { readFile } from '../../utils/tracks.js'
+import { checkFileMetadata } from '../../../utils/helpers'
+import { readFile } from '../../../utils/tracks.js'
 
 const processFiles = (dispatch, files) => {
 /* One file is treated the same way */
@@ -24,9 +25,12 @@ const processFiles = (dispatch, files) => {
     type: 'loading',
     percent: 0,
     id: progressNotificationId,
-    title: 'Importowanie',
-    subtitle: `sprawdzanie ${files.length} plików`,
-    message: 'Tylko pliki w odpowiednim formacie zostaną dodane.'
+    title: 'notifications.uploading.title',
+    subtitle: {
+      text: 'notifications.uploading.subtitle',
+      count: files.length
+    },
+    message: 'notifications.uploading.message'
   }}) )
 
   const limit = pLimit(30)
@@ -39,10 +43,19 @@ const processFiles = (dispatch, files) => {
     const progress = Math.round( (processed / files.length ) * 100)
 
     return updateNotification({ id: progressNotificationId, data: {
-      title: `Importowanie ${progress}%`,
-      subtitle: `${files.length} plików`,
+      title: {
+        text: 'notifications.uploading.progress.title',
+        count: progress
+      },
+      subtitle: {
+        text: 'notifications.uploading.progress.subtitle',
+        count: files.length
+      },
       percent: progress,
-      message: `Sprawdzono ${processed} pliki.`
+      message: {
+        text: 'notifications.uploading.progress.message',
+        count: processed
+      },
     }})
   }
 
@@ -55,16 +68,30 @@ const processFiles = (dispatch, files) => {
           actions.push( addNotification({ id: v4(), 
             code: 'FILE_FORMAT_REJECTED',
             data: {
-              title: `Pominięto plik .${fileMetadata.data.format}`,
-              subtitle: 'nieobsługiwane roszerzenie',
-              message: `Plik: ${fileMetadata.data.name} został pominięty.`,
+              title: 'notifications.rejeced_format.title',
+              subtitle: {
+                text: 'notifications.rejeced_format.subtitle',
+                value: fileMetadata.data.format
+              },
+              message: {
+                text: 'notifications.rejeced_format.message',
+                value: fileMetadata.data.name
+              }
             }
           }))
         } else {
           file.id = v4()
           file.format = fileMetadata.data.format
           const addTrack = await readFile( file )
-          actions.push( { id: file.id, ...addTrack, track: { ...fileMetadata.data, ...addTrack.track } } )
+          actions.push({ 
+            id: file.id, 
+            ...addTrack, 
+            track: { 
+              id: file.id, 
+              ...fileMetadata.data, 
+              ...addTrack.track 
+            } 
+          })
         }
         actions.push( updateProgress() )
         if ( actions.length > 12 ) {
@@ -83,13 +110,22 @@ const processFiles = (dispatch, files) => {
     const endTime = new Date()
     const performenceInMs = moment(endTime).diff(moment(startTime))
     const performenceInMin = Math.floor( performenceInMs / 1000 / 60 )
-    const performenceInSec = Math.floor( ( performenceInMs - ( performenceInMin * 1000 * 60 ) ) / 1000 )
+    const performenceInSec = Math.floor( performenceInMs / 1000 )
 
     dispatch( updateNotification({ id: progressNotificationId, data: {
-      title: `Zaimportowano ${files.length} plików`,
+      title: {
+        text: 'notifications.completed.title',
+        count: files.length
+      },
       type: 'success',
       subtitle: '',
-      message: `Trasy zostały dodane w ${performenceInMin > 0 ? `${performenceInMin} minut` : ''} ${performenceInSec} sekund.`
+      message: performenceInMin > 2 ? {
+        text: 'notifications.completed.messageMin',
+        count: performenceInMin
+      } : {
+        text: 'notifications.completed.messageSec',
+        count: performenceInSec
+      }
     }}) )
     dispatch( refreshTracksSummary() )
     dispatch( saveTracks() )
@@ -99,6 +135,7 @@ const processFiles = (dispatch, files) => {
 
 const TracksAdd = () => {
   const dispatch = useDispatch()
+  const { t } = useTranslation() 
 
   const onDrop = useCallback( files => {
     processFiles(dispatch, files) 
@@ -110,8 +147,12 @@ const TracksAdd = () => {
     <DropZoneContainer {...getRootProps()} isDragActive={isDragActive} className="track-add" style={{}} >
       <input {...getInputProps()} />
       {isDragActive ? 
-        <p>Upuść plik lub pliki z trasami.</p> :
-        <p>Przeciągnij i upuść trasy (.<strong>tcx</strong> lub .<strong>gpx</strong>) <br/>lub wybierz pliki klikając <strong className="positive">tutaj</strong>.</p>
+        <p>{t('tracks.add.dropHere')}</p> :
+        <p>
+          {t('tracks.add.hint.drop')} (.<strong>tcx</strong>, .<strong>gpx</strong>)
+          <br /> {t('tracks.add.hint.orPick')}
+          <strong className="positive"> {t('tracks.add.hint.here')}</strong>.
+        </p>
       }
     </DropZoneContainer>
   )
