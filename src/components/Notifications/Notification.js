@@ -39,7 +39,7 @@ const Notification = ({type, id, title, subtitle, message, percent}) => {
         {title ? tWithValue(title) : t('notifications.default.title')}
         {subtitle && <NotificationSubtitle> - {tWithValue(subtitle)}</NotificationSubtitle>}
       </NotificationTitle>
-      {type === 'loading' && percent && <ProgressBar value={percent} />}
+      {type === 'loading' && typeof percent === 'number' && <ProgressBar value={percent} />}
       <NotificationContent>
         {message ? tWithValue(message) : ''}
       </NotificationContent>
@@ -50,9 +50,24 @@ const Notification = ({type, id, title, subtitle, message, percent}) => {
 Notification.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string,
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
-  message: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.shape({
+      text: PropTypes.string.isRequired
+    })
+  ]).isRequired,
+  subtitle: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.shape({
+      text: PropTypes.string.isRequired
+    })
+  ]).isRequired,
+  message: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.shape({
+      text: PropTypes.string.isRequired
+    })
+  ]).isRequired,
   percent: PropTypes.number
 }
 

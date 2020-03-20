@@ -1,15 +1,21 @@
 {
   "tip": "You can compare languages with: http://www.jsondiff.com/",
   "language": {
-    "pl": "Polish",
+    "pl": "Polski",
     "en": "English"
   },
   "common": {
     "open": "Open",
     "close": "Close",
-    "loading": "Loading..."
+    "closeAll": "Close all",
+    "loading": "Loading...",
+    "remove": "Remove",
+    "distance": "Distance",
+    "speed": "Speed",
+    "duration": "Duration"
   },
   "notifications": {
+    "title": "Notifications list",
     "default": {
       "title": "Notification"
     },
@@ -27,9 +33,9 @@
       }
     },
     "rejeced_format": {
-      "title": "Pominięto plik",
-      "subtitle": "nieobsługiwane roszerzenie .{{value}}",
-      "message": "Plik {{value}} został pominięty."
+      "title": "A file was ignored",
+      "subtitle": "unknow format .{{value}}",
+      "message": "The file {{value}} was ignored."
     },
     "completed": {
       "title": "One file was imported",
@@ -62,6 +68,20 @@
     },
     "item": {
       "readingFile": "The file is being processed."
+    },
+    "detail": {
+      "name": "Route name",
+      "nameExample": "A walking",
+      "statistics": "Statistics",
+      "activity": "Activity",
+      "activityExample": "walking",
+      "confirmRemove": "Are you sure about removing \"{{value}}\"?"
+    },
+    "loadingItems": "Loading routes",
+    "sort": {
+      "title": "sort",
+      "byDate": "date",
+      "byDistance": "distance"
     }
   }
 }

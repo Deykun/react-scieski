@@ -2,10 +2,9 @@
 W założeniu skrypt ma na podstawie tras Endomondo generować mapy których domyślnie serwis ten nie generuje.
 
 ## Działa:
-- Dodawanie i obliczanie długości tras z plików .tcx i .gpx
-- Sortowanie i edytowanie trasy
-- Notyfikacje
-- Generowanie mapy z trasami
+- Import tras z plików .tcx i .gpx
+- Generowanie mapy
+- Tłumaczenia: en, pl
 
 ## Aktualna wersja - Hooks
 http://scieski.deykun.it

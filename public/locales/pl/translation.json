@@ -2,14 +2,20 @@
   "tip": "You can compare languages with: http://www.jsondiff.com/",
   "language": {
     "pl": "Polski",
-    "en": "Angielski"
+    "en": "English"
   },
   "common": {
     "open": "Otwórz",
     "close": "Zamknij",
-    "loading": "Ładowanie..."
+    "closeAll": "Zamknij wszystkie",
+    "loading": "Ładowanie...",
+    "remove": "Usuń",
+    "distance": "Dystans",
+    "speed": "Prędkość",
+    "duration": "Czas trwania"
   },
   "notifications": {
+    "title": "Lista powiadomień",
     "default": {
       "title": "Powiadomienie"
     },
@@ -68,6 +74,20 @@
     },
     "item": {
       "readingFile": "Trwa pobieranie danych z pliku."
+    },
+    "detail": {
+      "name": "Nawa trasy",
+      "nameExample": "Spacer",
+      "statistics": "Statystyki",
+      "activity": "Rodzaj aktywności",
+      "activityExample": "walking",
+      "confirmRemove": "Usunąć trasę \"{{value}}\"?"
+    },
+    "loadingItems": "Ładowanie tras",
+    "sort": {
+      "title": "sotuj",
+      "byDate": "data",
+      "byDistance": "dystans"
     }
   }
 }

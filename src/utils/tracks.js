@@ -5,11 +5,11 @@ export const readFile = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
     reader.onabort = () => {
-      console.log('FIAL ABORT')
+      console.warn('File on abort.')
       return resolve()
     }
     reader.onerror = () => {
-      console.log('FIAL ERROR')
+      console.warn('File on error.')
       return resolve()
     }
 
