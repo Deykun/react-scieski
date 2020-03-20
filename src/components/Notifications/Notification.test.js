@@ -24,7 +24,7 @@ describe('<Notification>', () => {
 
   it('Displaying defualt title', () => {
     const wrapper = mount(<TestWrapper><Notification id="test-id" /></TestWrapper>)
-    expect(wrapper.text().includes('Powiadomienie')).toBe(true)
+    expect(wrapper.text().includes('notifications.default.title')).toBe(true)
   })
 
   it('Displaying loading icon without progressbar', () => {

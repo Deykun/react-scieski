@@ -51,23 +51,23 @@ Notification.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string,
   title: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
+    PropTypes.string,
     PropTypes.shape({
       text: PropTypes.string.isRequired
     })
-  ]).isRequired,
+  ]),
   subtitle: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
+    PropTypes.string,
     PropTypes.shape({
       text: PropTypes.string.isRequired
     })
-  ]).isRequired,
+  ]),
   message: PropTypes.oneOfType([
-    PropTypes.string.isRequired,
+    PropTypes.string,
     PropTypes.shape({
       text: PropTypes.string.isRequired
     })
-  ]).isRequired,
+  ]),
   percent: PropTypes.number
 }
 

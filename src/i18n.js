@@ -27,10 +27,7 @@ i18n
     fallbackLng: 'en',
     debug: false,
     whitelist: LANGS,
-    transSupportBasicHtmlNodes: true,
-    transKeepBasicHtmlNodesFor: ['br', 'strong', 'em'],
     keySeparator: '.',
-
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     }
