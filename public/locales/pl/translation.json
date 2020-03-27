@@ -19,6 +19,11 @@
     "default": {
       "title": "Powiadomienie"
     },
+    "demoTracks": {
+      "title": "Wgrać przykładowe trasy?",
+      "message": "Jeśli klikniesz \"tak\" kilka tras zostanie dodanych do aplikacji.",
+      "actionCTA": "tak"
+    },
     "uploading": {
       "title": "Importowanie",
       "subtitle_0": "Sprawdzanie {{count}} pliku.",

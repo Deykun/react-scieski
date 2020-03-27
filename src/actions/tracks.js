@@ -12,7 +12,7 @@ import pLimit from 'p-limit'
 import { v4 } from 'node-uuid'
 
 import { multipleActions } from './index'
-import { addNotification, updateNotification } from './notifications'
+import { addNotification, updateNotification, removeNotification } from './notifications'
 import { checkFileMetadata, checkResponseMetadata } from '../utils/helpers'
 import { readFile, readFileFromURL } from '../utils/tracks.js'
 
@@ -249,12 +249,13 @@ export const addTracks = ( { dispatch, files, urls } ) => {
   }
 }
 
-export const addDemoTracks = dispatch => {
+export const addDemoTracks = (dispatch, notificationId) => {
   const fetchDemoTracks = async () => {
     const tracksIndex = await fetch('/demo-tracks.json')
     const tracksToFetch = await tracksIndex.json()
     await addTracks( { dispatch: dispatch, urls: tracksToFetch.map( file => file.path )} )
   }
   fetchDemoTracks()
+  dispatch( removeNotification({ id: 'demo-promt' }) )
 }
 

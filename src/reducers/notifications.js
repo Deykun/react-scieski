@@ -8,12 +8,12 @@ export const REMOVE_ALL_NOTIFICATIONS = 'REMOVE_ALL_NOTIFICATION'
 
 const demoPromtNotification = {
   id: 'demo-promt',
-  title: 'Wgrać kilka przykładowych tras?',
-  message: 'Kliknij by potwierdzić.',
+  title: 'notifications.demoTracks.title',
+  message: 'notifications.demoTracks.message',
   action: {
     name: 'addDemoTracks',
-    cta: 'Dodaj',
-    icon: 'test'
+    cta: 'notifications.demoTracks.actionCTA',
+    icon: 'check'
   }
 }
 

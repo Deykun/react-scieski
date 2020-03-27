@@ -7,7 +7,7 @@ import { removeNotification, customActionFromNotification } from '../../actions/
 import Icon from '../../styles/ui/Icon'
 import Button from '../../styles/ui/Button'
 import ProgressBar from '../../styles/ui/ProgressBar'
-import { NotificationItem, NotificationTitle, NotificationSubtitle, NotificationContent } from '../../styles/components/Notifications/Notification.js'
+import { NotificationItem, NotificationTitle, NotificationSubtitle, NotificationContent, NotificationActions } from '../../styles/components/Notifications/Notification.js'
 
 const Notification = ({type, id, title, subtitle, message, percent, action}) => {
   const dispatch = useDispatch()
@@ -43,10 +43,18 @@ const Notification = ({type, id, title, subtitle, message, percent, action}) => 
       <NotificationContent>
         {message ? tWithValue(message) : ''}
       </NotificationContent>
-      <p>
-        {action && action.name && <button onClick={() => customActionFromNotification(dispatch, action.name)}>{action.cta}</button>}
-        {/* customActionFromNotification */}
-      </p>
+      
+      {action && action.name && 
+        <NotificationActions>
+          <Button 
+            onClick={() => customActionFromNotification(dispatch, action.name)}
+            iconleft={action.icon ? action.icon : null}
+            positiveActive
+          >
+            {t(action.cta)}
+          </Button>
+        </NotificationActions>
+      }
     </NotificationItem>
   )
 }
