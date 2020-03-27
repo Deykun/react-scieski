@@ -161,7 +161,8 @@ export const addTracksFromFiles = (dispatch, files) => {
   })
 }
 
-
 export const addDemoTracks = dispatch => {
+  console.log('Custom action')
   // dispatch( )
 }
+

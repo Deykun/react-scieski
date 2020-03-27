@@ -1,11 +1,24 @@
 import { MULTIPLE } from '../actions/index'
+
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION'
 export const UPDATE_NOTIFICATION = 'UPDATE_NOTIFICATION'
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION'
 export const REMOVE_ALL_NOTIFICATIONS = 'REMOVE_ALL_NOTIFICATION'
 
+
+const demoPromtNotification = {
+  id: 'demo-promt',
+  title: 'Wgrać kilka przykładowych tras?',
+  message: 'Kliknij by potwierdzić.',
+  action: {
+    name: 'addDemoTracks',
+    cta: 'Dodaj',
+    icon: 'test'
+  }
+}
+
 const initialState = {
-  items: []
+  items: [demoPromtNotification]
 }
 
 const applyAction = (state, action) => {
