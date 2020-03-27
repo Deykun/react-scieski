@@ -19,6 +19,11 @@
     "default": {
       "title": "Notification"
     },
+    "demoTracks": {
+      "title": "Would you like to see some examples?",
+      "message": "Click \"yes\" to import example routes.",
+      "actionCTA": "yes"
+    },
     "uploading": {
       "title": "Importing",
       "subtitle": "Checking a file.",

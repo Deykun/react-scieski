@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import { v4 } from 'node-uuid'
+import { MULTIPLE } from '../actions/index'
 
 export const ADD_MAP = 'ADD_MAP'
 export const MAP_STYLE_UPDATE = 'MAP_STYLE_UPDATE'
@@ -37,7 +38,7 @@ const applyAction = (state, action) => {
 const reducer = ( state = initialState, action ) => {
   let newState = {...state}
 
-  if ( action.type === 'MULTIPLE') {
+  if ( action.type === MULTIPLE ) {
     action.actions.forEach( subaction => {
       newState = applyAction(newState, subaction)
     })

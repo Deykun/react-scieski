@@ -56,4 +56,4 @@ TrackPreview.propTypes = {
   })
 }
 
-export default React.memo( TrackPreview )
+export default TrackPreview

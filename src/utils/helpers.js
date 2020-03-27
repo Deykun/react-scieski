@@ -1,3 +1,5 @@
+export const allowedFormats = ['gpx','tcx']
+
 export const divideIntoSmallerArrays = (arr, sizeOfSmallerArray) => {
   const newArr = []
   arr.forEach( (item, index) => {
@@ -13,8 +15,6 @@ export const divideIntoSmallerArrays = (arr, sizeOfSmallerArray) => {
 }
 
 export const checkFileMetadata = ( file ) => {
-  const allowedFormats = ['gpx','tcx']
-
   const lastDot = file.name.lastIndexOf('.')
   const response = {
     isFormatAllowed: null,
@@ -22,6 +22,24 @@ export const checkFileMetadata = ( file ) => {
       name: file.name,
       format: file.name.substring(lastDot + 1).toLowerCase(),
       title: file.name.slice(0, lastDot)
+    }
+  }
+
+  response.isFormatAllowed = allowedFormats.includes( response.data.format )
+
+  return response
+}
+
+export const checkResponseMetadata = ( urlResponse ) => {
+  const lastSlash = urlResponse.url.lastIndexOf('/')
+  const fileName = urlResponse.url.substring(lastSlash + 1)
+  const lastDot = fileName.lastIndexOf('.')
+  const response = {
+    isFormatAllowed: null,
+    data: {
+      name: fileName,
+      format: fileName.substring(lastDot + 1).toLowerCase(),
+      title: fileName.slice(0, lastDot).replace(/%20/g, ' ')
     }
   }
 

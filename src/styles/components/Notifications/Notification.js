@@ -71,8 +71,12 @@ export const NotificationSubtitle = styled.span`
 `
 
 export const NotificationContent = styled.p`
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 400;
   text-align: justify;
   hyphens: auto;
+`
+
+export const NotificationActions = styled.p`
+  text-align: right;
 `

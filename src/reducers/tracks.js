@@ -1,3 +1,4 @@
+import { MULTIPLE } from '../actions/index'
 export const ADD_TRACK = 'ADD_TRACK'
 export const UPDATE_TRACK = 'UPDATE_TRACK'
 export const REMOVE_TRACK = 'REMOVE_TRACK'
@@ -97,9 +98,9 @@ const applyAction = (state, action) => {
 }
 
 const reducer = ( state = initialState, action ) => {
-  let newState = {...state}
+  let newState = {...state, items: [...state.items]}
 
-  if ( action.type === 'MULTIPLE') {
+  if ( action.type === MULTIPLE ) {
     action.actions.forEach( subaction => {
       newState = applyAction(newState, subaction)
     })

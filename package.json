@@ -21,12 +21,13 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
     "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^4.4.1",
     "styled-normalize": "^8.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "node .\\demo\\tracks-index.js && react-scripts build",
     "test": "react-scripts test --coverage --watchAll=false",
     "test-dev": "react-scripts test",
     "eject": "react-scripts eject"

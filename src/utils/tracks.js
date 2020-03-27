@@ -17,14 +17,26 @@ export const readFile = (file) => {
 
     reader.onloadend = () => {
       const fileContent = reader.result
-      const track = dataFromFile( fileContent, file.format )
+      const track = processFileContent( fileContent, file.format )
       track.status = 'success'
       return resolve( addTrack( { id: file.id, data: track } )  )
     }
   })
 }
 
-export const dataFromFile = (fileContent, fileFormat) => {
+export const readFileFromURL = (file, response) => {
+  return new Promise((resolve, reject) => {
+    const readResponse = async () => {
+      const fileContent = await response.text()
+      const track = processFileContent( fileContent, file.format )
+      track.status = 'success'
+      return resolve( addTrack( { id: file.id, data: track } ) )
+    }
+    readResponse()
+  })  
+}
+
+export const processFileContent = (fileContent, fileFormat) => {
   var points = []
   const fragments = []
 

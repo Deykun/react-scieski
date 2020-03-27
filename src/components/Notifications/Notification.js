@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { removeNotification } from '../../actions/notifications'
+import { removeNotification, customActionFromNotification } from '../../actions/notifications'
 
 import Icon from '../../styles/ui/Icon'
 import Button from '../../styles/ui/Button'
 import ProgressBar from '../../styles/ui/ProgressBar'
-import { NotificationItem, NotificationTitle, NotificationSubtitle, NotificationContent } from '../../styles/components/Notifications/Notification.js'
+import { NotificationItem, NotificationTitle, NotificationSubtitle, NotificationContent, NotificationActions } from '../../styles/components/Notifications/Notification.js'
 
-const Notification = ({type, id, title, subtitle, message, percent}) => {
+const Notification = ({type, id, title, subtitle, message, percent, action}) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
 
@@ -43,6 +43,18 @@ const Notification = ({type, id, title, subtitle, message, percent}) => {
       <NotificationContent>
         {message ? tWithValue(message) : ''}
       </NotificationContent>
+      
+      {action && action.name && 
+        <NotificationActions>
+          <Button 
+            onClick={() => customActionFromNotification(dispatch, action.name)}
+            iconleft={action.icon ? action.icon : null}
+            positiveActive
+          >
+            {t(action.cta)}
+          </Button>
+        </NotificationActions>
+      }
     </NotificationItem>
   )
 }
@@ -68,6 +80,11 @@ Notification.propTypes = {
       text: PropTypes.string.isRequired
     })
   ]),
+  action: PropTypes.shape({
+    name: PropTypes.string,
+    cta: PropTypes.string,
+    icon: PropTypes.string
+  }),
   percent: PropTypes.number
 }
 
