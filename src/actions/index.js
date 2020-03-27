@@ -1,4 +1,6 @@
+export const MULTIPLE = 'MULTIPLE'
+
 export const multipleActions = ( actions ) => ({
-  type: 'MULTIPLE',
+  type: MULTIPLE,
   actions: actions
 })

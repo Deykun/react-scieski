@@ -1,3 +1,4 @@
+import { MULTIPLE } from '../actions/index'
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION'
 export const UPDATE_NOTIFICATION = 'UPDATE_NOTIFICATION'
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION'
@@ -40,7 +41,7 @@ const applyAction = (state, action) => {
 const reducer = ( state = initialState, action ) => {
   let newState = {...state}
 
-  if ( action.type === 'MULTIPLE') {
+  if ( action.type === MULTIPLE ) {
     action.actions.forEach( subaction => {
       newState = applyAction(newState, subaction)
     })
