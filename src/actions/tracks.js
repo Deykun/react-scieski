@@ -13,8 +13,8 @@ import { v4 } from 'node-uuid'
 
 import { multipleActions } from './index'
 import { addNotification, updateNotification } from './notifications'
-import { checkFileMetadata } from '../utils/helpers'
-import { readFile } from '../utils/tracks.js'
+import { checkFileMetadata, checkResponseMetadata } from '../utils/helpers'
+import { readFile, readFileFromURL } from '../utils/tracks.js'
 
 export const addTrack = ( { data={} } ) => ({
   type: ADD_TRACK,
@@ -45,10 +45,20 @@ export const saveTracks = () => ({
   type: SAVE_TRACKS,
 })
 
-export const addTracksFromFiles = (dispatch, files) => {
-  /* One file is treated the same way */
-  if ( !Array.isArray( files ) ) { files = [files] }
-  
+
+export const addTracks = ( { dispatch, files, urls } ) => {
+  if ( !files && !urls ) {
+    console.error('Missing files or urls.')
+    return
+  }
+  const from = {
+    files: 'files',
+    urls: 'urls'
+  }
+  const fetchFrom = files ? from.files : from.urls
+  let tracks = files ? files : urls
+  if ( !Array.isArray( tracks ) ) { tracks = [tracks] }
+
   const progressNotificationId = v4()
   dispatch( addNotification({ data: {
     type: 'loading',
@@ -57,19 +67,18 @@ export const addTracksFromFiles = (dispatch, files) => {
     title: 'notifications.uploading.title',
     subtitle: {
       text: 'notifications.uploading.subtitle',
-      count: files.length
+      count: tracks.length
     },
     message: 'notifications.uploading.message'
   }}) )
-  
+
   const limit = pLimit(30)
-    
   const startTime = new Date()
-  
+    
   let processed = 0
   const updateProgress = () => {
     processed = processed + 1
-    const progress = Math.round( (processed / files.length ) * 100)
+    const progress = Math.round( (processed / tracks.length ) * 100)
   
     return updateNotification({ id: progressNotificationId, data: {
       title: {
@@ -78,7 +87,7 @@ export const addTracksFromFiles = (dispatch, files) => {
       },
       subtitle: {
         text: 'notifications.uploading.progress.subtitle',
-        count: files.length
+        count: tracks.length
       },
       percent: progress,
       message: {
@@ -87,82 +96,165 @@ export const addTracksFromFiles = (dispatch, files) => {
       },
     }})
   }
-  
+
   let actions = []
-  let promises = files.map( file => {
-    return limit(() => new Promise( resolve => {
-      const processFile = async (file) => {
-        const fileMetadata = checkFileMetadata( file )
-        if ( !(fileMetadata.isFormatAllowed) ) {
-          actions.push( addNotification({ id: v4(), 
-            code: 'FILE_FORMAT_REJECTED',
-            data: {
-              title: 'notifications.rejeced_format.title',
-              subtitle: {
-                text: 'notifications.rejeced_format.subtitle',
-                value: fileMetadata.data.format
-              },
-              message: {
-                text: 'notifications.rejeced_format.message',
-                value: fileMetadata.data.name
+
+  if ( fetchFrom === from.files ) {
+    let promises = tracks.map( file => {
+      return limit(() => new Promise( resolve => {
+        const processFile = async (file) => {
+          const fileMetadata = checkFileMetadata( file )
+          if ( !(fileMetadata.isFormatAllowed) ) {
+            actions.push( addNotification({ id: v4(), 
+              code: 'FILE_FORMAT_REJECTED',
+              data: {
+                title: 'notifications.rejeced_format.title',
+                subtitle: {
+                  text: 'notifications.rejeced_format.subtitle',
+                  value: fileMetadata.data.format
+                },
+                message: {
+                  text: 'notifications.rejeced_format.message',
+                  value: fileMetadata.data.name
+                }
               }
-            }
-          }))
-        } else {
-          file.id = v4()
-          file.format = fileMetadata.data.format
-          const addTrack = await readFile( file )
-          actions.push({ 
-            id: file.id, 
-            ...addTrack, 
-            track: { 
+            }))
+          } else {
+            file.id = v4()
+            file.format = fileMetadata.data.format
+            const addTrack = await readFile( file )
+            actions.push({ 
               id: file.id, 
-              ...fileMetadata.data, 
-              ...addTrack.track 
-            } 
-          })
+              ...addTrack, 
+              track: { 
+                id: file.id, 
+                ...fileMetadata.data, 
+                ...addTrack.track 
+              } 
+            })
+          }
+          actions.push( updateProgress() )
+          if ( actions.length > 12 ) {
+            await dispatch( multipleActions( actions ) )
+            actions = []
+          }
+          resolve()
         }
-        actions.push( updateProgress() )
-        if ( actions.length > 12 ) {
-          await dispatch( multipleActions( actions ) )
-          actions = []
+        processFile( file )
+      }))
+    })
+    
+    Promise.all(promises).then( async () => {
+      await dispatch( multipleActions( actions ) )
+    
+      const endTime = new Date()
+      const performenceInMs = moment(endTime).diff(moment(startTime))
+      const performenceInMin = Math.floor( performenceInMs / 1000 / 60 )
+      const performenceInSec = Math.floor( performenceInMs / 1000 )
+    
+      dispatch( updateNotification({ id: progressNotificationId, data: {
+        title: {
+          text: 'notifications.completed.title',
+          count: tracks.length
+        },
+        type: 'success',
+        subtitle: '',
+        message: performenceInMin > 2 ? {
+          text: 'notifications.completed.messageMin',
+          count: performenceInMin
+        } : {
+          text: 'notifications.completed.messageSec',
+          count: performenceInSec
         }
-        resolve()
-      }
-      processFile( file )
-    }))
-  })
-  
-  Promise.all(promises).then( async () => {
-    await dispatch( multipleActions( actions ) )
-  
-    const endTime = new Date()
-    const performenceInMs = moment(endTime).diff(moment(startTime))
-    const performenceInMin = Math.floor( performenceInMs / 1000 / 60 )
-    const performenceInSec = Math.floor( performenceInMs / 1000 )
-  
-    dispatch( updateNotification({ id: progressNotificationId, data: {
-      title: {
-        text: 'notifications.completed.title',
-        count: files.length
-      },
-      type: 'success',
-      subtitle: '',
-      message: performenceInMin > 2 ? {
-        text: 'notifications.completed.messageMin',
-        count: performenceInMin
-      } : {
-        text: 'notifications.completed.messageSec',
-        count: performenceInSec
-      }
-    }}) )
-    dispatch( refreshTracksSummary() )
-    dispatch( saveTracks() )
-  })
+      }}) )
+      dispatch( refreshTracksSummary() )
+      dispatch( saveTracks() )
+    })
+  }
+
+  if ( fetchFrom === from.urls ) {
+    let promises = tracks.map( url => {
+      return limit(() => fetch(url).then( response => new Promise( resolve => {
+        const processResponse = async ( response ) => {
+          const fileMetadata = checkResponseMetadata( response )
+          if ( !(fileMetadata.isFormatAllowed) ) {
+            actions.push( addNotification({ id: v4(), 
+              code: 'FILE_FORMAT_REJECTED',
+              data: {
+                title: 'notifications.rejeced_format.title',
+                subtitle: {
+                  text: 'notifications.rejeced_format.subtitle',
+                  value: fileMetadata.data.format
+                },
+                message: {
+                  text: 'notifications.rejeced_format.message',
+                  value: fileMetadata.data.name
+                }
+              }
+            }))
+          } else {
+            const file = {
+              id: v4(),
+              format: fileMetadata.data.format
+            }
+            const addTrack = await readFileFromURL( file, response )
+            actions.push({ 
+              id: file.id, 
+              ...addTrack, 
+              track: { 
+                id: file.id, 
+                ...fileMetadata.data, 
+                ...addTrack.track 
+              } 
+            })
+          }
+          actions.push( updateProgress() )
+          if ( actions.length > 12 ) {
+            await dispatch( multipleActions( actions ) )
+            actions = []
+          }
+          resolve()
+        }
+        processResponse( response )
+
+      })))
+    })
+    
+    Promise.all(promises).then( async () => {
+      await dispatch( multipleActions( actions ) )
+    
+      const endTime = new Date()
+      const performenceInMs = moment(endTime).diff(moment(startTime))
+      const performenceInMin = Math.floor( performenceInMs / 1000 / 60 )
+      const performenceInSec = Math.floor( performenceInMs / 1000 )
+    
+      dispatch( updateNotification({ id: progressNotificationId, data: {
+        title: {
+          text: 'notifications.completed.title',
+          count: tracks.length
+        },
+        type: 'success',
+        subtitle: '',
+        message: performenceInMin > 2 ? {
+          text: 'notifications.completed.messageMin',
+          count: performenceInMin
+        } : {
+          text: 'notifications.completed.messageSec',
+          count: performenceInSec
+        }
+      }}) )
+      dispatch( refreshTracksSummary() )
+      dispatch( saveTracks() )
+    })
+  }
 }
 
 export const addDemoTracks = dispatch => {
-  console.log('Custom action')
-  // dispatch( )
+  const fetchDemoTracks = async () => {
+    const tracksIndex = await fetch('/demo-tracks.json')
+    const tracksToFetch = await tracksIndex.json()
+    await addTracks( { dispatch: dispatch, urls: tracksToFetch.map( file => file.path )} )
+  }
+  fetchDemoTracks()
 }
 

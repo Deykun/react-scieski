@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react'
 import { useDispatch } from 'react-redux'
-import { addTracksFromFiles } from '../../../actions/tracks'
+import { addTracks } from '../../../actions/tracks'
 import { useDropzone } from 'react-dropzone'
 import { useTranslation } from 'react-i18next'
 
@@ -11,7 +11,7 @@ const TracksAdd = () => {
   const { t } = useTranslation() 
 
   const onDrop = useCallback( files => {
-    addTracksFromFiles(dispatch, files) 
+    addTracks( { dispatch, files } ) 
   }, [dispatch])
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})

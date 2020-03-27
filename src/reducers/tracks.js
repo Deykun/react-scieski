@@ -98,7 +98,7 @@ const applyAction = (state, action) => {
 }
 
 const reducer = ( state = initialState, action ) => {
-  let newState = {...state}
+  let newState = {...state, items: [...state.items]}
 
   if ( action.type === MULTIPLE ) {
     action.actions.forEach( subaction => {
