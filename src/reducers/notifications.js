@@ -17,8 +17,19 @@ const demoPromtNotification = {
   }
 }
 
+const removeOldTracksNotification = {
+  id: 'remove-old-promt',
+  title: 'notifications.removeSavedTracks.title',
+  message: 'notifications.removeSavedTracks.message',
+  action: {
+    name: 'removeAllTracks',
+    cta: 'notifications.removeSavedTracks.actionCTA',
+    icon: 'check'
+  }
+}
+
 const initialState = {
-  items: [demoPromtNotification]
+  items: [localStorage.getItem('trackInitialState') ? removeOldTracksNotification : demoPromtNotification ]
 }
 
 const applyAction = (state, action) => {

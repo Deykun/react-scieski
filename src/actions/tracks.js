@@ -1,7 +1,8 @@
 import { 
   ADD_TRACK, 
   UPDATE_TRACK, 
-  REMOVE_TRACK, 
+  REMOVE_TRACK,
+  REMOVE_ALL_TRACKS, 
   SORT_TRACKS,
   SAVE_TRACKS,
   REFRESH_SUMMARY
@@ -12,7 +13,7 @@ import pLimit from 'p-limit'
 import { v4 } from 'node-uuid'
 
 import { multipleActions } from './index'
-import { addNotification, updateNotification, removeNotification } from './notifications'
+import { addNotification, updateNotification } from './notifications'
 import { checkFileMetadata, checkResponseMetadata } from '../utils/helpers'
 import { readFile, readFileFromURL } from '../utils/tracks.js'
 
@@ -30,6 +31,10 @@ export const updateTrack = ( { id, data={} } ) => ({
 export const removeTrack = ( { id, data={} } ) => ({
   type: REMOVE_TRACK,
   id: id ? id : data.id
+})
+
+export const removeAllTracks = () => ({
+  type: REMOVE_ALL_TRACKS
 })
 
 export const sortTracks = ( { by, data={} } ) => ({
@@ -249,13 +254,12 @@ export const addTracks = ( { dispatch, files, urls } ) => {
   }
 }
 
-export const addDemoTracks = (dispatch, notificationId) => {
+export const addDemoTracks = (dispatch) => {
   const fetchDemoTracks = async () => {
     const tracksIndex = await fetch('/demo-tracks.json')
     const tracksToFetch = await tracksIndex.json()
     await addTracks( { dispatch: dispatch, urls: tracksToFetch.map( file => file.path )} )
   }
   fetchDemoTracks()
-  dispatch( removeNotification({ id: 'demo-promt' }) )
 }
 
