@@ -69,6 +69,10 @@
     }
   },
   "settings": {
+    "global": {
+      "title": "Globalne",
+      "removeAllTracks": "Usuń trasy"
+    },
     "language": {
       "title": "Język"
     }

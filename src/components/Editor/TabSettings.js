@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateStyle } from '../../actions/maps'
 
 import LangSwitcher from './Settings/LangSwitcher'
+import Global from './Settings/Global'
 
 const TabSettings = () => {
   const mapsStyle = useSelector(state => state.maps.style)
@@ -11,6 +12,7 @@ const TabSettings = () => {
 
   return (
     <>
+      <Global />
       <LangSwitcher />
       <h3>Stroke</h3>
       <input 

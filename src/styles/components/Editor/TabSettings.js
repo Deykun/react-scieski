@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { card } from '../../shared/panel'
 
-export const SwitcherCard = styled.div`
+export const SettingsCard = styled.div`
   ${card}
   padding: 10px;
   margin: 0;
