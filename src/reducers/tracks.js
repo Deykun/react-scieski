@@ -2,6 +2,7 @@ import { MULTIPLE } from '../actions/index'
 export const ADD_TRACK = 'ADD_TRACK'
 export const UPDATE_TRACK = 'UPDATE_TRACK'
 export const REMOVE_TRACK = 'REMOVE_TRACK'
+export const REMOVE_ALL_TRACKS = 'REMOVE_ALL_TRACKS'
 export const SORT_TRACKS = 'SORT_TRACKS'
 export const SAVE_TRACKS = 'SAVE_TRACKS'
 export const REFRESH_SUMMARY = 'REFRESH_SUMMARY'
@@ -43,6 +44,15 @@ const applyAction = (state, action) => {
 
     case REMOVE_TRACK:
       state.items = state.items.filter( track => track.id !== action.id )
+      break
+
+    case REMOVE_ALL_TRACKS: 
+      state = { ...defaultInitialState }
+      try {
+        localStorage.removeItem('trackInitialState')
+      } catch (e) {
+        console.error(e)
+      }
       break
 
     case SORT_TRACKS:

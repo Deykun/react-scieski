@@ -19,6 +19,11 @@
     "default": {
       "title": "Powiadomienie"
     },
+    "removeSavedTracks": {
+      "title": "Usunąć wcześniej wgrane trasy?",
+      "message": "Jeśli klikniesz \"tak\" wsztkie trasy zostaną usunięte z aplikacji.",
+      "actionCTA": "tak"
+    },
     "demoTracks": {
       "title": "Wgrać przykładowe trasy?",
       "message": "Jeśli klikniesz \"tak\" kilka tras zostanie dodanych do aplikacji.",
@@ -64,6 +69,10 @@
     }
   },
   "settings": {
+    "global": {
+      "title": "Globalne",
+      "removeAllTracks": "Usuń trasy"
+    },
     "language": {
       "title": "Język"
     }

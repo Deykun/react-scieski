@@ -1,5 +1,5 @@
 import { v4 } from 'node-uuid'
-import { addDemoTracks } from './tracks'
+import { addDemoTracks, removeAllTracks } from './tracks'
 
 import { 
   ADD_NOTIFICATION, 
@@ -29,7 +29,14 @@ export const removeAllNotifications = ( ) => ({
 })
 
 const customAction = {
-  addDemoTracks: (dispatch) => addDemoTracks(dispatch)
+  addDemoTracks: (dispatch) => {
+    dispatch( removeNotification({ id: 'demo-promt' }) )
+    addDemoTracks(dispatch)
+  },
+  removeAllTracks: (dispatch) => {
+    dispatch( removeNotification({ id: 'remove-old-promt' }) )
+    dispatch( removeAllTracks() )
+  }
 }
 
 export const customActionFromNotification = ( dispatch, actionname ) => {

@@ -5,13 +5,13 @@ import { LANGS as languages } from '../../../i18n'
 import Button from '../../../styles/ui/Button'
 import Title from '../../../styles/ui/Title'
 
-import { SwitcherCard } from '../../../styles/components/Editor/LangSwitcher'
+import { SettingsCard } from '../../../styles/components/Editor/TabSettings'
 
 const LanguageSwitcher = () => {
   const { t, i18n } = useTranslation()
 
   return (
-    <SwitcherCard>
+    <SettingsCard>
       <Title>
         {t('settings.language.title')} 
       </Title>
@@ -24,7 +24,7 @@ const LanguageSwitcher = () => {
           {t(`language.${lang}`)} 
         </Button>
       )}
-    </SwitcherCard>
+    </SettingsCard>
   )
 }
 

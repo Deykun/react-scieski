@@ -19,6 +19,11 @@
     "default": {
       "title": "Notification"
     },
+    "removeSavedTracks": {
+      "title": "Would you like to remove saved routes?",
+      "message": "Click \"yes\" to remove all routes.",
+      "actionCTA": "yes"
+    },
     "demoTracks": {
       "title": "Would you like to see some examples?",
       "message": "Click \"yes\" to import example routes.",
@@ -58,6 +63,10 @@
     }
   },
   "settings": {
+    "global": {
+      "title": "Global",
+      "removeAllTracks": "Remove tracks"
+    },
     "language": {
       "title": "Language"
     }
